@@ -4,6 +4,9 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 
+// Middleware
+app.use(express.urlencoded({ extended: true }));
+
 // Database Connection
 mongoose.connect(process.env.DATABASE_URL);
 
@@ -15,7 +18,7 @@ db.on('disconnected', () => console.log('Disconnected from database.'));
 
 // Create Route
 app.post('/user', (req, res) => {
-  res.send('Received request.');
+  res.send(req.body);
 });
 
 // Listener
