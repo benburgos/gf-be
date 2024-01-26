@@ -4,6 +4,9 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 
+// Route Dependencies
+const User = require('./models/user.js');
+
 // Middleware
 app.use(express.urlencoded({ extended: true }));
 
@@ -16,6 +19,7 @@ db.on('error', (err) => console.log('Error:' + err.message));
 db.on('connected', () => console.log('Connected to database.'));
 db.on('disconnected', () => console.log('Disconnected from database.'));
 
+// Routes / Controllers
 // Create Route
 app.post('/user', (req, res) => {
   res.send(req.body);
