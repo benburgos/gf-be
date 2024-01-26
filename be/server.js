@@ -13,6 +13,11 @@ db.on('error', (err) => console.log('Error:' + err.message));
 db.on('connected', () => console.log('Connected to database.'));
 db.on('disconnected', () => console.log('Disconnected from database.'));
 
+// Create Route
+app.post('/user', (req, res) => {
+  res.send('Received request.');
+});
+
 // Listener
 app.listen(process.env.PORT, () =>
   console.log(`Server is running on port ${process.env.PORT}!`)
