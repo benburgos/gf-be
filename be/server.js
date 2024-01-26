@@ -22,7 +22,11 @@ db.on('disconnected', () => console.log('Disconnected from database.'));
 // Routes / Controllers
 // Create Route
 app.post('/user', (req, res) => {
-  req.body.isAdmin ? 
+  req.body.isAdmin ? (req.body.isAdmin = 'Yes') : (req.body.isAdmin = 'No');
+
+  User.create(req.body, (error, createdUser) => {
+    res.send(createdUser);
+  });
 });
 
 // Listener
