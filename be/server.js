@@ -22,11 +22,13 @@ db.on('disconnected', () => console.log('Disconnected from database.'));
 // Routes / Controllers
 // Create Route
 app.post('/users', (req, res) => {
+  req.body.dateUpdated = Date.now();
+  req.body.dateCreated = Date.now();
   db.collection('users').insertOne(req.body, (err, res) => {
     if (err) throw err;
-    console.log('New user created.')
-  })
-  res.send(`New user ${req.body.firstName} created.`)
+    console.log('New user created.');
+  });
+  res.send(`New user ${req.body.firstName} created at ${new Date(req.body.dateCreated)}`);
 });
 
 // Listener
