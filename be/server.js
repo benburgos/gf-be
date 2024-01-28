@@ -30,12 +30,12 @@ app.post('/users', (req, res) => {
     pwk: req.body.pwh,
   };
 
-  delete req.body.pwh
+  delete req.body.pwh;
 
   db.collection('users').insertOne(req.body, (err, res) => {
     if (err) throw err;
     console.log('New user created.');
-    db.collection('pwk').insertOne(pwk, (error, res) => {
+    db.collection('pwks').insertOne(pwk, (error, res) => {
       if (error) throw error;
       console.log('Saved to database.');
     });
@@ -46,6 +46,14 @@ app.post('/users', (req, res) => {
       req.body.dateCreated
     )}`
   );
+});
+
+app.get('/users/:id', (req, res) => {
+  db.collection('users').findOne({}, (err, result) => {
+    if (err) throw err;
+    console.log(result);
+    res.json(result);
+  });
 });
 
 // Listener
