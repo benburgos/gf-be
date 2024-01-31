@@ -9,7 +9,6 @@ app.use(express.json());
 
 // Route Dependencies
 const User = require('./models/user.js');
-const pwi = require('./models/pwi.js');
 
 // Database Connection
 mongoose.connect(process.env.DATABASE_URL);
