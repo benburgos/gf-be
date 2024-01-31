@@ -3,6 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
+const { v4: uuidv4 } = require('uuid');
 
 // Middleware
 app.use(express.json());
