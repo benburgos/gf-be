@@ -33,7 +33,7 @@ app.post('/users', async (req, res) => {
   }
   try {
     const user = await User.create(req.body);
-    res.send(user);
+    res.send(`New user, ${user.firstName}, was created.`);
   } catch (err) {
     res.send(err);
   }
