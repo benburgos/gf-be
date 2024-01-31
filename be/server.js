@@ -22,10 +22,13 @@ db.on('disconnected', () => console.log('Disconnected from database.'));
 
 // Routes / Controllers
 // Create Route
-app.post('/users', (req, res) => {
-  User.create(req.body, (error, createdUser) => {
-    res.json(createdUser)
-  })
+app.post('/users', async (req, res) => {
+  try {
+    const user = await User.create(req.body);
+    res.send(user);
+  } catch (err) {
+    res.send(err);
+  }
 });
 
 // Get Route (Single)
