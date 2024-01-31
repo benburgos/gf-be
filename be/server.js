@@ -23,6 +23,14 @@ db.on('disconnected', () => console.log('Disconnected from database.'));
 // Routes / Controllers
 // Create Route
 app.post('/users', async (req, res) => {
+  req.body = {
+    ...req.body,
+    _id: uuidv4(),
+    userID: uuidv4(),
+    brandID: uuidv4(),
+    dateUpdated: Date.now(),
+    dateCreated: Date.now(),
+  }
   try {
     const user = await User.create(req.body);
     res.send(user);

@@ -10,6 +10,8 @@ const userSchema = new mongoose.Schema({
   phoneNumber: { type: String, required: false },
   pwh: { type: String, required: true },
   isAdmin: { type: Boolean },
+  dateUpdated: {type: Number, required: true},
+  dateCreated: {type: Number, required: true},
 });
 
 const User = mongoose.model('User', userSchema);
