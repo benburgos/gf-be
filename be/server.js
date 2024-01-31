@@ -30,7 +30,7 @@ app.post('/users', async (req, res) => {
     brandID: uuidv4(),
     dateUpdated: Date.now(),
     dateCreated: Date.now(),
-  }
+  };
   try {
     const user = await User.create(req.body);
     res.send(`New user, ${user.firstName}, was created.`);
@@ -43,7 +43,14 @@ app.post('/users', async (req, res) => {
 app.get('/users/:id', (req, res) => {});
 
 // Get Route (All)
-app.get('/users', (req, res) => {});
+app.get('/users', async (req, res) => {
+  try {
+    const allUsers = await User.find({});
+    res.send(allUsers);
+  } catch (err) {
+    throw err;
+  }
+});
 
 // Listener
 app.listen(process.env.PORT, () =>
