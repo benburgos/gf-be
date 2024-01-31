@@ -22,39 +22,13 @@ db.on('disconnected', () => console.log('Disconnected from database.'));
 
 // Routes / Controllers
 // Create Route
-app.post('/users', (req, res) => {
-  req.body.dateUpdated = Date.now();
-  req.body.dateCreated = Date.now();
-  pwk = {
-    udbid: req.body._id,
-    pwk: req.body.pwh,
-  };
+app.post('/users', (req, res) => {});
 
-  delete req.body.pwh;
+// Get Route (Single)
+app.get('/users/:id', (req, res) => {});
 
-  db.collection('users').insertOne(req.body, (err, res) => {
-    if (err) throw err;
-    console.log('New user created.');
-    db.collection('pwks').insertOne(pwk, (error, res) => {
-      if (error) throw error;
-      console.log('Saved to database.');
-    });
-  });
-
-  res.send(
-    `New user ${req.body.firstName} created at ${new Date(
-      req.body.dateCreated
-    )}`
-  );
-});
-
-app.get('/users/:id', (req, res) => {
-  db.collection('users').findOne({}, (err, result) => {
-    if (err) throw err;
-    console.log(result);
-    res.json(result);
-  });
-});
+// Get Route (All)
+app.get('/users', (req, res) => {});
 
 // Listener
 app.listen(process.env.PORT, () =>
