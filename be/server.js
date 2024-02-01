@@ -2,23 +2,14 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
-const mongoose = require('mongoose');
 const { v4: uuidv4 } = require('uuid');
+const db = require('./config/db.js')
 
 // Middleware
 app.use(express.json());
 
 // Route Dependencies
 const User = require('./models/user.js');
-
-// Database Connection
-mongoose.connect(process.env.DATABASE_URL);
-
-// DB Connection Events
-const db = mongoose.connection;
-db.on('error', (err) => console.log('Error:' + err.message));
-db.on('connected', () => console.log('Connected to database.'));
-db.on('disconnected', () => console.log('Disconnected from database.'));
 
 // Routes / Controllers
 // Create Route
