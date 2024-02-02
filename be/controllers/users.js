@@ -1,6 +1,7 @@
 const db = require('../config/db');
 const User = require('../models/user');
 const { v4: uuidv4 } = require('uuid');
+const { hashPassword } = require('../middlewares/genHash');
 
 // Create User
 async function createUser(req, res) {
@@ -12,12 +13,18 @@ async function createUser(req, res) {
     dateUpdated: Date.now(),
     dateCreated: Date.now(),
   };
+
+  pwh = await hashPassword(req.body.pwh);
+  
   try {
+    delete req.body.pwh
     const user = await User.create(req.body);
     res.send(`New user, ${user.firstName}, was created.`);
   } catch (err) {
     res.send(err);
   }
+
+  console.log(pwh)
 }
 
 // Get Single User
