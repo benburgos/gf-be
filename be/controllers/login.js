@@ -1,6 +1,3 @@
-const db = require('../config/db');
-const User = require('../models/user');
-const Pwh = require('../models/pwh');
 const { checkHash } = require('../middlewares/checkHash');
 
 async function loginUser(req, res) {
