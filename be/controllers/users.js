@@ -9,7 +9,6 @@ async function createUser(req, res) {
   req.body = {
     ...req.body,
     _id: uuidv4(),
-    userID: uuidv4(),
     brandID: uuidv4(),
     dateUpdated: Date.now(),
     dateCreated: Date.now(),
@@ -20,7 +19,7 @@ async function createUser(req, res) {
   try {
     delete req.body.pwh;
     const user = await User.create(req.body);
-    const hash = await Pwh.create({ ...req.body, _id: uuidv4(), pwh: pw });
+    const hash = await Pwh.create({ ...req.body, _id: uuidv4(), userID: user._id,pwh: pw });
     res.send(`New user, ${user.firstName}, was created.`);
   } catch (err) {
     res.send(err);
