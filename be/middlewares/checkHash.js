@@ -10,7 +10,8 @@ async function checkHash(email, password) {
 
   return {
     isMatch,
-    user
+    id: user._id,
+    key: pw._id
   };
 }
 
