@@ -4,7 +4,7 @@ function genToken(data, secret) {
   const token = jwt.sign({ id: data.id }, secret, {
     expiresIn: '1h',
   });
-  return token;
+  return { token, data };
 }
 
 module.exports = {
