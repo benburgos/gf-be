@@ -35,6 +35,8 @@ async function createUser(req, res) {
 async function getUser(req, res) {
   try {
     const user = await User.findOne({ _id: req.params.id });
+    // Shows user who accessed page, may think about creating event log.
+    console.log(`User ${req.id} has viewed ${user.firstName}'s page.`)
     res.send(user);
   } catch (err) {
     res.send(err);
