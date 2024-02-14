@@ -12,6 +12,7 @@ async function checkHash(email, password) {
     return {
       id: user._id,
       rid: user.roleId,
+      bid: user.brandId
     };
   }
 }

@@ -7,6 +7,7 @@ function authToken(req, res, next) {
     const decoded = jwt.verify(token, process.env.SECRET)
     req.id = decoded.id
     req.rid = decoded.rid
+    req.bid = decoded.bid
     next()
   } catch (error) {
     res.status(401).json({ Error: 'Invalid Token' });
