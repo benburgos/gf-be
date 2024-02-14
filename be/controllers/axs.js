@@ -1,8 +1,8 @@
 const db = require('../config/db');
-const Permission = require('../models/permission');
+const Axs = require('../models/axs');
 const { v4: uuidv4 } = require('uuid');
 
-async function createPermission(req, res) {
+async function createAxs(req, res) {
   req.body = {
     ...req.body,
     _id: uuidv4(),
@@ -13,13 +13,13 @@ async function createPermission(req, res) {
   };
 
   try {
-    const permission = await Permission.create(req.body);
-    res.json(permission);
+    const axs = await Axs.create(req.body);
+    res.json(axs);
   } catch (err) {
     res.send(err);
   }
 }
 
 module.exports = {
-  createPermission,
+  createAxs,
 };
