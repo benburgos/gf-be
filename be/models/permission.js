@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const permissionSchema = new Schema({
+const permissionSchema = new mongoose.Schema({
   _id: { type: String, required: true },
   type: { type: String, enum: ['r', 'w', 'rw'], required: true },
   productId: { type: String, required: true },
