@@ -2,15 +2,17 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
-const usersRouter = require('./routes/users');
 const loginRouter = require('./routes/login');
+const usersRouter = require('./routes/users');
+const permissionRouter = require('./routes/permissions')
 
 // Middleware
 app.use(express.json());
 
 // Routes
-app.use('/api/users', usersRouter);
 app.use('/api/login', loginRouter);
+app.use('/api/users', usersRouter);
+app.use('/api/permissions', permissionRouter)
 
 // Listener
 app.listen(process.env.PORT, () =>
