@@ -9,8 +9,8 @@ const loginRouter = require('./routes/login');
 app.use(express.json());
 
 // Routes
-app.use('/users', usersRouter);
-app.use('/login', loginRouter);
+app.use('/api/users', usersRouter);
+app.use('/api/login', loginRouter);
 
 // Listener
 app.listen(process.env.PORT, () =>
