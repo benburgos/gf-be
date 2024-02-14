@@ -4,14 +4,13 @@ const Pwh = require('../models/pwh');
 
 async function checkHash(email, password) {
   const user = await User.findOne({ email: email });
-  const pw = await Pwh.findOne({ userID: user._id });
+  const pw = await Pwh.findOne({ userId: user._id });
 
   const isMatch = await bcrypt.compare(password, pw.pwh);
 
   return {
-    isMatch,
     id: user._id,
-    key: pw._id
+    rid: user.roleId
   };
 }
 

@@ -4,7 +4,7 @@ const { genToken } = require('../services/genToken');
 async function loginUser(req, res) {
   try {
     const match = await checkHash(req.body.email, req.body.password);
-    if (match.isMatch) {
+    if (match) {
       res.json(genToken(match, match.key));
     } else {
       res.send('Incorrect Password.');
