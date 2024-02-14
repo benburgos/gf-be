@@ -8,10 +8,12 @@ async function checkHash(email, password) {
 
   const isMatch = await bcrypt.compare(password, pw.pwh);
 
-  return {
-    id: user._id,
-    rid: user.roleId
-  };
+  if (isMatch) {
+    return {
+      id: user._id,
+      rid: user.roleId,
+    };
+  }
 }
 
 module.exports = {
