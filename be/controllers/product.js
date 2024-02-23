@@ -4,7 +4,8 @@ const { v4: uuidv4 } = require('uuid');
 
 // Create Product
 async function createProduct(req, res) {
-  const existing = Product.findOne({ desc: req.body.desc });
+  const existing = await Product.findOne({ desc: req.body.desc });
+  
   if (existing) {
     res.send('Product already exists.');
   } else {
