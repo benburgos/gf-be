@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const axs = require('../controllers/axs');
+const pms = require('../controllers/axs');
 
-router.post('/', axs.createAxs);
+router.post('/', pms.createPms);
 
 module.exports = router;

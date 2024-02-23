@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
 
-const axsSchema = new mongoose.Schema({
+const pmsSchema = new mongoose.Schema({
   _id: { type: String, required: true },
   type: { type: String, enum: ['r', 'w', 'rw'], required: true },
   productId: { type: String, required: true },
   brandId: { type: String, required: true },
 });
 
-const Axs = mongoose.model('Axs', axsSchema);
+const Pms = mongoose.model('Pms', pmsSchema);
 
-module.exports = Axs;
+module.exports = Pms;
