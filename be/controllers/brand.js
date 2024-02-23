@@ -11,6 +11,8 @@ async function createBrand(req, res) {
   req.body = {
     ...req.body,
     _id: uuidv4(),
+    dateUpdated: Date.now(),
+    dateCreated: Date.now(),
   };
   try {
     const brand = await Brand.create(req.body);
