@@ -27,10 +27,25 @@ async function createProduct(req, res) {
 }
 
 // Get Product
-async function getProduct(req, res) {}
+async function getProduct(req, res) {
+  try {
+    const product = await Product.findOne({ _id: req.params.id });
+    console.log(product);
+    res.send(product);
+  } catch (err) {
+    res.send(err);
+  }
+}
 
 // Get All Products
-async function getProducts(req, res) {}
+async function getProducts(req, res) {
+  try {
+    const allProducts = await Product.find({});
+    res.send(allProducts);
+  } catch (err) {
+    res.send(err);
+  }
+}
 
 module.exports = {
   createProduct,
