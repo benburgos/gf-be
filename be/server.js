@@ -5,6 +5,7 @@ const app = express();
 const loginRouter = require('./routes/login');
 const usersRouter = require('./routes/users');
 const pmsRouter = require('./routes/pms')
+const productRouter = require('./routes/product')
 
 // Middleware
 app.use(express.json());
@@ -12,7 +13,8 @@ app.use(express.json());
 // Routes
 app.use('/api/login', loginRouter);
 app.use('/api/users', usersRouter);
-app.use('/api/axs', pmsRouter)
+app.use('/api/axs', pmsRouter);
+app.use('/api/product', productRouter);
 
 // Listener
 app.listen(process.env.PORT, () =>
