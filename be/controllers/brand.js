@@ -28,10 +28,24 @@ async function createBrand(req, res) {
 }
 
 // Get Brand
-async function getBrand(req, res) {}
+async function getBrand(req, res) {
+  try {
+    const brand = await Brand.findOne({ _id: req.params.id });
+    res.send(brand);
+  } catch (err) {
+    res.send(err);
+  }
+}
 
 // Get All Brands
-async function getBrands(req, res) {}
+async function getBrands(req, res) {
+  try {
+    const brands = await Brand.find({});
+    res.send(brands);
+  } catch (err) {
+    res.send(err);
+  }
+}
 
 module.exports = {
   createBrand,
