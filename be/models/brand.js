@@ -6,6 +6,8 @@ const brandSchema = new mongoose.Schema({
   desc: { type: String, required: false },
   imgUrl: { type: String, required: false },
   userCount: { type: Number, default: 0, required: true },
+  dateUpdated: { type: Number, required: true },
+  dateCreated: { type: Number, required: true },
 });
 
 const Brand = mongoose.model('Brand', brandSchema);
