@@ -25,3 +25,9 @@ async function getBrand(req, res) {}
 
 // Get All Brands
 async function getBrands(req, res) {}
+
+module.exports = {
+  createBrand,
+  getBrand,
+  getBrands,
+};
