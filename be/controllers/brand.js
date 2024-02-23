@@ -15,6 +15,7 @@ async function createBrand(req, res) {
     req.body = {
       ...req.body,
       _id: uuidv4(),
+      userCount: 1,
       dateUpdated: Date.now(),
       dateCreated: Date.now(),
     };
