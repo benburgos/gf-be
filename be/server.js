@@ -4,7 +4,7 @@ const express = require('express');
 const app = express();
 const loginRouter = require('./routes/login');
 const usersRouter = require('./routes/users');
-const pmsRouter = require('./routes/axs')
+const pmsRouter = require('./routes/pms')
 
 // Middleware
 app.use(express.json());
