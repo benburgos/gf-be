@@ -2,16 +2,12 @@ const db = require('../config/db');
 const Brand = require('../models/brand');
 
 async function checkBrand(data) {
-  const existing = await Brand.findOne({ name: data.brandName }).collation({
+  const existing = await Brand.findOne({ name: data }).collation({
     locale: 'en',
     strength: 1,
   });
 
-  if (existing) {
-    res.send(`Brand already exists.`);
-  } else {
-    return existing;
-  }
+  return existing ? true : false;
 }
 
 module.exports = {
