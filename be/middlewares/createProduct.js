@@ -19,6 +19,7 @@ async function createProduct(data) {
 
   Product.insertMany(products);
   console.log(`${products.length} products were added to company, ${data.name}.`)
+  return products
 }
 
 module.exports = {
