@@ -1,48 +1,44 @@
 const db = require('../config/db');
 const User = require('../models/user');
 const Pwh = require('../models/pwh');
-const Role = require('../models/role');
 const { v4: uuidv4 } = require('uuid');
 const { hashPassword } = require('../middlewares/genHash');
+const { checkBrand } = require('../services/checkBrand');
 
 // Create User
 async function createUser(req, res) {
-  req.body = {
-    ...req.body,
-    _id: uuidv4(),
-    brandId: uuidv4(),
-    dateUpdated: Date.now(),
-    dateCreated: Date.now(),
-  };
+  const check = await checkBrand(req.body.brandName);
 
-  pw = await hashPassword(req.body.pwh);
-
-  const role = {
-    _id: req.body.roleId,
-    brandId: req.body.brandId,
-    name: 'Agent',
-    permissions: [
-      { productId: uuidv4(), pId: uuidv4() },
-      { productId: uuidv4(), pId: uuidv4() },
-    ],
-    isActive: true,
-  };
-
-  await Role.create(role);
-
-  try {
-    delete req.body.pwh;
-    const user = await User.create(req.body);
-    const hash = await Pwh.create({
-      ...req.body,
-      _id: uuidv4(),
-      userId: user._id,
-      pwh: pw,
-    });
-    res.send(`New user, ${user.firstName}, was created.`);
-  } catch (err) {
-    res.send(err);
+  if (check) {
+    console.log('Brand exists');
+    return;
+  } else {
+    console.log('Brand does not exist');
+    return;
   }
+  // req.body = {
+  //   ...req.body,
+  //   _id: uuidv4(),
+  //   brandId: uuidv4(),
+  //   dateUpdated: Date.now(),
+  //   dateCreated: Date.now(),
+  // };
+
+  // pw = await hashPassword(req.body.pwh);
+
+  // try {
+  //   delete req.body.pwh;
+  //   const user = await User.create(req.body);
+  //   const hash = await Pwh.create({
+  //     ...req.body,
+  //     _id: uuidv4(),
+  //     userId: user._id,
+  //     pwh: pw,
+  //   });
+  //   res.send(`New user, ${user.firstName}, was created.`);
+  // } catch (err) {
+  //   res.send(err);
+  // }
 }
 
 // Get Single User
