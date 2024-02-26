@@ -2,7 +2,7 @@ const db = require('../config/db');
 const Brand = require('../models/brand');
 
 async function checkBrand(req, res) {
-  const existing = await Brand.findOne({ name: req.body.name }).collation({
+  const existing = await Brand.findOne({ name: req.body.brandName }).collation({
     locale: 'en',
     strength: 1,
   });
