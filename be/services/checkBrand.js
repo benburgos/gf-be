@@ -1,4 +1,3 @@
-const db = require('../config/db');
 const Brand = require('../models/brand');
 
 async function checkBrand(data) {
