@@ -1,4 +1,3 @@
-const db = require('../config/db');
 const { checkHash } = require('../middlewares/checkHash');
 const { genToken } = require('../services/genToken');
 

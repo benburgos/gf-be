@@ -1,4 +1,3 @@
-const db = require('../config/db');
 const User = require('../models/user');
 const Pwh = require('../models/pwh');
 const { v4: uuidv4 } = require('uuid');
