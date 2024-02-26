@@ -18,13 +18,14 @@ async function createUser(req, res) {
   pw = await hashPassword(req.body.pwh);
 
   const role = {
-    _id: uuidv4(),
+    _id: req.body.roleId,
     brandId: req.body.brandId,
     name: 'Agent',
     permissions: [
       { productId: uuidv4(), pId: uuidv4() },
       { productId: uuidv4(), pId: uuidv4() },
     ],
+    isActive: true,
   };
 
   await Role.create(role);
