@@ -1,5 +1,5 @@
 const db = require('../config/db');
-const Pms = require('../models/pms');
+const Pms = require('../models/permission');
 const { v4: uuidv4 } = require('uuid');
 
 async function createPms(req, res) {
