@@ -12,11 +12,11 @@ const brandRouter = require('./routes/brand');
 app.use(express.json());
 
 // Routes
-app.use('/api/login', loginRouter);
-app.use('/api/users', usersRouter);
-app.use('/api/axs', pmsRouter);
-app.use('/api/product', productRouter);
-app.use('/api/brand', brandRouter);
+app.use('/login', loginRouter);
+app.use('/users', usersRouter);
+app.use('/axs', pmsRouter);
+app.use('/product', productRouter);
+app.use('/brand', brandRouter);
 
 // Listener
 app.listen(process.env.PORT, () =>
