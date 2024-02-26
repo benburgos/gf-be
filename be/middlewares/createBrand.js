@@ -14,7 +14,7 @@ async function createBrand(data) {
   };
   try {
     const brand = await Brand.create(data);
-    console.log(`New brand, ${brand.name} was successfully created.`);
+    console.log(`New brand, ${brand.name}, was successfully created.`);
     return brand;
   } catch (err) {
     console.log(err);
