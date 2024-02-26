@@ -1,6 +1,7 @@
 const db = require('../config/db');
 const User = require('../models/user');
 const Pwh = require('../models/pwh');
+const Role = require('../models/role');
 const { v4: uuidv4 } = require('uuid');
 const { hashPassword } = require('../middlewares/genHash');
 
@@ -15,6 +16,18 @@ async function createUser(req, res) {
   };
 
   pw = await hashPassword(req.body.pwh);
+
+  const role = {
+    _id: uuidv4(),
+    brandId: req.body.brandId,
+    name: 'Agent',
+    permissions: [
+      { productId: uuidv4(), pId: uuidv4() },
+      { productId: uuidv4(), pId: uuidv4() },
+    ],
+  };
+
+  await Role.create(role);
 
   try {
     delete req.body.pwh;
@@ -36,7 +49,7 @@ async function getUser(req, res) {
   try {
     const user = await User.findOne({ _id: req.params.id });
     // Shows user who accessed page, may think about creating event log.
-    console.log(`User ${req.id} has viewed ${user.firstName}'s page.`)
+    console.log(`User ${req.id} has viewed ${user.firstName}'s page.`);
     res.send(user);
   } catch (err) {
     res.send(err);
