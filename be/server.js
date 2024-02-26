@@ -13,7 +13,7 @@ app.use(express.json());
 
 // Routes
 app.use('/login', loginRouter);
-app.use('/users', usersRouter);
+app.use('/user', usersRouter);
 app.use('/axs', pmsRouter);
 app.use('/product', productRouter);
 app.use('/brand', brandRouter);
