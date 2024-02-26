@@ -1,4 +1,4 @@
-const Permission = require('../models/pms');
+const Permission = require('../models/permission');
 const { v4: uuidv4 } = require('uuid');
 
 async function createPermissions(brand, product) {
