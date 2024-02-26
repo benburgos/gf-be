@@ -24,6 +24,8 @@ async function createPermissions(brand, product) {
   console.log(
     `${permissions.length} permissions were added to company, ${brand.name}.`
   );
+
+  return permissions
 }
 
 module.exports = {
