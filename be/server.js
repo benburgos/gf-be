@@ -12,6 +12,8 @@ app.use(express.json());
 // Routes
 app.use('/login', loginRouter);
 app.use('/brand', brandRouter);
+// app.use('/app/user')
+// app.use('/api/user')
 // app.use('/app/qa')
 // app.use('/api/qa')
 // app.use('/app/performance')
