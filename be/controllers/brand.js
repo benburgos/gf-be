@@ -9,7 +9,7 @@ const { createRole } = require('../middlewares/sys/createRole');
 const { checkBrand } = require('../services/checkBrand');
 
 // Create User
-async function createUser(req, res) {
+async function newBrand(req, res) {
   const check = await checkBrand(req.body.brandName);
 
   if (check) {
@@ -37,7 +37,7 @@ async function createUser(req, res) {
           userId: user._id,
           pwh: pw,
         });
-        res.send(`New user, ${user.firstName}, was created.`);
+        res.send(`New company, ${brand.name}, was created under new company admin, ${user.firstName}.`);
       } catch (err) {
         res.send(err);
       }
@@ -45,7 +45,7 @@ async function createUser(req, res) {
 }
 
 // Get Single User
-async function getUser(req, res) {
+async function getBrand(req, res) {
   try {
     const user = await User.findOne({ _id: req.params.id });
     // Shows user who accessed page, may think about creating event log.
@@ -56,18 +56,7 @@ async function getUser(req, res) {
   }
 }
 
-// Get All Users
-async function getUsers(req, res) {
-  try {
-    const allUsers = await User.find({});
-    res.send(allUsers);
-  } catch (err) {
-    throw err;
-  }
-}
-
 module.exports = {
-  createUser,
-  getUser,
-  getUsers,
+  newBrand,
+  getBrand,
 };

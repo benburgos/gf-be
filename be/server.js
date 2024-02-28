@@ -4,14 +4,14 @@ const express = require('express');
 const app = express();
 const db = require('./config/db');
 const loginRouter = require('./routes/login');
-const usersRouter = require('./routes/users');
+const brandRouter = require('./routes/brand');
 
 // Middleware
 app.use(express.json());
 
 // Routes
 app.use('/login', loginRouter);
-app.use('/user', usersRouter);
+app.use('/brand', brandRouter);
 
 // Listener
 app.listen(process.env.PORT, () =>
