@@ -2,10 +2,10 @@ const User = require('../models/user');
 const Pwh = require('../models/pwh');
 const { v4: uuidv4 } = require('uuid');
 const { hashPassword } = require('../middlewares/genHash');
-const { createBrand } = require('../middlewares/createBrand');
-const { createProduct } = require('../middlewares/createProduct');
-const { createPermissions } = require('../middlewares/createPermission');
-const { createRole } = require('../middlewares/createRole');
+const { createBrand } = require('../middlewares/sys/createBrand');
+const { createProduct } = require('../middlewares/sys/createProduct');
+const { createPermissions } = require('../middlewares/sys/createPermission');
+const { createRole } = require('../middlewares/sys/createRole');
 const { checkBrand } = require('../services/checkBrand');
 
 // Create User

@@ -1,4 +1,4 @@
-const Brand = require('../models/brand');
+const Brand = require('../models/sys/brand');
 
 async function checkBrand(data) {
   const existing = await Brand.findOne({ name: data }).collation({

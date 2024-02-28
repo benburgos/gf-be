@@ -1,4 +1,4 @@
-const Product = require('../models/product');
+const Product = require('../../models/sys/product');
 const { v4: uuidv4 } = require('uuid');
 
 async function createProduct(data) {
@@ -18,8 +18,10 @@ async function createProduct(data) {
   }
 
   Product.insertMany(products);
-  console.log(`${products.length} products were added to company, ${data.name}.`)
-  return products
+  console.log(
+    `${products.length} products were added to company, ${data.name}.`
+  );
+  return products;
 }
 
 module.exports = {

@@ -1,4 +1,4 @@
-const Brand = require('../models/brand');
+const Brand = require('../../models/sys/brand');
 const { v4: uuidv4 } = require('uuid');
 
 // Create Brand
@@ -20,7 +20,7 @@ async function createBrand(data) {
     console.log(err);
   }
 
-  return {_id: data._id, name: data.name}
+  return { _id: data._id, name: data.name };
 }
 
 module.exports = {

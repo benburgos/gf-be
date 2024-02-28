@@ -1,4 +1,4 @@
-const Permission = require('../models/permission');
+const Permission = require('../../models/sys/permission');
 const { v4: uuidv4 } = require('uuid');
 
 async function createPermissions(brand, product) {
@@ -20,11 +20,11 @@ async function createPermissions(brand, product) {
       const data = {
         productId: permission.productId,
         pId: permission._id,
-        type:  permission.type
-      }
+        type: permission.type,
+      };
 
       permissions.push(permission);
-      dataArr.push(data)
+      dataArr.push(data);
     }
   }
 
@@ -33,7 +33,7 @@ async function createPermissions(brand, product) {
     `${permissions.length} permissions were added to company, ${brand.name}.`
   );
 
-  return dataArr
+  return dataArr;
 }
 
 module.exports = {
