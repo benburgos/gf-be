@@ -3,15 +3,14 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const db = require('./config/db');
-const loginRouter = require('./routes/login');
-const brandRouter = require('./routes/brand');
+const route = require('./routes/routeIndex');
 
 // Middleware
 app.use(express.json());
 
 // Routes
-app.use('/login', loginRouter);
-app.use('/brand', brandRouter);
+app.use('/login', route.login);
+app.use('/brand', route.brand);
 // app.use('/app/user')
 // app.use('/api/user')
 // app.use('/app/qa')
