@@ -1,6 +1,7 @@
 const User = require('../models/user');
 const Pwh = require('../models/pwh');
 const Brand = require('../models/sys/brand')
+const Role = require('../models/sys/role')
 const { v4: uuidv4 } = require('uuid');
 const { hashPassword } = require('../middlewares/genHash');
 const { createBrand } = require('../middlewares/sys/createBrand');
@@ -49,14 +50,20 @@ async function newBrand(req, res) {
 
 // Get Single User
 async function getBrand(req, res) {
-  try {
-    const brand = await Brand.findOne({ _id: req.params.id });
-    const user = await User.findOne({ _id: req.id });
-    // Shows user who accessed page, may think about creating event log.
-    console.log(`User ${user.firstName} has viewed the company, ${brand.name}'s page.`);
-    res.send(brand);
-  } catch (err) {
-    res.send(err);
+  const role = await Role.findOne({_id: req.rid})
+
+  if (role.name === "Company Admin") {
+    try {
+      const brand = await Brand.findOne({ _id: req.params.id });
+      const user = await User.findOne({ _id: req.id });
+      // Shows user who accessed page, may think about creating event log.
+      console.log(`User ${user.firstName} has viewed the company, ${brand.name}'s page.`);
+      res.send(brand);
+    } catch (err) {
+      res.send(err);
+    }
+  } else {
+    res.send(`Only your company admin has access to this page, redirecting to your app.`)
   }
 }
 
