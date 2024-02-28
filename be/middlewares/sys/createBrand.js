@@ -8,7 +8,6 @@ async function createBrand(data) {
     name: data.brandName,
     desc: data.brandDesc,
     imgUrl: data.imgUrl,
-    userCount: 1,
     dateUpdated: Date.now(),
     dateCreated: Date.now(),
   };
