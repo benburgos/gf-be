@@ -1,7 +1,7 @@
 const User = require('../models/user');
 const Pwh = require('../models/pwh');
-const Brand = require('../models/sys/brand')
-const Role = require('../models/sys/role')
+const Brand = require('../models/sys/brand');
+const Role = require('../models/sys/role');
 const { v4: uuidv4 } = require('uuid');
 const { hashPassword } = require('../middlewares/genHash');
 const { createBrand } = require('../middlewares/sys/createBrand');
@@ -9,15 +9,20 @@ const { createProduct } = require('../middlewares/sys/createProduct');
 const { createPermissions } = require('../middlewares/sys/createPermission');
 const { createRole } = require('../middlewares/sys/createRole');
 const { checkBrand } = require('../services/checkBrand');
+const { checkEmail } = require('../services/checkEmail');
 
 // Create User
 async function newBrand(req, res) {
-  const check = await checkBrand(req.body.brandName);
+  const brandCheck = await checkBrand(req.body.brandName);
+  const emailCheck = await checkEmail(req.body.email);
 
-  if (check) {
+  if (emailCheck) {
+    res.send(`The email you're attempting to register already exists.`);
+    return;
+  } else if (brandCheck) {
     res.send(`The company you're attempting to register already exists.`);
     return;
-  } else {
+  } else if (!emailCheck && !brandCheck) {
     const brand = await createBrand(req.body);
     const product = await createProduct(brand);
     const permissions = await createPermissions(brand, product);
@@ -50,20 +55,24 @@ async function newBrand(req, res) {
 
 // Get Single User
 async function getBrand(req, res) {
-  const role = await Role.findOne({_id: req.rid})
+  const role = await Role.findOne({ _id: req.rid });
 
-  if (role.name === "Company Admin") {
+  if (role.name === 'Company Admin') {
     try {
       const brand = await Brand.findOne({ _id: req.params.id });
       const user = await User.findOne({ _id: req.id });
       // Shows user who accessed page, may think about creating event log.
-      console.log(`User ${user.firstName} has viewed the company, ${brand.name}'s page.`);
+      console.log(
+        `User ${user.firstName} has viewed the company, ${brand.name}'s page.`
+      );
       res.send(brand);
     } catch (err) {
       res.send(err);
     }
   } else {
-    res.send(`Only your company admin has access to this page, redirecting to your app.`)
+    res.send(
+      `Only your company admin has access to this page, redirecting to your app.`
+    );
   }
 }
 
