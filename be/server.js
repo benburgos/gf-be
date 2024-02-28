@@ -12,16 +12,16 @@ app.use(express.json());
 // Routes
 app.use('/login', loginRouter);
 app.use('/brand', brandRouter);
-app.use('/app/qa')
-app.use('/api/qa')
-app.use('/app/performance')
-app.use('/api/performance')
-app.use('/app/engagement')
-app.use('/api/engagement')
-app.use('/app/wfm')
-app.use('/api/wfm')
-app.use('/app/shop')
-app.use('/api/shop')
+// app.use('/app/qa')
+// app.use('/api/qa')
+// app.use('/app/performance')
+// app.use('/api/performance')
+// app.use('/app/engagement')
+// app.use('/api/engagement')
+// app.use('/app/wfm')
+// app.use('/api/wfm')
+// app.use('/app/shop')
+// app.use('/api/shop')
 
 // Listener
 app.listen(process.env.PORT, () =>
