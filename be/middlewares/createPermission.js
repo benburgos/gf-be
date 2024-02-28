@@ -4,6 +4,7 @@ const { v4: uuidv4 } = require('uuid');
 async function createPermissions(brand, product) {
   const permissionList = ['r', 'w', 'rw'];
   const permissions = [];
+  const dataArr = [];
 
   for (let i = 0; i < product.length; i++) {
     for (let j = 0; j < permissionList.length; j++) {
@@ -16,7 +17,14 @@ async function createPermissions(brand, product) {
         dateCreated: Date.now(),
       };
 
+      const data = {
+        productId: permission.productId,
+        pId: permission._id,
+        type:  permission.type
+      }
+
       permissions.push(permission);
+      dataArr.push(data)
     }
   }
 
@@ -25,7 +33,7 @@ async function createPermissions(brand, product) {
     `${permissions.length} permissions were added to company, ${brand.name}.`
   );
 
-  return permissions
+  return dataArr
 }
 
 module.exports = {

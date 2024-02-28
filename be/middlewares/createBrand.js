@@ -14,11 +14,13 @@ async function createBrand(data) {
   };
   try {
     const brand = await Brand.create(data);
-    console.log(`New brand, ${brand.name}, was successfully created.`);
+    console.log(`New company, ${brand.name}, was successfully added.`);
     return brand;
   } catch (err) {
     console.log(err);
   }
+
+  return {_id: data._id, name: data.name}
 }
 
 module.exports = {

@@ -4,7 +4,7 @@ const { v4: uuidv4 } = require('uuid');
 async function createRole(brand, permissions) {
   const seedRoles = ['Company Admin', 'Admin', 'Manager', 'Agent'];
   let role = {
-    brandId: permissions[0].brandId,
+    brandId: brand._id,
     permissions: [],
     isActive: true,
   };
@@ -13,7 +13,7 @@ async function createRole(brand, permissions) {
   for (let i = 0; i < seedRoles.length; i++) {
     switch (seedRoles[i]) {
       case 'Company Admin':
-        const companyAdmin = permissions.filter(obj => obj.type === 'rw').map((obj) => ({productId: obj.productId, pId: obj._id}))
+        const companyAdmin = permissions.filter(obj => obj.type === 'rw').map(({type, ...rest}) => rest)
         role = {
             ...role,
             _id: uuidv4(),
@@ -23,7 +23,7 @@ async function createRole(brand, permissions) {
         roles.push(role)
         break;
       case 'Admin':
-        const admin = permissions.filter(obj => obj.type === 'rw').map((obj) => ({productId: obj.productId, pId: obj._id}))
+        const admin = permissions.filter(obj => obj.type === 'rw').map(({type, ...rest}) => rest)
         role = {
             ...role,
             _id: uuidv4(),
@@ -33,7 +33,7 @@ async function createRole(brand, permissions) {
         roles.push(role)
         break;
       case 'Manager':
-        const manager = permissions.filter(obj => obj.type === 'w').map((obj) => ({productId: obj.productId, pId: obj._id}))
+        const manager = permissions.filter(obj => obj.type === 'w').map(({type, ...rest}) => rest)
         role = {
             ...role,
             _id: uuidv4(),
@@ -43,7 +43,7 @@ async function createRole(brand, permissions) {
         roles.push(role)
         break;
       case 'Agent':
-        const agent = permissions.filter(obj => obj.type === 'r').map((obj) => ({productId: obj.productId, pId: obj._id}))
+        const agent = permissions.filter(obj => obj.type === 'r').map(({type, ...rest}) => rest)
         role = {
             ...role,
             _id: uuidv4(),

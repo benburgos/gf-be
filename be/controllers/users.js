@@ -23,7 +23,7 @@ async function createUser(req, res) {
       req.body = {
         ...req.body,
         _id: uuidv4(),
-        brandId: brand,
+        brandId: brand._id,
         roleId: role,
         dateUpdated: Date.now(),
         dateCreated: Date.now(),
