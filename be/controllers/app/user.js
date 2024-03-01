@@ -54,7 +54,21 @@ async function getAllUsers(req, res) {
   const users = await User.find({brandId: req.bid})
   res.send(users)
 }
-async function editUser(req, res) {}
+
+async function editUser(req, res) {
+  const foundUser = await User.findOne({_id: req.params.id})
+  const editedUser = {}
+  
+  if (foundUser && foundUser.brandId === req.bid) {
+    
+    res.send(editedUser)
+  } else if (foundUser && foundUser.brandId !== req.bid) {
+    re.send(`You do not belong to the same organization as this user.`)
+  } else {
+    res.send(`User does not exist.`)
+  }
+}
+
 async function deleteUser(req, res) {}
 
 module.exports = {
