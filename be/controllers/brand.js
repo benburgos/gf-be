@@ -38,7 +38,7 @@ async function newBrand(req, res) {
     pw = await hashPassword(req.body.pw);
     try {
       const user = await User.create(req.body);
-      const hash = await Pwh.create({
+      await Pwh.create({
         ...req.body,
         _id: uuidv4(),
         userId: user._id,
