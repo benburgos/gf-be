@@ -2,7 +2,7 @@ const Product = require('../../models/sys/product');
 const { v4: uuidv4 } = require('uuid');
 
 async function createProduct(data) {
-  const productList = ['qa', 'pm', 'eng', 'wfm', 'shop'];
+  const productList = ['qa', 'pm', 'eng', 'wfm', 'shop', 'admin'];
   const products = [];
 
   for (let i = 0; i < productList.length; i++) {
