@@ -39,37 +39,52 @@ async function createUser(req, res) {
 }
 
 async function getUser(req, res) {
-  const foundUser = await User.findOne({_id: req.params.id})
-  
+  const foundUser = await User.findOne({ _id: req.params.id });
+
   if (foundUser && foundUser.brandId === req.bid) {
-    res.send(foundUser)
+    res.send(foundUser);
   } else if (foundUser && foundUser.brandId !== req.bid) {
-    re.send(`You do not belong to the same organization as this user.`)
+    re.send(`You do not belong to the same organization as this user.`);
   } else {
-    res.send(`User does not exist.`)
+    res.send(`User does not exist.`);
   }
 }
 
 async function getAllUsers(req, res) {
-  const users = await User.find({brandId: req.bid})
-  res.send(users)
+  const users = await User.find({ brandId: req.bid });
+  res.send(users);
 }
 
 async function editUser(req, res) {
-  const foundUser = await User.findOne({_id: req.params.id})
-  const editedUser = {}
-  
+  const foundUser = await User.findOne({ _id: req.params.id });
+
   if (foundUser && foundUser.brandId === req.bid) {
-    
-    res.send(editedUser)
+    req.body.dateUpdated = Date.now();
+    let savedUser = await User.findOneAndUpdate(
+      { _id: foundUser._id },
+      req.body
+    );
+
+    res.send(`User, ${foundUser.firstName} has been updated.`);
   } else if (foundUser && foundUser.brandId !== req.bid) {
-    re.send(`You do not belong to the same organization as this user.`)
+    re.send(`You do not belong to the same organization as this user.`);
   } else {
-    res.send(`User does not exist.`)
+    res.send(`User does not exist.`);
   }
 }
 
-async function deleteUser(req, res) {}
+async function deleteUser(req, res) {
+  const foundUser = await User.findOne({ _id: req.params.id });
+
+  if (foundUser && foundUser.brandId === req.bid) {
+    await User.findOneAndDelete({ _id: foundUser._id })
+    res.send(`User, ${foundUser.firstName} has been removed from the database.`);
+  } else if (foundUser && foundUser.brandId !== req.bid) {
+    re.send(`You do not belong to the same organization as this user.`);
+  } else {
+    res.send(`User does not exist.`);
+  }
+}
 
 module.exports = {
   createUser,
