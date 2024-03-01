@@ -49,7 +49,11 @@ async function getUser(req, res) {
     res.send(`User does not exist.`)
   }
 }
-async function getAllUsers(req, res) {}
+
+async function getAllUsers(req, res) {
+  const users = await User.find({brandId: req.bid})
+  res.send(users)
+}
 async function editUser(req, res) {}
 async function deleteUser(req, res) {}
 
