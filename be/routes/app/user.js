@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const userController = require('../controllers/app/user');
-const { authToken } = require('../middlewares/authToken');
+const userController = require('../../controllers/app/user');
+const { authToken } = require('../../middlewares/authToken');
 
 router.post('/create', authToken, userController.createUser);
 router.get('/:id', authToken, userController.getUser);
