@@ -5,7 +5,7 @@ const productSchema = new mongoose.Schema({
   brandId: { type: String, required: true },
   desc: {
     type: String,
-    enum: ['qa', 'pm', 'eng', 'wfm', 'shop'],
+    enum: ['qa', 'pm', 'eng', 'wfm', 'shop', 'admin'],
     required: true,
   },
   isActive: { type: Boolean, default: false, required: true },
