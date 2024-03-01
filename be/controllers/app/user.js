@@ -77,8 +77,12 @@ async function deleteUser(req, res) {
   const foundUser = await User.findOne({ _id: req.params.id });
 
   if (foundUser && foundUser.brandId === req.bid) {
-    await User.findOneAndDelete({ _id: foundUser._id })
-    res.send(`User, ${foundUser.firstName} has been removed from the database.`);
+    await User.findOneAndDelete({ _id: foundUser._id });
+    await Pwh.findOneAndDelete({ userId: foundUser._id });
+
+    res.send(
+      `User, ${foundUser.firstName} has been removed from the database.`
+    );
   } else if (foundUser && foundUser.brandId !== req.bid) {
     re.send(`You do not belong to the same organization as this user.`);
   } else {
