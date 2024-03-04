@@ -1,5 +1,6 @@
 const User = require('../../models/user');
 const Pwh = require('../../models/pwh');
+const Role = require('../../models/sys/role');
 const { v4: uuidv4 } = require('uuid');
 const { hashPassword } = require('../../middlewares/genHash');
 const { checkEmail } = require('../../services/checkEmail');
@@ -72,8 +73,29 @@ async function getUser(req, res) {
 }
 
 async function getAllUsers(req, res) {
-  const users = await User.find({ brandId: req.bid });
-  res.send(users);
+  const data = {
+    prod: 'admin',
+    bid: req.bid,
+    ra: req.ra,
+  };
+  const type = await checkPermission(data);
+
+  if (type === 'r' || 'w' || 'rw') {
+    const users = await User.find(
+      { brandId: req.bid },
+      '_id firstName lastName roleId isActive'
+    );
+    const roles = await Role.find({ brandId: req.bid }, '-brandId -permissions -isActive -__v');
+    
+      for (let i = 0; i < users.length; i++) {
+        let role = await roles.find(obj => obj._id === users[i].roleId)
+        users[i].roleId = role.name
+      }
+
+    res.send(users);
+  } else {
+    res.send(`You are not authorized to access this resource.`);
+  }
 }
 
 async function editUser(req, res) {
