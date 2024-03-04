@@ -6,35 +6,46 @@ const { checkEmail } = require('../../services/checkEmail');
 const { checkPermission } = require('../../middlewares/checkPermission');
 
 async function createUser(req, res) {
-  const emailCheck = await checkEmail(req.body.email);
+  const data = {
+    prod: 'admin',
+    bid: req.bid,
+    ra: req.ra,
+  };
+  const type = await checkPermission(data);
 
-  if (emailCheck) {
-    res.send(`The email you're attempting to register already exists.`);
-    return;
-  } else {
-    req.body = {
-      ...req.body,
-      _id: uuidv4(),
-      brandId: req.bid,
-      roleId: req.body.roleId,
-      dateUpdated: Date.now(),
-      dateCreated: Date.now(),
-    };
+  if (type === 'w' || 'rw') {
+    const emailCheck = await checkEmail(req.body.email);
 
-    pw = await hashPassword(req.body.pw);
-
-    try {
-      const user = await User.create(req.body);
-      await Pwh.create({
+    if (emailCheck) {
+      res.send(`The email you're attempting to register already exists.`);
+      return;
+    } else {
+      req.body = {
         ...req.body,
         _id: uuidv4(),
-        userId: user._id,
-        pwh: pw,
-      });
-      res.send(`New employee, ${user.firstName}, was added to the database.`);
-    } catch (err) {
-      res.send(err);
+        brandId: req.bid,
+        roleId: req.body.roleId,
+        dateUpdated: Date.now(),
+        dateCreated: Date.now(),
+      };
+
+      pw = await hashPassword(req.body.pw);
+
+      try {
+        const user = await User.create(req.body);
+        await Pwh.create({
+          ...req.body,
+          _id: uuidv4(),
+          userId: user._id,
+          pwh: pw,
+        });
+        res.send(`New employee, ${user.firstName}, was added to the database.`);
+      } catch (err) {
+        res.send(err);
+      }
     }
+  } else {
+    res.send(`You are not authorized to access this resource.`);
   }
 }
 
@@ -56,7 +67,7 @@ async function getUser(req, res) {
       res.send(`User does not exist.`);
     }
   } else {
-    res.send(`You are not authorized to access this resource.`)
+    res.send(`You are not authorized to access this resource.`);
   }
 }
 
@@ -66,37 +77,59 @@ async function getAllUsers(req, res) {
 }
 
 async function editUser(req, res) {
-  const foundUser = await User.findOne({ _id: req.params.id });
+  const data = {
+    prod: 'admin',
+    bid: req.bid,
+    ra: req.ra,
+  };
+  const type = await checkPermission(data);
 
-  if (foundUser && foundUser.brandId === req.bid) {
-    req.body.dateUpdated = Date.now();
-    let savedUser = await User.findOneAndUpdate(
-      { _id: foundUser._id },
-      req.body
-    );
+  if (type === 'w' || 'rw' || req.params.id === req.id) {
+    const foundUser = await User.findOne({ _id: req.params.id });
 
-    res.send(`User, ${foundUser.firstName} has been updated.`);
-  } else if (foundUser && foundUser.brandId !== req.bid) {
-    re.send(`You do not belong to the same organization as this user.`);
+    if (foundUser && foundUser.brandId === req.bid) {
+      req.body.dateUpdated = Date.now();
+      let savedUser = await User.findOneAndUpdate(
+        { _id: foundUser._id },
+        req.body
+      );
+
+      res.send(`User, ${foundUser.firstName} has been updated.`);
+    } else if (foundUser && foundUser.brandId !== req.bid) {
+      re.send(`You do not belong to the same organization as this user.`);
+    } else {
+      res.send(`User does not exist.`);
+    }
   } else {
-    res.send(`User does not exist.`);
+    res.send(`You are not authorized to access this resource.`);
   }
 }
 
 async function deleteUser(req, res) {
-  const foundUser = await User.findOne({ _id: req.params.id });
+  const data = {
+    prod: 'admin',
+    bid: req.bid,
+    ra: req.ra,
+  };
+  const type = await checkPermission(data);
 
-  if (foundUser && foundUser.brandId === req.bid) {
-    await User.findOneAndDelete({ _id: foundUser._id });
-    await Pwh.findOneAndDelete({ userId: foundUser._id });
+  if (type === 'rw') {
+    const foundUser = await User.findOne({ _id: req.params.id });
 
-    res.send(
-      `User, ${foundUser.firstName} has been removed from the database.`
-    );
-  } else if (foundUser && foundUser.brandId !== req.bid) {
-    re.send(`You do not belong to the same organization as this user.`);
+    if (foundUser && foundUser.brandId === req.bid) {
+      await User.findOneAndDelete({ _id: foundUser._id });
+      await Pwh.findOneAndDelete({ userId: foundUser._id });
+
+      res.send(
+        `User, ${foundUser.firstName} has been removed from the database.`
+      );
+    } else if (foundUser && foundUser.brandId !== req.bid) {
+      re.send(`You do not belong to the same organization as this user.`);
+    } else {
+      res.send(`User does not exist.`);
+    }
   } else {
-    res.send(`User does not exist.`);
+    res.send(`You are not authorized to access this resource.`);
   }
 }
 
