@@ -42,17 +42,21 @@ async function getUser(req, res) {
   const data = {
     prod: 'admin',
     bid: req.bid,
+    ra: req.ra,
   };
-  const foundUser = await User.findOne({ _id: req.params.id });
-  const type = await checkPermission(data)
-  console.log(type)
+  const type = await checkPermission(data);
 
-  if (foundUser && foundUser.brandId === req.bid) {
-    res.send(foundUser);
-  } else if (foundUser && foundUser.brandId !== req.bid) {
-    re.send(`You do not belong to the same organization as this user.`);
+  if (type === 'r' || 'w' || 'rw') {
+    const foundUser = await User.findOne({ _id: req.params.id });
+    if (foundUser && foundUser.brandId === req.bid) {
+      res.send(foundUser);
+    } else if (foundUser && foundUser.brandId !== req.bid) {
+      re.send(`You do not belong to the same organization as this user.`);
+    } else {
+      res.send(`User does not exist.`);
+    }
   } else {
-    res.send(`User does not exist.`);
+    res.send(`You are not authorized to access this resource.`)
   }
 }
 
