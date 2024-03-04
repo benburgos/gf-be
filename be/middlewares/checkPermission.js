@@ -2,16 +2,17 @@ const Product = require('../models/sys/product');
 const Permission = require('../models/sys/permission');
 
 async function checkPermission(data) {
-  const pId = await Product.findOne({ brandId: data.bid, desc: data.prod });
-  const perm = await Permission.findOne({
-    productId: pId._id,
+  const { _id: prod } = await Product.findOne({
     brandId: data.bid,
+    desc: data.prod,
   });
+  const { pId: permId } = await data.ra.find((obj) => obj.productId === prod);
+  const permission = await Permission.findOne({ _id: permId });
 
-  if (pId && perm) {
-    return perm.type;
+  if (permission.brandId === data.bid && permission.productId === prod) {
+    return permission.type
   } else {
-    return false;
+    return false
   }
 }
 
