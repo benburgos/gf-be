@@ -3,6 +3,7 @@ const Pwh = require('../../models/pwh');
 const { v4: uuidv4 } = require('uuid');
 const { hashPassword } = require('../../middlewares/genHash');
 const { checkEmail } = require('../../services/checkEmail');
+const { checkPermission } = require('../../middlewares/checkPermission');
 
 async function createUser(req, res) {
   const emailCheck = await checkEmail(req.body.email);
@@ -38,7 +39,13 @@ async function createUser(req, res) {
 }
 
 async function getUser(req, res) {
+  const data = {
+    prod: 'admin',
+    bid: req.bid,
+  };
   const foundUser = await User.findOne({ _id: req.params.id });
+  const type = await checkPermission(data)
+  console.log(type)
 
   if (foundUser && foundUser.brandId === req.bid) {
     res.send(foundUser);
