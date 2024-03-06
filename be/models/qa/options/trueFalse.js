@@ -1,8 +1,8 @@
 const TrueFalse = {
-    options: [
-        { position: 0, value: "True"},
-        { position: 1, value: "False"}
-    ]
-}
+  options: [
+    { position: 0, desc: 'True', value: true },
+    { position: 1, value: 'False', value: false },
+  ],
+};
 
 module.exports = TrueFalse;
