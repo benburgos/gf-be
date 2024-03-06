@@ -60,8 +60,10 @@ async function getUser(req, res) {
 
   if (type === 'r' || 'w' || 'rw') {
     const foundUser = await User.findOne({ _id: req.params.id });
+    const userRole = await Role.findOne({_id: foundUser.roleId}, '_id, name');
+
     if (foundUser && foundUser.brandId === req.bid) {
-      res.send(foundUser);
+      res.json({user: foundUser, role: userRole});
     } else if (foundUser && foundUser.brandId !== req.bid) {
       re.send(`You do not belong to the same organization as this user.`);
     } else {
