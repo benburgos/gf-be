@@ -1,4 +1,5 @@
 const shortAnswer = {
+  name: "Short Answer",
   options: {
     position: 0,
     desc: 'Feedback',
