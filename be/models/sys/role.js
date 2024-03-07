@@ -11,6 +11,8 @@ const roleSchema = new mongoose.Schema({
     },
   ],
   isActive: { type: Boolean, required: true },
+  dateUpdated: { type: Number, required: true },
+  dateCreated: { type: Number, required: true },
 });
 
 const Role = mongoose.model('Role', roleSchema);
