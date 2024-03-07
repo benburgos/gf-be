@@ -11,7 +11,7 @@ const evaluationSchema = new mongoose.Schema({
   score: { type: { String, Number }, required: true },
   evalType: {
     type: String,
-    enum: ['evaluation', 'calibration', 'self'],
+    enum: ['evaluation', 'calibration', 'self', 'manager', 'peer'],
     required: true,
   },
   data: [
