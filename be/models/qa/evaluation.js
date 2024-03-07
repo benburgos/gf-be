@@ -8,7 +8,9 @@ const evaluationSchema = new mongoose.Schema({
   userId: { type: String, required: true },
   teamId: { type: String, required: true },
   scorecardId: { type: String, required: true },
-  score: { type: { String, Number }, required: true },
+  score: { type: Number, required: true },
+  targetScore: { type: Number, required: true },
+  maxScore: { type: Number, required: true },
   evalType: {
     type: String,
     enum: ['evaluation', 'calibration', 'self', 'manager', 'peer'],
