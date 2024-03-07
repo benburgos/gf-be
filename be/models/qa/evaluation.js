@@ -23,7 +23,7 @@ const evaluationSchema = new mongoose.Schema({
           questionId: { type: String, required: true },
           questionDesc: { type: String, required: true },
           optionType: { type: String, required: true },
-          optionScore: { type: String, required: true },
+          optionScore: { type: {String, Number}, required: true },
         },
       ],
     },
