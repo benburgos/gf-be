@@ -20,19 +20,25 @@ const evaluationSchema = new mongoose.Schema({
     {
       sectionId: { type: String, required: true },
       sectionName: { type: String, required: true },
+      sectionValue: { type: Number, required: true },
       questions: [
         {
           questionId: { type: String, required: true },
           questionDesc: { type: String, required: true },
+          questionValue: { type: Number, required: true },
           optionType: { type: String, required: true },
-          optionScore: { type: {String, Number}, required: true },
+          optionScore: { type: { String, Number }, required: true },
         },
       ],
     },
   ],
-  status:  { type: String, enum: ['not_started', 'in_progress', 'complete'], required: true },
-  positiveFeedback:  { type: String, required: true },
-  improvementFeedback:  { type: String, required: true },
+  status: {
+    type: String,
+    enum: ['not_started', 'in_progress', 'complete'],
+    required: true,
+  },
+  positiveFeedback: { type: String, required: true },
+  improvementFeedback: { type: String, required: true },
   dateUpdated: { type: Number, required: true },
   dateCreated: { type: Number, required: true },
 });
