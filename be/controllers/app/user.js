@@ -118,7 +118,7 @@ async function editUser(req, res) {
         req.body
       );
 
-      res.send(`User, ${foundUser.firstName} has been updated.`);
+      res.send(`User, ${savedUser.firstName} has been updated.`);
     } else if (foundUser && foundUser.brandId !== req.bid) {
       re.send(`You do not belong to the same organization as this user.`);
     } else {

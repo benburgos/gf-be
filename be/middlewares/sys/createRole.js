@@ -21,6 +21,8 @@ async function createRole(brand, permissions) {
           _id: uuidv4(),
           name: seedRoles[i],
           permissions: companyAdmin,
+          dateUpdated: Date.now(),
+          dateCreated: Date.now(),
         };
         roles.push(role);
         break;
@@ -33,6 +35,8 @@ async function createRole(brand, permissions) {
           _id: uuidv4(),
           name: seedRoles[i],
           permissions: admin,
+          dateUpdated: Date.now(),
+          dateCreated: Date.now(),
         };
         roles.push(role);
         break;
@@ -45,6 +49,8 @@ async function createRole(brand, permissions) {
           _id: uuidv4(),
           name: seedRoles[i],
           permissions: manager,
+          dateUpdated: Date.now(),
+          dateCreated: Date.now(),
         };
         roles.push(role);
         break;
@@ -57,6 +63,8 @@ async function createRole(brand, permissions) {
           _id: uuidv4(),
           name: seedRoles[i],
           permissions: agent,
+          dateUpdated: Date.now(),
+          dateCreated: Date.now(),
         };
         roles.push(role);
         break;
