@@ -12,6 +12,7 @@ app.use(express.json());
 app.use('/login', route.login);
 app.use('/brand', route.brand);
 app.use('/app/user', route.appUser)
+app.use('/app/qa/option', route.appQaOption)
 // app.use('/api/user', route.apiUser)
 // app.use('/app/qa', route.appQa)
 // app.use('/api/qa', route.apiQa)
