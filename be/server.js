@@ -13,8 +13,12 @@ app.use('/login', route.login);
 app.use('/brand', route.brand);
 app.use('/app/user', route.appUser)
 app.use('/app/qa/option', route.appQaOption)
+// app.use('/app/qa/answer', route.appQaAnswer)
+// app.use('/app/qa/question', route.appQaQuestion)
+// app.use('/app/qa/section', route.appQaSection)
+// app.use('/app/qa/scorecard', route.appQaScorecard)
+// app.use('/app/qa/evaluate', route.appQaEvaluate)
 // app.use('/api/user', route.apiUser)
-// app.use('/app/qa', route.appQa)
 // app.use('/api/qa', route.apiQa)
 // app.use('/app/performance', route.appPerformance)
 // app.use('/api/performance', route.apiPerformance)
