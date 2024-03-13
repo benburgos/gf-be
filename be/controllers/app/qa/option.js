@@ -1,4 +1,4 @@
-const Option = require('../../../models/app/qa/option')
+const { Option } = require('../../../models/app/qa/qaIndex')
 const { v4: uuidv4 } = require('uuid');
 const { hashPassword } = require('../../middlewares/genHash');
 const { checkPermission } = require('../../middlewares/checkPermission');
