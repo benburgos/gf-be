@@ -1,15 +1,15 @@
-const option = require('./option');
-const answer = require('./answer');
-const question = require('./question');
-const section = require('./section');
-const scorecard = require('./scorecard');
-const evaluation = require('./evaluation');
+const Option = require('./option');
+const Answer = require('./answer');
+const Question = require('./question');
+const Section = require('./section');
+const Scorecard = require('./scorecard');
+const Evaluation = require('./evaluation');
 
 module.exports = {
-  option,
-  answer,
-  question,
-  section,
-  scorecard,
-  evaluation,
+  Option,
+  Answer,
+  Question,
+  Section,
+  Scorecard,
+  Evaluation,
 };
