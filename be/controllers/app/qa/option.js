@@ -10,7 +10,7 @@ async function createOption(req, res) {
   };
 
   const type = await checkPermission(data);
-  
+
   if (type === 'rw') {
     let newOption = {
       _id: uuidv4(),
@@ -31,7 +31,17 @@ async function createOption(req, res) {
   }
 }
 
-async function getOption(req, res) {}
+async function getOption(req, res) {
+  const foundOption = await Option.findOne({ _id: req.params.id });
+
+  if (foundOption && foundOption.brandId === req.bid) {
+    res.json(foundOption);
+  } else if (foundOption && foundOption.brandId !== req.bid) {
+    res.send(`You do not belong to the same organization as this option.`);
+  } else {
+    res.send(`Option ID does not exist.`);
+  }
+}
 async function getOptions(req, res) {}
 async function editOption(req, res) {}
 async function deleteOption(req, res) {}
