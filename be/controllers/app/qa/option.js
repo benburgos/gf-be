@@ -92,11 +92,30 @@ async function editOption(req, res) {
 }
 
 async function deleteOption(req, res) {
+  const data = {
+    prod: 'qa',
+    bid: req.bid,
+    ra: req.ra,
+  };
+
+  const type = await checkPermission(data);
+
+  if (type === 'rw') {
     const foundOption = await Option.findOne({ _id: req.params.id });
-    await Option.findOneAndDelete({ _id: foundOption._id });
-    res.send(
+
+    if (foundOption && foundOption.brandId === req.bid) {
+      await Option.findOneAndDelete({ _id: foundOption._id });
+      res.send(
         `Option, ${foundOption.name}, has been removed from the database.`
       );
+    } else if (foundOption && foundOption.brandId !== req.bid) {
+      res.send(`You do not belong to this organization.`);
+    } else {
+      res.send(`Option ID does not exist.`);
+    }
+  } else {
+    res.send(`You are not authorized to access this resource.`);
+  }
 }
 
 module.exports = {
