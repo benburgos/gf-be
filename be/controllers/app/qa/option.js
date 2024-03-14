@@ -91,7 +91,13 @@ async function editOption(req, res) {
   }
 }
 
-async function deleteOption(req, res) {}
+async function deleteOption(req, res) {
+    const foundOption = await Option.findOne({ _id: req.params.id });
+    await Option.findOneAndDelete({ _id: foundOption._id });
+    res.send(
+        `Option, ${foundOption.name}, has been removed from the database.`
+      );
+}
 
 module.exports = {
   createOption,
