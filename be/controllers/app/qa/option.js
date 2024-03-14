@@ -72,7 +72,16 @@ async function getAllOptions(req, res) {
   }
 }
 
-async function editOption(req, res) {}
+async function editOption(req, res) {
+  const foundOption = await Option.findOne({ _id: req.params.id });
+  req.body.dateUpdated = Date.now();
+  await Option.findOneAndUpdate(
+    { _id: foundOption._id },
+    req.body
+  );
+
+  res.send(`Option, ${req.body.name}, has been updated.`);
+}
 async function deleteOption(req, res) {}
 
 module.exports = {
