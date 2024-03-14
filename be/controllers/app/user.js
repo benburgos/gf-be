@@ -65,7 +65,7 @@ async function getUser(req, res) {
     if (foundUser && foundUser.brandId === req.bid) {
       res.json({user: foundUser, role: userRole});
     } else if (foundUser && foundUser.brandId !== req.bid) {
-      re.send(`You do not belong to the same organization as this user.`);
+      res.send(`You do not belong to the same organization as this user.`);
     } else {
       res.send(`User does not exist.`);
     }
@@ -148,7 +148,7 @@ async function deleteUser(req, res) {
         `User, ${foundUser.firstName} has been removed from the database.`
       );
     } else if (foundUser && foundUser.brandId !== req.bid) {
-      re.send(`You do not belong to the same organization as this user.`);
+      res.send(`You do not belong to the same organization as this user.`);
     } else {
       res.send(`User does not exist.`);
     }
