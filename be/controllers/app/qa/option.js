@@ -39,7 +39,7 @@ async function getOption(req, res) {
   };
 
   const type = await checkPermission(data);
-  
+
   if (type === 'rw' || 'w') {
     const foundOption = await Option.findOne({ _id: req.params.id });
 
@@ -54,7 +54,15 @@ async function getOption(req, res) {
     res.send(`You are not authorized to access this resource.`);
   }
 }
-async function getAllOptions(req, res) {}
+
+async function getAllOptions(req, res) {
+    const options = await Option.find(
+        { brandId: req.bid },
+        'name desc'
+      );
+
+      res.send(options)
+}
 async function editOption(req, res) {}
 async function deleteOption(req, res) {}
 
