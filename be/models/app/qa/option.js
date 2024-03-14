@@ -5,7 +5,7 @@ const optionSchema = new mongoose.Schema({
   brandId: { type: String, required: true },
   name: { type: String, required: true },
   desc: { type: Array, required: true },
-  modality: { type: String, enum:['phone_inbound, phone_outbound, chat, email, other, all'], required: true },
+  modality: { type: String, enum:['phone_inbound', 'phone_outbound', 'chat', 'email', 'other', 'all'], required: true },
   data: [
     {
       position: { type: Number, required: true },
