@@ -32,24 +32,36 @@ async function createOption(req, res) {
 }
 
 async function getOption(req, res) {
-  const foundOption = await Option.findOne({ _id: req.params.id });
+  const data = {
+    prod: 'qa',
+    bid: req.bid,
+    ra: req.ra,
+  };
 
-  if (foundOption && foundOption.brandId === req.bid) {
-    res.json(foundOption);
-  } else if (foundOption && foundOption.brandId !== req.bid) {
-    res.send(`You do not belong to the same organization as this option.`);
+  const type = await checkPermission(data);
+  
+  if (type === 'rw' || 'w') {
+    const foundOption = await Option.findOne({ _id: req.params.id });
+
+    if (foundOption && foundOption.brandId === req.bid) {
+      res.json(foundOption);
+    } else if (foundOption && foundOption.brandId !== req.bid) {
+      res.send(`You do not belong to the same organization as this option.`);
+    } else {
+      res.send(`Option ID does not exist.`);
+    }
   } else {
-    res.send(`Option ID does not exist.`);
+    res.send(`You are not authorized to access this resource.`);
   }
 }
-async function getOptions(req, res) {}
+async function getAllOptions(req, res) {}
 async function editOption(req, res) {}
 async function deleteOption(req, res) {}
 
 module.exports = {
   createOption,
   getOption,
-  getOptions,
+  getAllOptions,
   editOption,
   deleteOption,
 };
