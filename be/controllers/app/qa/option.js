@@ -10,7 +10,7 @@ async function createOption(req, res) {
   };
 
   const type = await checkPermission(data);
-
+  
   if (type === 'rw') {
     let newOption = {
       _id: uuidv4(),
