@@ -16,7 +16,7 @@ app.use('/app/qa/option', route.appQaOption)
 app.use('/app/qa/question', route.appQaQuestion)
 // app.use('/app/qa/section', route.appQaSection)
 // app.use('/app/qa/scorecard', route.appQaScorecard)
-// app.use('/app/qa/evaluate', route.appQaEvaluate)
+// app.use('/app/qa/evaluate', route.appQaEvaluation)
 
 /////// Future Additions ///////////////////////////////
 // app.use('/api/user', route.apiUser)
