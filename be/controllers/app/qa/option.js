@@ -73,15 +73,24 @@ async function getAllOptions(req, res) {
 }
 
 async function editOption(req, res) {
-  const foundOption = await Option.findOne({ _id: req.params.id });
-  req.body.dateUpdated = Date.now();
-  await Option.findOneAndUpdate(
-    { _id: foundOption._id },
-    req.body
-  );
+  const data = {
+    prod: 'qa',
+    bid: req.bid,
+    ra: req.ra,
+  };
 
-  res.send(`Option, ${req.body.name}, has been updated.`);
+  const type = await checkPermission(data);
+  if (type === 'rw') {
+    const foundOption = await Option.findOne({ _id: req.params.id });
+    req.body.dateUpdated = Date.now();
+    await Option.findOneAndUpdate({ _id: foundOption._id }, req.body);
+
+    res.send(`Option, ${req.body.name}, has been updated.`);
+  } else {
+    res.send(`You are not authorized to access this resource.`);
+  }
 }
+
 async function deleteOption(req, res) {}
 
 module.exports = {
