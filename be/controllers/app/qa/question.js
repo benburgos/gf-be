@@ -4,6 +4,7 @@ const { checkPermission } = require('../../../middlewares/checkPermission');
 
 async function createQuestion(req, res) {
     let newQuestion = {
+        ...req.body,
         _id: uuidv4(),
         brandId: req.bid,
         isActive: true,
@@ -11,7 +12,8 @@ async function createQuestion(req, res) {
         dateUpdated: Date.now()
     }
 
-    console.log(newQuestion)
+    await Question.create(newQuestion)
+    res.send(newQuestion)
 }
 
 async function getQuestion(req, res) {}
