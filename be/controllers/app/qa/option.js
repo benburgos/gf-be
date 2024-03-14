@@ -56,13 +56,22 @@ async function getOption(req, res) {
 }
 
 async function getAllOptions(req, res) {
-    const options = await Option.find(
-        { brandId: req.bid },
-        'name desc'
-      );
+  const data = {
+    prod: 'qa',
+    bid: req.bid,
+    ra: req.ra,
+  };
 
-      res.send(options)
+  const type = await checkPermission(data);
+
+  if (type === 'rw' || 'w') {
+    const options = await Option.find({ brandId: req.bid }, 'name desc');
+    res.send(options);
+  } else {
+    res.send(`You are not authorized to access this resource.`);
+  }
 }
+
 async function editOption(req, res) {}
 async function deleteOption(req, res) {}
 
