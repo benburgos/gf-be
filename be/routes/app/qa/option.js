@@ -5,7 +5,7 @@ const { authToken } = require('../../../middlewares/authToken');
 
 router.post('/create', authToken, optionController.createOption);
 router.get('/:id', authToken, optionController.getOption);
-router.get('/', authToken, optionController.getOptions);
+router.get('/', authToken, optionController.getAllOptions);
 router.put('/edit/:id', authToken, optionController.editOption);
 router.delete('/delete/:id', authToken, optionController.deleteOption);
 
