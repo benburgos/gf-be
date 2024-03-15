@@ -16,10 +16,15 @@ async function createQuestion(req, res) {
       ...req.body,
       _id: uuidv4(),
       brandId: req.bid,
+      value: 0,
       isActive: true,
       dateCreated: Date.now(),
       dateUpdated: Date.now(),
     };
+
+    for (let i = 0; i < newQuestion.options.length; i++) {
+      newQuestion.value += req.body.options[i].value
+    }
 
     try {
       await Question.create(newQuestion);
@@ -97,30 +102,30 @@ async function editQuestion(req, res) {
 }
 
 async function deleteQuestion(req, res) {
-    const data = {
-        prod: 'qa',
-        bid: req.bid,
-        ra: req.ra,
-      };
-    
-      const type = await checkPermission(data);
-    
-      if (type === 'rw') {
-        const foundQuestion = await Question.findOne({ _id: req.params.id });
-    
-        if (foundQuestion && foundQuestion.brandId === req.bid) {
-          await Question.findOneAndDelete({ _id: foundQuestion._id });
-          res.send(
-            `Question, ${foundQuestion.name}, has been removed from the database.`
-          );
-        } else if (foundQuestion && foundQuestion.brandId !== req.bid) {
-          res.send(`You do not belong to this organization.`);
-        } else {
-          res.send(`Question ID does not exist.`);
-        }
-      } else {
-        res.send(`You are not authorized to access this resource.`);
-      }
+  const data = {
+    prod: 'qa',
+    bid: req.bid,
+    ra: req.ra,
+  };
+
+  const type = await checkPermission(data);
+
+  if (type === 'rw') {
+    const foundQuestion = await Question.findOne({ _id: req.params.id });
+
+    if (foundQuestion && foundQuestion.brandId === req.bid) {
+      await Question.findOneAndDelete({ _id: foundQuestion._id });
+      res.send(
+        `Question, ${foundQuestion.name}, has been removed from the database.`
+      );
+    } else if (foundQuestion && foundQuestion.brandId !== req.bid) {
+      res.send(`You do not belong to this organization.`);
+    } else {
+      res.send(`Question ID does not exist.`);
+    }
+  } else {
+    res.send(`You are not authorized to access this resource.`);
+  }
 }
 
 module.exports = {
