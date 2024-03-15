@@ -97,7 +97,30 @@ async function editSection(req, res){
 }
 
 async function deleteSection(req, res){
-
+    const data = {
+        prod: 'qa',
+        bid: req.bid,
+        ra: req.ra,
+      };
+    
+      const type = await checkPermission(data);
+    
+      if (type === 'rw') {
+        const foundSection = await Section.findOne({ _id: req.params.id });
+    
+        if (foundSection && foundSection.brandId === req.bid) {
+          await Section.findOneAndDelete({ _id: foundSection._id });
+          res.send(
+            `Section, ${foundSection.name}, has been removed from the database.`
+          );
+        } else if (foundSection && foundSection.brandId !== req.bid) {
+          res.send(`You do not belong to this organization.`);
+        } else {
+          res.send(`Section ID does not exist.`);
+        }
+      } else {
+        res.send(`You are not authorized to access this resource.`);
+      }
 }
 
 
