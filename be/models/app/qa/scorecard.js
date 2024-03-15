@@ -5,7 +5,7 @@ const scorecardSchema = new mongoose.Schema(
     _id: { type: String, required: true },
     brandId: { type: String, required: true },
     teamId: { type: String, required: true },
-    type: { type: String, required: true },
+    type: { type: String, enum: ['native', 'zendesk', 'salesforce'], required: true },
     modality: { type: String, required: true },
     criteria: { type: Array, required: true },
     maxScore: { type: Number, required: true },
