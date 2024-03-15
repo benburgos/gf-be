@@ -23,7 +23,7 @@ async function createSection(req, res){
     
         try {
           await Section.create(newSection);
-          res.send(`New question, ${newSection.name}, was added to the database.`);
+          res.send(`New section, ${newSection.name}, was added to the database.`);
         } catch (err) {
           res.send(err);
         }
