@@ -19,6 +19,7 @@ const questionSchema = new mongoose.Schema(
         label: { type: String, required: true },
         toolTip: { type: String, required: true },
         value: { type: Number, required: true },
+        _id: false,
       },
     ],
     isActive: { type: Boolean, default: false, required: true },
