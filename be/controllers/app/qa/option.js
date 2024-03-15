@@ -80,6 +80,7 @@ async function editOption(req, res) {
   };
 
   const type = await checkPermission(data);
+  
   if (type === 'rw') {
     const foundOption = await Option.findOne({ _id: req.params.id });
     req.body.dateUpdated = Date.now();

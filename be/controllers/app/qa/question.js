@@ -76,7 +76,13 @@ async function getAllQuestions(req, res) {
   }
 }
 
-async function editQuestion(req, res) {}
+async function editQuestion(req, res) {
+    const foundQuestion = await Question.findOne({ _id: req.params.id });
+    req.body.dateUpdated = Date.now();
+    await Question.findOneAndUpdate({ _id: foundQuestion._id }, req.body);
+
+    res.send(`Question, ${req.body.name}, has been updated.`);
+}
 
 async function deleteQuestion(req, res) {}
 
