@@ -2,11 +2,52 @@ const { Section } = require('../../../models/app/qa/qaIndex');
 const { v4: uuidv4 } = require('uuid');
 const { checkPermission } = require('../../../middlewares/checkPermission');
 
-async function createSection(req, res){}
-async function getSection(req, res){}
-async function getAllSections(req, res){}
-async function editSection(req, res){}
-async function deleteSection(req, res){}
+async function createSection(req, res){
+    const data = {
+        prod: 'qa',
+        bid: req.bid,
+        ra: req.ra,
+      };
+    
+      const type = await checkPermission(data);
+    
+      if (type === 'rw') {
+        let newSection = {
+          ...req.body,
+          _id: uuidv4(),
+          brandId: req.bid,
+          isActive: true,
+          dateCreated: Date.now(),
+          dateUpdated: Date.now(),
+        };
+    
+        try {
+          await Section.create(newSection);
+          res.send(`New question, ${newSection.name}, was added to the database.`);
+        } catch (err) {
+          res.send(err);
+        }
+      } else {
+        res.send(`You are not authorized to access this resource.`);
+      }
+}
+
+async function getSection(req, res){
+
+}
+
+async function getAllSections(req, res){
+
+}
+
+async function editSection(req, res){
+
+}
+
+async function deleteSection(req, res){
+
+}
+
 
 module.exports = {
     createSection,
