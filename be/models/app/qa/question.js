@@ -6,7 +6,18 @@ const questionSchema = new mongoose.Schema(
     brandId: { type: String, required: true },
     name: { type: String, required: true },
     desc: { type: String, required: true },
-    modality: { type: String, required: true },
+    modality: {
+      type: String,
+      enum: [
+        'phone_inbound',
+        'phone_outbound',
+        'chat',
+        'email',
+        'other',
+        'all',
+      ],
+      required: true,
+    },
     type: {
       type: String,
       enum: ['standard', 'fail_section', 'fail_all'],
