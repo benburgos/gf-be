@@ -57,7 +57,23 @@ async function getSection(req, res){
 }
 
 async function getAllSections(req, res){
-
+    const data = {
+        prod: 'qa',
+        bid: req.bid,
+        ra: req.ra,
+      };
+    
+      const type = await checkPermission(data);
+    
+      if (type === 'rw' || 'w') {
+        const sections = await Section.find(
+          { brandId: req.bid },
+          'name desc modality value isActive'
+        );
+        res.send(sections);
+      } else {
+        res.send(`You are not authorized to access this resource.`);
+      }
 }
 
 async function editSection(req, res){
