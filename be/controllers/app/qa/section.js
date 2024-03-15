@@ -77,7 +77,23 @@ async function getAllSections(req, res){
 }
 
 async function editSection(req, res){
-
+    const data = {
+        prod: 'qa',
+        bid: req.bid,
+        ra: req.ra,
+      };
+    
+      const type = await checkPermission(data);
+    
+      if (type === 'rw') {
+        const foundSection = await Section.findOne({ _id: req.params.id });
+        req.body.dateUpdated = Date.now();
+        await Section.findOneAndUpdate({ _id: foundSection._id }, req.body);
+    
+        res.send(`Section, ${foundSection.name}, has been updated.`);
+      } else {
+        res.send(`You are not authorized to access this resource.`);
+      }
 }
 
 async function deleteSection(req, res){
