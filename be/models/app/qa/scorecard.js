@@ -6,6 +6,7 @@ const scorecardSchema = new mongoose.Schema(
     brandId: { type: String, required: true },
     teamId: { type: String, required: true },
     type: { type: String, required: true },
+    modality: { type: String, required: true },
     criteria: { type: Array, required: true },
     maxScore: { type: Number, required: true },
     targetScore: { type: Number, required: true },
