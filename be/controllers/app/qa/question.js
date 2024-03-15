@@ -40,7 +40,7 @@ async function getQuestion(req, res) {
   };
 
   const type = await checkPermission(data);
-  
+
   if (type === 'rw' || 'w') {
     const findQuestion = await Question.findOne({ _id: req.params.id });
 
@@ -56,7 +56,11 @@ async function getQuestion(req, res) {
   }
 }
 
-async function getAllQuestions(req, res) {}
+async function getAllQuestions(req, res) {
+    const questions = await Question.find({ brandId: req.bid }, 'name desc modality value isActive');
+
+    res.send(questions)
+}
 
 async function editQuestion(req, res) {}
 
