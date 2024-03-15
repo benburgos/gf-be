@@ -57,9 +57,23 @@ async function getQuestion(req, res) {
 }
 
 async function getAllQuestions(req, res) {
-    const questions = await Question.find({ brandId: req.bid }, 'name desc modality value isActive');
+  const data = {
+    prod: 'qa',
+    bid: req.bid,
+    ra: req.ra,
+  };
 
-    res.send(questions)
+  const type = await checkPermission(data);
+
+  if (type === 'rw' || 'w') {
+    const questions = await Question.find(
+      { brandId: req.bid },
+      'name desc modality value isActive'
+    );
+    res.send(questions);
+  } else {
+    res.send(`You are not authorized to access this resource.`);
+  }
 }
 
 async function editQuestion(req, res) {}
