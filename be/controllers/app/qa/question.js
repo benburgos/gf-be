@@ -77,11 +77,23 @@ async function getAllQuestions(req, res) {
 }
 
 async function editQuestion(req, res) {
+  const data = {
+    prod: 'qa',
+    bid: req.bid,
+    ra: req.ra,
+  };
+
+  const type = await checkPermission(data);
+
+  if (type === 'rw') {
     const foundQuestion = await Question.findOne({ _id: req.params.id });
     req.body.dateUpdated = Date.now();
     await Question.findOneAndUpdate({ _id: foundQuestion._id }, req.body);
 
-    res.send(`Question, ${req.body.name}, has been updated.`);
+    res.send(`Question, ${foundQuestion.name}, has been updated.`);
+  } else {
+    res.send(`You are not authorized to access this resource.`);
+  }
 }
 
 async function deleteQuestion(req, res) {}
