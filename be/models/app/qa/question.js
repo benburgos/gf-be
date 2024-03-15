@@ -7,8 +7,20 @@ const questionSchema = new mongoose.Schema(
     name: { type: String, required: true },
     desc: { type: String, required: true },
     modality: { type: String, required: true },
-    type: { type: String, enum:['standard', 'fail_section', 'fail_all'], required: true },
+    type: {
+      type: String,
+      enum: ['standard', 'fail_section', 'fail_all'],
+      required: true,
+    },
     value: { type: Number, required: true },
+    options: [
+      {
+        position: { type: Number, required: true },
+        label: { type: String, required: true },
+        toolTip: { type: String, required: true },
+        value: { type: Number, required: true },
+      },
+    ],
     isActive: { type: Boolean, default: false, required: true },
     dateUpdated: { type: Number, required: true },
     dateCreated: { type: Number, required: true },
