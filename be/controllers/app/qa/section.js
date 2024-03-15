@@ -42,14 +42,14 @@ async function getSection(req, res){
       const type = await checkPermission(data);
     
       if (type === 'rw' || 'w') {
-        const findQuestion = await Question.findOne({ _id: req.params.id });
+        const findSection = await Section.findOne({ _id: req.params.id });
     
-        if (findQuestion && findQuestion.brandId === req.bid) {
-          res.json(findQuestion);
-        } else if (findQuestion && findQuestion.brandId !== req.bid) {
+        if (findSection && findSection.brandId === req.bid) {
+          res.json(findSection);
+        } else if (findSection && findSection.brandId !== req.bid) {
           res.send(`You do not belong to the same organization as this option.`);
         } else {
-          res.send(`Question ID does not exist.`);
+          res.send(`Section ID does not exist.`);
         }
       } else {
         res.send(`You are not authorized to access this resource.`);
