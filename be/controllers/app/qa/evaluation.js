@@ -73,8 +73,19 @@ async function getAllEvaluations(req, res) {
     
     for (i = 0; i < evaluations.length; i++){
         let foundUser = await users.find((obj) => obj._id === evaluations[i].userId)
-        let copy = foundUser.firstName
-        console.log(copy)
+        let foundScorecard = await scorecards.find((obj) => obj._id === evaluations[i].scorecardId)
+
+        if (foundUser) {
+            evaluations[i].userId = `${foundUser.firstName} ${foundUser.lastName}`
+        } else {
+            evaluations[i].userId = "Unassigned"
+        }
+
+        if (foundScorecard) {
+            evaluations[i].scorecardId = `${foundScorecard.name}`
+        } else {
+            evaluations[i].scorecardId = "Unassigned"
+        }
     }
 
     res.send(evaluations);
