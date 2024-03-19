@@ -57,7 +57,25 @@ async function getScorecard(req, res) {
   }
 }
 
-async function getAllScorecards(req, res) {}
+async function getAllScorecards(req, res) {
+    const data = {
+        prod: 'qa',
+        bid: req.bid,
+        ra: req.ra,
+      };
+    
+      const type = await checkPermission(data);
+    
+      if (type === 'rw' || 'w') {
+        const scorecards = await Scorecard.find(
+          { brandId: req.bid },
+          'name desc type modality targetScore maxScore isActive'
+        );
+        res.send(scorecards);
+      } else {
+        res.send(`You are not authorized to access this resource.`);
+      }
+}
 
 async function editScorecard(req, res) {}
 
