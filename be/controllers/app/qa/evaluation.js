@@ -47,10 +47,33 @@ async function createEvaluation(req, res) {
     res.send(`You are not authorized to access this resource.`);
   }
 }
+
 async function getEvaluation(req, res) {}
-async function getAllEvaluations(req, res) {}
+
+async function getAllEvaluations(req, res) {
+    const data = {
+        prod: 'qa',
+        bid: req.bid,
+        ra: req.ra,
+      };
+    
+      const type = await checkPermission(data);
+    
+      if (type === 'rw' || 'w') {
+        const evaluations = await Evaluation.find(
+          { brandId: req.bid, evaluatorId: req.id },
+          '_id name desc type modality targetScore maxScore isActive'
+        );
+        res.send(evaluations);
+      } else {
+        res.send(`You are not authorized to access this resource.`);
+      }
+}
+
 async function editEvaluation(req, res) {}
+
 async function deleteEvaluation(req, res) {}
+
 
 module.exports = {
   createEvaluation,

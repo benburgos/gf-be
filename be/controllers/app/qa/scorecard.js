@@ -69,7 +69,7 @@ async function getAllScorecards(req, res) {
   if (type === 'rw' || 'w') {
     const scorecards = await Scorecard.find(
       { brandId: req.bid },
-      'name desc type modality targetScore maxScore isActive'
+      '_id name desc type modality targetScore maxScore isActive'
     );
     res.send(scorecards);
   } else {

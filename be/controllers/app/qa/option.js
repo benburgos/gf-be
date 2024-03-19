@@ -65,7 +65,7 @@ async function getAllOptions(req, res) {
   const type = await checkPermission(data);
 
   if (type === 'rw' || 'w') {
-    const options = await Option.find({ brandId: req.bid }, 'name desc');
+    const options = await Option.find({ brandId: req.bid }, '_id name desc');
     res.send(options);
   } else {
     res.send(`You are not authorized to access this resource.`);

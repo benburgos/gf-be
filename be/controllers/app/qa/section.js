@@ -68,7 +68,7 @@ async function getAllSections(req, res) {
   if (type === 'rw' || 'w') {
     const sections = await Section.find(
       { brandId: req.bid },
-      'name desc modality value isActive'
+      '_id name desc modality value isActive'
     );
     res.send(sections);
   } else {

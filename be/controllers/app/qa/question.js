@@ -73,7 +73,7 @@ async function getAllQuestions(req, res) {
   if (type === 'rw' || 'w') {
     const questions = await Question.find(
       { brandId: req.bid },
-      'name desc modality value isActive'
+      '_id name desc modality value isActive'
     );
     res.send(questions);
   } else {
