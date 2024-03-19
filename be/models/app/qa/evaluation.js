@@ -4,6 +4,7 @@ const evaluationSchema = new mongoose.Schema(
   {
     _id: { type: String, required: true },
     brandId: { type: String, required: true },
+    evalId: { type: Number, required: true },
     systemId: { type: { String, Number }, required: true },
     modality: {
       type: String,
