@@ -87,9 +87,11 @@ async function editScorecard(req, res) {
   const type = await checkPermission(data);
 
   if (type === 'rw') {
-    const foundScorecard = await Scorecard.findOne({ _id: req.params.id });
     req.body.dateUpdated = Date.now();
-    await Scorecard.findOneAndUpdate({ _id: foundScorecard._id }, req.body);
+    const foundScorecard = await Scorecard.findOneAndUpdate(
+      { _id: req.params.id },
+      req.body
+    );
 
     res.send(`Scorecard, ${foundScorecard.name}, has been updated.`);
   } else {

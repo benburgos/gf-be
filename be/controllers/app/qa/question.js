@@ -23,7 +23,7 @@ async function createQuestion(req, res) {
     };
 
     for (let i = 0; i < newQuestion.options.length; i++) {
-      newQuestion.value += req.body.options[i].value
+      newQuestion.value += req.body.options[i].value;
     }
 
     try {
@@ -91,9 +91,11 @@ async function editQuestion(req, res) {
   const type = await checkPermission(data);
 
   if (type === 'rw') {
-    const foundQuestion = await Question.findOne({ _id: req.params.id });
     req.body.dateUpdated = Date.now();
-    await Question.findOneAndUpdate({ _id: foundQuestion._id }, req.body);
+    const foundQuestion = await Question.findOneAndUpdate(
+      { _id: req.params.id },
+      req.body
+    );
 
     res.send(`Question, ${foundQuestion.name}, has been updated.`);
   } else {
