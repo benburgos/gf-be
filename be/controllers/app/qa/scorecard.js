@@ -33,7 +33,10 @@ async function createScorecard(req, res) {
   }
 }
 
-async function getScorecard(req, res) {}
+async function getScorecard(req, res) {
+  let foundScorecard = await Scorecard.find({ _id: req.params.id });
+  res.send(foundScorecard)
+}
 
 async function getAllScorecards(req, res) {}
 
