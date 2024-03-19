@@ -1,7 +1,8 @@
-const { Evaluation } = require('../../../models/app/qa/qaIndex');
-const { Scorecard } = require('../../../models/app/qa/qaIndex');
+const { Evaluation, Scorecard } = require('../../../models/app/qa/qaIndex');
+const User = require('../../../models/user');
 const { v4: uuidv4 } = require('uuid');
 const { checkPermission } = require('../../../middlewares/checkPermission');
+const { listenerCount } = require('../../../models/pwh');
 
 async function createEvaluation(req, res) {
   const data = {
@@ -21,8 +22,8 @@ async function createEvaluation(req, res) {
         brandId: req.bid,
         evalId: evaluations + 1,
         systemId: evaluations + 1,
-        modality: 'all',
-        userId: 'TBD',
+        modality: 'other',
+        userId: 'd20c6ac6-7611-4e69-8ce9-b4d1e69af71a',
         teamId: 'TBD',
         evaluatorId: req.id,
         scorecardId: 'TBD',
@@ -51,29 +52,47 @@ async function createEvaluation(req, res) {
 async function getEvaluation(req, res) {}
 
 async function getAllEvaluations(req, res) {
-    const data = {
-        prod: 'qa',
-        bid: req.bid,
-        ra: req.ra,
-      };
+  const data = {
+    prod: 'qa',
+    bid: req.bid,
+    ra: req.ra,
+  };
+
+  const type = await checkPermission(data);
+
+  if (type === 'rw') {
+    let evaluations = await Evaluation.find(
+      { brandId: req.bid },
+      '_id evalId systemId evaluatorId scorecardId modality userId teamId evalType status'
+    );
+    let users = await User.find(
+      { brandId: req.bid },
+      '_id firstName lastName'
+    );
+    let scorecards = await Scorecard.find({ brandId: req.bid }, '_id name');
     
-      const type = await checkPermission(data);
-    
-      if (type === 'rw' || 'w') {
-        const evaluations = await Evaluation.find(
-          { brandId: req.bid, evaluatorId: req.id },
-          '_id name desc type modality targetScore maxScore isActive'
-        );
-        res.send(evaluations);
-      } else {
-        res.send(`You are not authorized to access this resource.`);
-      }
+    for (i = 0; i < evaluations.length; i++){
+        let foundUser = await users.find((obj) => obj._id === evaluations[i].userId)
+        let copy = foundUser.firstName
+        console.log(copy)
+    }
+
+    res.send(evaluations);
+    // res.send(evaluations);
+  } else if (type === 'w') {
+    const evaluations = await Evaluation.find(
+      { brandId: req.bid, evaluatorId: req.id },
+      '_id evalId systemId evaluatorId scorecardId modality userId teamId evalType status'
+    );
+    res.send(evaluations);
+  } else {
+    res.send(`You are not authorized to access this resource.`);
+  }
 }
 
 async function editEvaluation(req, res) {}
 
 async function deleteEvaluation(req, res) {}
-
 
 module.exports = {
   createEvaluation,

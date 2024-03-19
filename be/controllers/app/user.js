@@ -60,10 +60,10 @@ async function getUser(req, res) {
 
   if (type === 'r' || 'w' || 'rw') {
     const foundUser = await User.findOne({ _id: req.params.id });
-    const userRole = await Role.findOne({_id: foundUser.roleId}, '_id, name');
+    const userRole = await Role.findOne({ _id: foundUser.roleId }, '_id, name');
 
     if (foundUser && foundUser.brandId === req.bid) {
-      res.json({user: foundUser, role: userRole});
+      res.json({ user: foundUser, role: userRole });
     } else if (foundUser && foundUser.brandId !== req.bid) {
       res.send(`You do not belong to the same organization as this user.`);
     } else {
@@ -87,12 +87,15 @@ async function getAllUsers(req, res) {
       { brandId: req.bid },
       '_id firstName lastName roleId isActive'
     );
-    const roles = await Role.find({ brandId: req.bid }, '-brandId -permissions -isActive -__v');
-    
-      for (let i = 0; i < users.length; i++) {
-        let role = await roles.find(obj => obj._id === users[i].roleId)
-        users[i].roleId = role.name
-      }
+    const roles = await Role.find(
+      { brandId: req.bid },
+      '-brandId -permissions -isActive -__v'
+    );
+
+    for (let i = 0; i < users.length; i++) {
+      let role = await roles.find((obj) => obj._id === users[i].roleId);
+      users[i].roleId = role.name;
+    }
 
     res.send(users);
   } else {
