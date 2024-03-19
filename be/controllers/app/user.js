@@ -94,7 +94,12 @@ async function getAllUsers(req, res) {
 
     for (let i = 0; i < users.length; i++) {
       let role = await roles.find((obj) => obj._id === users[i].roleId);
-      users[i].roleId = role.name;
+
+      if (role) {
+        users[i].roleId = role.name;
+      } else {
+        users[i].roleId = "Unassigned"
+      }
     }
 
     res.send(users);
