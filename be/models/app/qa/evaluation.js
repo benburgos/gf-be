@@ -20,6 +20,7 @@ const evaluationSchema = new mongoose.Schema(
     },
     userId: { type: String, required: true },
     teamId: { type: String, required: true },
+    evaluatorId: { type: String, required: true },
     scorecardId: { type: String, required: true },
     score: { type: Number, required: true },
     targetScore: { type: Number, required: true },
