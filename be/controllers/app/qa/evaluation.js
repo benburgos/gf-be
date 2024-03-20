@@ -72,27 +72,34 @@ async function getAllEvaluations(req, res) {
       let foundUser = await users.find(
         (obj) => obj._id === evaluations[i].userId
       );
+
+      if (foundUser) {
+        evaluations[i].userId = `${foundUser.firstName} ${foundUser.lastName}`;
+      } else {
+        evaluations[i].userId = 'Unassigned';
+      }
+
+      let foundGrader = await users.find(
+        (obj) => obj._id === evaluations[i].evaluatorId
+      );
+
+      if (foundEvaluator) {
+        evaluations[i].evaluatorId = `${foundEvaluator.firstName} ${foundEvaluator.lastName}`;
+      } else {
+        evaluations[i].evaluatorId = 'Unassigned';
+      }
+
       let foundScorecard = await scorecards.find(
         (obj) => obj._id === evaluations[i].scorecardId
       );
 
-      if (foundUser && foundScorecard) {
-        evaluations[i].userId = `${foundUser.firstName} ${foundUser.lastName}`;
+      if (foundScorecard) {
         evaluations[i].scorecardId = `${foundScorecard.name}`;
-      } else if (!foundUser && foundScorecard) {
-        evaluations[i].userId = 'Unassigned';
-        evaluations[i].scorecardId = `${foundScorecard.name}`;
-      } else if (foundUser && !foundScorecard) {
-        evaluations[i].userId = `${foundUser.firstName} ${foundUser.lastName}`;
-        evaluations[i].scorecardId = 'Unassigned';
       } else {
-        evaluations[i].userId = 'Unassigned';
         evaluations[i].scorecardId = 'Unassigned';
       }
     }
-
     res.send(evaluations);
-    // res.send(evaluations);
   } else if (type === 'w') {
     let evaluations = await Evaluation.find(
       { brandId: req.bid, evaluatorId: req.id },
@@ -128,7 +135,27 @@ async function getAllEvaluations(req, res) {
   }
 }
 
-async function editEvaluation(req, res) {}
+async function editEvaluation(req, res) {
+  const data = {
+    prod: 'qa',
+    bid: req.bid,
+    ra: req.ra,
+  };
+
+  const type = await checkPermission(data);
+
+  if (type === 'rw' || 'w') {
+    req.body.dateUpdated = Date.now();
+    const foundEvaluation = await Evaluation.findOneAndUpdate(
+      { _id: req.params.id },
+      req.body
+    );
+
+    res.send(`Evaluation, #${foundEvaluation.evalId} has been updated.`);
+  } else {
+    res.send(`You are not authorized to access this resource.`);
+  }
+}
 
 async function deleteEvaluation(req, res) {}
 
