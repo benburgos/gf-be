@@ -2,7 +2,6 @@ const { Evaluation, Scorecard } = require('../../../models/app/qa/qaIndex');
 const User = require('../../../models/user');
 const { v4: uuidv4 } = require('uuid');
 const { checkPermission } = require('../../../middlewares/checkPermission');
-const { listenerCount } = require('../../../models/pwh');
 
 async function createEvaluation(req, res) {
   const data = {
