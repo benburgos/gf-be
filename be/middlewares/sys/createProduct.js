@@ -14,6 +14,10 @@ async function createProduct(data) {
       dateCreated: Date.now(),
     };
 
+    if (product.desc === 'admin') {
+      product.isActive = true;
+    }
+
     products.push(product);
   }
 
