@@ -65,37 +65,64 @@ async function getAllEvaluations(req, res) {
       { brandId: req.bid },
       '_id evalId systemId evaluatorId scorecardId modality userId teamId evalType status'
     );
-    let users = await User.find(
-      { brandId: req.bid },
-      '_id firstName lastName'
-    );
+    let users = await User.find({ brandId: req.bid }, '_id firstName lastName');
     let scorecards = await Scorecard.find({ brandId: req.bid }, '_id name');
-    
-    for (i = 0; i < evaluations.length; i++){
-        let foundUser = await users.find((obj) => obj._id === evaluations[i].userId)
-        let foundScorecard = await scorecards.find((obj) => obj._id === evaluations[i].scorecardId)
 
-        if (foundUser) {
-            evaluations[i].userId = `${foundUser.firstName} ${foundUser.lastName}`
-        } else {
-            evaluations[i].userId = "Unassigned"
-        }
+    for (i = 0; i < evaluations.length; i++) {
+      let foundUser = await users.find(
+        (obj) => obj._id === evaluations[i].userId
+      );
+      let foundScorecard = await scorecards.find(
+        (obj) => obj._id === evaluations[i].scorecardId
+      );
 
-        if (foundScorecard) {
-            evaluations[i].scorecardId = `${foundScorecard.name}`
-        } else {
-            evaluations[i].scorecardId = "Unassigned"
-        }
+      if (foundUser && foundScorecard) {
+        evaluations[i].userId = `${foundUser.firstName} ${foundUser.lastName}`;
+        evaluations[i].scorecardId = `${foundScorecard.name}`;
+      } else if (!foundUser && foundScorecard) {
+        evaluations[i].userId = 'Unassigned';
+        evaluations[i].scorecardId = `${foundScorecard.name}`;
+      } else if (foundUser && !foundScorecard) {
+        evaluations[i].userId = `${foundUser.firstName} ${foundUser.lastName}`;
+        evaluations[i].scorecardId = 'Unassigned';
+      } else {
+        evaluations[i].userId = 'Unassigned';
+        evaluations[i].scorecardId = 'Unassigned';
+      }
     }
 
     res.send(evaluations);
     // res.send(evaluations);
   } else if (type === 'w') {
-    const evaluations = await Evaluation.find(
+    let evaluations = await Evaluation.find(
       { brandId: req.bid, evaluatorId: req.id },
       '_id evalId systemId evaluatorId scorecardId modality userId teamId evalType status'
     );
-    res.send(evaluations);
+    let users = await User.find({ brandId: req.bid }, '_id firstName lastName');
+    let scorecards = await Scorecard.find({ brandId: req.bid }, '_id name');
+
+    for (i = 0; i < evaluations.length; i++) {
+      let foundUser = await users.find(
+        (obj) => obj._id === evaluations[i].userId
+      );
+      let foundScorecard = await scorecards.find(
+        (obj) => obj._id === evaluations[i].scorecardId
+      );
+
+      if (foundUser && foundScorecard) {
+        evaluations[i].userId = `${foundUser.firstName} ${foundUser.lastName}`;
+        evaluations[i].scorecardId = `${foundScorecard.name}`;
+      } else if (!foundUser && foundScorecard) {
+        evaluations[i].userId = 'Unassigned';
+        evaluations[i].scorecardId = `${foundScorecard.name}`;
+      } else if (foundUser && !foundScorecard) {
+        evaluations[i].userId = `${foundUser.firstName} ${foundUser.lastName}`;
+        evaluations[i].scorecardId = 'Unassigned';
+      } else {
+        evaluations[i].userId = 'Unassigned';
+        evaluations[i].scorecardId = 'Unassigned';
+      }
+    }
   } else {
     res.send(`You are not authorized to access this resource.`);
   }
