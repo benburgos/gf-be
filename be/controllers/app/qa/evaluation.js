@@ -112,24 +112,34 @@ async function getAllEvaluations(req, res) {
       let foundUser = await users.find(
         (obj) => obj._id === evaluations[i].userId
       );
+
+      if (foundUser) {
+        evaluations[i].userId = `${foundUser.firstName} ${foundUser.lastName}`;
+      } else {
+        evaluations[i].userId = 'Unassigned';
+      }
+
+      let foundEvaluator = await users.find(
+        (obj) => obj._id === evaluations[i].evaluatorId
+      );
+
+      if (foundEvaluator) {
+        evaluations[i].evaluatorId = `${foundEvaluator.firstName} ${foundEvaluator.lastName}`;
+      } else {
+        evaluations[i].evaluatorId = 'Unassigned';
+      }
+
       let foundScorecard = await scorecards.find(
         (obj) => obj._id === evaluations[i].scorecardId
       );
 
-      if (foundUser && foundScorecard) {
-        evaluations[i].userId = `${foundUser.firstName} ${foundUser.lastName}`;
+      if (foundScorecard) {
         evaluations[i].scorecardId = `${foundScorecard.name}`;
-      } else if (!foundUser && foundScorecard) {
-        evaluations[i].userId = 'Unassigned';
-        evaluations[i].scorecardId = `${foundScorecard.name}`;
-      } else if (foundUser && !foundScorecard) {
-        evaluations[i].userId = `${foundUser.firstName} ${foundUser.lastName}`;
-        evaluations[i].scorecardId = 'Unassigned';
       } else {
-        evaluations[i].userId = 'Unassigned';
         evaluations[i].scorecardId = 'Unassigned';
       }
     }
+    res.send(evaluations);
   } else {
     res.send(`You are not authorized to access this resource.`);
   }
@@ -157,7 +167,32 @@ async function editEvaluation(req, res) {
   }
 }
 
-async function deleteEvaluation(req, res) {}
+async function deleteEvaluation(req, res) {
+    const data = {
+        prod: 'qa',
+        bid: req.bid,
+        ra: req.ra,
+      };
+    
+      const type = await checkPermission(data);
+    
+      if (type === 'rw') {
+        const foundEvaluation = await Evaluation.findOne({ _id: req.params.id });
+    
+        if (foundEvaluation && foundEvaluation.brandId === req.bid) {
+          await Evaluation.findOneAndDelete({ _id: foundEvaluation._id });
+          res.send(
+            `Evaluation, ${foundEvaluation.evalId}, has been removed from the database.`
+          );
+        } else if (foundEvaluation && foundEvaluation.brandId !== req.bid) {
+          res.send(`You do not belong to this organization.`);
+        } else {
+          res.send(`Evaluation ID does not exist.`);
+        }
+      } else {
+        res.send(`You are not authorized to access this resource.`);
+      }
+}
 
 module.exports = {
   createEvaluation,
