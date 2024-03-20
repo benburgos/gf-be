@@ -69,7 +69,6 @@ async function getEvaluation(req, res) {
       '-_id name desc'
     );
 
-    // Try adding the ternaries here to the getAllEvaluations..
     res.send({
       eval: foundEvaluation,
       evalUser: evalUser ? evalUser : 'Unassigned',
