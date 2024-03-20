@@ -11,7 +11,7 @@ async function createTeam(req, res) {
   };
   const type = await checkPermission(data);
 
-  if (type === 'w' || 'rw') {
+  if (type === 'rw') {
     req.body = {
       ...req.body,
       _id: uuidv4(),
@@ -86,35 +86,60 @@ async function getAllTeams(req, res) {
 }
 
 async function editTeam(req, res) {
-    const data = {
-        prod: 'admin',
-        bid: req.bid,
-        ra: req.ra,
-      };
-      const type = await checkPermission(data);
-    
-      if (type === 'w' || 'rw') {
-        const foundTeam = await Team.findOne({ _id: req.params.id });
-    
-        if (foundTeam && foundTeam.brandId === req.bid) {
-          req.body.dateUpdated = Date.now();
-          let savedTeam = await Team.findOneAndUpdate(
-            { _id: foundTeam._id },
-            req.body
-          );
-    
-          res.send(`Team, ${savedTeam.name}, has been updated.`);
-        } else if (foundTeam && foundTeam.brandId !== req.bid) {
-          res.send(`You do not belong to the same organization as this team.`);
-        } else {
-          res.send(`Team does not exist.`);
-        }
-      } else {
-        res.send(`You are not authorized to access this resource.`);
-      }
+  const data = {
+    prod: 'admin',
+    bid: req.bid,
+    ra: req.ra,
+  };
+  const type = await checkPermission(data);
+
+  if (type === 'w' || 'rw') {
+    const foundTeam = await Team.findOne({ _id: req.params.id });
+
+    if (foundTeam && foundTeam.brandId === req.bid) {
+      req.body.dateUpdated = Date.now();
+      let savedTeam = await Team.findOneAndUpdate(
+        { _id: foundTeam._id },
+        req.body
+      );
+
+      res.send(`Team, ${savedTeam.name}, has been updated.`);
+    } else if (foundTeam && foundTeam.brandId !== req.bid) {
+      res.send(`You do not belong to the same organization as this team.`);
+    } else {
+      res.send(`Team does not exist.`);
+    }
+  } else {
+    res.send(`You are not authorized to access this resource.`);
+  }
 }
 
-async function deleteTeam(req, res) {}
+async function deleteTeam(req, res) {
+  const data = {
+    prod: 'admin',
+    bid: req.bid,
+    ra: req.ra,
+  };
+  const type = await checkPermission(data);
+
+  if (type === 'rw') {
+    const foundTeam = await Team.findOne({ _id: req.params.id });
+
+    if (foundTeam && foundTeam.brandId === req.bid) {
+      await Team.findOneAndDelete({ _id: foundTeam._id });
+
+      res.send(
+        `Team, ${foundTeam.name}, has been removed from the database.`
+      );
+    } else if (foundTeam && foundTeam.brandId !== req.bid) {
+      res.send(`You do not belong to the same organization as this user.`);
+    } else {
+      res.send(`Team does not exist.`);
+    }
+  } else {
+    res.send(`You are not authorized to access this resource.`);
+  }
+}
 
 module.exports = {
   createTeam,
