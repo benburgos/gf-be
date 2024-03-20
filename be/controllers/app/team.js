@@ -31,7 +31,28 @@ async function createTeam(req, res) {
   }
 }
 
-async function getTeam(req, res) {}
+async function getTeam(req, res) {
+    const data = {
+        prod: 'admin',
+        bid: req.bid,
+        ra: req.ra,
+      };
+      const type = await checkPermission(data);
+    
+      if (type === 'r' || 'w' || 'rw') {
+        const foundTeam = await Team.findOne({ _id: req.params.id });
+    
+        if (foundTeam && foundTeam.brandId === req.bid) {
+          res.json(foundTeam);
+        } else if (foundTeam && foundTeam.brandId !== req.bid) {
+          res.send(`You do not belong to the same organization as this team.`);
+        } else {
+          res.send(`Team does not exist.`);
+        }
+      } else {
+        res.send(`You are not authorized to access this resource.`);
+      }
+}
 
 async function getAllTeams(req, res) {}
 
