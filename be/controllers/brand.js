@@ -2,14 +2,12 @@ const User = require('../models/user');
 const Pwh = require('../models/pwh');
 const Brand = require('../models/sys/brand');
 const Role = require('../models/sys/role');
+const Qa = require('../models/app/qa/qaIndex')
 const { v4: uuidv4 } = require('uuid');
 const { hashPassword } = require('../middlewares/genHash');
-const { createBrand } = require('../middlewares/sys/createBrand');
-const { createProduct } = require('../middlewares/sys/createProduct');
-const { createPermissions } = require('../middlewares/sys/createPermission');
-const { createRole } = require('../middlewares/sys/createRole');
 const { checkBrand } = require('../services/checkBrand');
 const { checkEmail } = require('../services/checkEmail');
+const sys = require('../middlewares/sys/startupIndex')
 
 // Create User
 async function newBrand(req, res) {
@@ -23,10 +21,10 @@ async function newBrand(req, res) {
     res.send(`The company you're attempting to register already exists.`);
     return;
   } else if (!emailCheck && !brandCheck) {
-    const brand = await createBrand(req.body);
-    const product = await createProduct(brand);
-    const permissions = await createPermissions(brand, product);
-    const role = await createRole(brand, permissions);
+    const brand = await sys.createBrand(req.body);
+    const product = await sys.createProduct(brand);
+    const permissions = await sys.createPermissions(brand, product);
+    const role = await sys.createRole(brand, permissions);
     req.body = {
       ...req.body,
       _id: uuidv4(),
