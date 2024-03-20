@@ -79,7 +79,7 @@ async function getAllEvaluations(req, res) {
         evaluations[i].userId = 'Unassigned';
       }
 
-      let foundGrader = await users.find(
+      let foundEvaluator = await users.find(
         (obj) => obj._id === evaluations[i].evaluatorId
       );
 
