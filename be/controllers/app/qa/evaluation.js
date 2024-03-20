@@ -99,34 +99,26 @@ async function getAllEvaluations(req, res) {
 
     for (i = 0; i < evaluations.length; i++) {
       let foundUser = users.find((obj) => obj._id === evaluations[i].userId);
-
-      if (foundUser) {
-        evaluations[i].userId = `${foundUser.firstName} ${foundUser.lastName}`;
-      } else {
-        evaluations[i].userId = 'Unassigned';
-      }
-
       let foundEvaluator = users.find(
         (obj) => obj._id === evaluations[i].evaluatorId
       );
-
-      if (foundEvaluator) {
-        evaluations[
-          i
-        ].evaluatorId = `${foundEvaluator.firstName} ${foundEvaluator.lastName}`;
-      } else {
-        evaluations[i].evaluatorId = 'Unassigned';
-      }
-
       let foundScorecard = scorecards.find(
         (obj) => obj._id === evaluations[i].scorecardId
       );
 
-      if (foundScorecard) {
-        evaluations[i].scorecardId = `${foundScorecard.name}`;
-      } else {
-        evaluations[i].scorecardId = 'Unassigned';
-      }
+      foundUser
+        ? (evaluations[
+            i
+          ].userId = `${foundUser.firstName} ${foundUser.lastName}`)
+        : 'Unassigned';
+      foundEvaluator
+        ? (evaluations[
+            i
+          ].evaluatorId = `${foundEvaluator.firstName} ${foundEvaluator.lastName}`)
+        : 'Unassigned';
+      foundScorecard
+        ? (evaluations[i].scorecardId = `${foundScorecard.name}`)
+        : 'Unassigned';
     }
     res.send(evaluations);
   } else if (type === 'w') {
@@ -139,34 +131,25 @@ async function getAllEvaluations(req, res) {
 
     for (i = 0; i < evaluations.length; i++) {
       let foundUser = users.find((obj) => obj._id === evaluations[i].userId);
-
-      if (foundUser) {
-        evaluations[i].userId = `${foundUser.firstName} ${foundUser.lastName}`;
-      } else {
-        evaluations[i].userId = 'Unassigned';
-      }
-
       let foundEvaluator = users.find(
         (obj) => obj._id === evaluations[i].evaluatorId
       );
-
-      if (foundEvaluator) {
-        evaluations[
-          i
-        ].evaluatorId = `${foundEvaluator.firstName} ${foundEvaluator.lastName}`;
-      } else {
-        evaluations[i].evaluatorId = 'Unassigned';
-      }
-
       let foundScorecard = scorecards.find(
         (obj) => obj._id === evaluations[i].scorecardId
       );
-
-      if (foundScorecard) {
-        evaluations[i].scorecardId = `${foundScorecard.name}`;
-      } else {
-        evaluations[i].scorecardId = 'Unassigned';
-      }
+      foundUser
+        ? (evaluations[
+            i
+          ].userId = `${foundUser.firstName} ${foundUser.lastName}`)
+        : 'Unassigned';
+      foundEvaluator
+        ? (evaluations[
+            i
+          ].evaluatorId = `${foundEvaluator.firstName} ${foundEvaluator.lastName}`)
+        : 'Unassigned';
+      foundScorecard
+        ? (evaluations[i].scorecardId = `${foundScorecard.name}`)
+        : 'Unassigned';
     }
     res.send(evaluations);
   } else {
