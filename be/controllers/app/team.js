@@ -42,6 +42,12 @@ async function getTeam(req, res) {
 
   if (type === 'r' || 'w' || 'rw') {
     const foundTeam = await Team.findOne({ _id: req.params.id });
+    const userCount = await User.countDocuments({
+      brandId: req.bid,
+      teamId: foundTeam._id,
+    });
+
+    foundTeam.userCount = userCount;
 
     if (foundTeam && foundTeam.brandId === req.bid) {
       res.json(foundTeam);
