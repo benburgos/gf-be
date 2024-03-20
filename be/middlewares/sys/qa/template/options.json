@@ -1,13 +1,90 @@
 [
     {
-        "name": null,
-        "desc": null,
-        "modality": null,
+        "name": "True or False",
+        "desc": "A method judging if the response to the criteria is true or false.",
         "data": [
             {
                 "position": 0,
-                "name": null,
-                "tooltip": null
+                "name": "True",
+                "tooltip": "Interaction matches criteria."
+            },
+            {
+                "position": 1,
+                "name": "False",
+                "tooltip": "Interaction does not match criteria."
+            }
+        ]
+    },
+    {
+        "name": "Yes or No",
+        "desc": "A method for judging true or false, labeled as a yes or no.",
+        "data": [
+            {
+                "position": 0,
+                "name": "Yes",
+                "tooltip": "Interaction matches criteria."
+            },
+            {
+                "position": 1,
+                "name": "No",
+                "tooltip": "Interaction does not match criteria."
+            }
+        ]
+    },
+    {
+        "name": "Multiple Choice",
+        "desc": "A series of choices similar to a scale, often with varying levels of scoring.",
+        "data": [
+            {
+                "position": 0,
+                "name": "Agent fulfilled all criteria",
+                "tooltip": "Agent met all criteria as described."
+            },
+            {
+                "position": 1,
+                "name": "Agent fulfilled some criteria",
+                "tooltip": "Agent met some of the criteria as described."
+            },
+            {
+                "position": 2,
+                "name": "Agent fulfilled no criteria",
+                "tooltip": "Agent met none of the criteria as described."
+            }
+        ]
+    },
+    {
+        "name": "Number Scale",
+        "desc": "A number scale used to indicate at what level the Agent met the criteria.",
+        "data": [
+            {
+                "position": 0,
+                "name": "0",
+                "tooltip": "On a scale from 0 - 5, if the Agent met the criteria, is a 0."
+            },
+            {
+                "position": 1,
+                "name": "1",
+                "tooltip": "On a scale from 0 - 5, if the Agent met the criteria, is a 1."
+            },
+            {
+                "position": 2,
+                "name": "2",
+                "tooltip": "On a scale from 0 - 5, if the Agent met the criteria, is a 2."
+            },
+            {
+                "position": 3,
+                "name": "3",
+                "tooltip": "On a scale from 0 - 5, if the Agent met the criteria, is a 3."
+            },
+            {
+                "position": 4,
+                "name": "4",
+                "tooltip": "On a scale from 0 - 5, if the Agent met the criteria, is a 4."
+            },
+            {
+                "position": 5,
+                "name": "5",
+                "tooltip": "On a scale from 0 - 5, if the Agent met the criteria, is a 5."
             }
         ]
     }
