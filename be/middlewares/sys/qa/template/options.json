@@ -59,7 +59,7 @@
             {
                 "position": 0,
                 "name": "0",
-                "tooltip": "On a scale from 0 - 5, if the Agent met the criteria, is a 0."
+                "tooltip": "On a scale from 0 - 5, the Agent receives a 0."
             },
             {
                 "position": 1,
