@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
 
-/// Add OrgId - rework team into Org, needs both a team and an org to belong to (e.g. Customer Service is in Operations), org object/model will have a team ID and a group ID
-
 const userSchema = new mongoose.Schema(
   {
     _id: { type: String, required: true },
