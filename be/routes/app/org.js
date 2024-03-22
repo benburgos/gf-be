@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const teamController = require('../../controllers/app/team');
+const orgController = require('../../controllers/app/team');
 const { authToken } = require('../../middlewares/authToken');
 
-router.post('/create', authToken, teamController.createTeam);
-router.get('/:id', authToken, teamController.getTeam);
-router.get('/', authToken, teamController.getAllTeams);
-router.put('/edit/:id', authToken, teamController.editTeam);
-router.delete('/delete/:id', authToken, teamController.deleteTeam);
+router.post('/create', authToken, orgController.createOrg);
+router.get('/:id', authToken, orgController.getOrg);
+router.get('/', authToken, orgController.getAllOrgs);
+router.put('/edit/:id', authToken, orgController.editOrg);
+router.delete('/delete/:id', authToken, orgController.deleteOrg);
 
 module.exports = router;
