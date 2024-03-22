@@ -21,7 +21,7 @@ async function createProduct(data) {
     products.push(product);
   }
 
-  Product.insertMany(products);
+  await Product.insertMany(products);
   console.log(
     `${products.length} products were added to company, ${data.name}.`
   );

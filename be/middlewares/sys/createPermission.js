@@ -28,7 +28,7 @@ async function createPermissions(brand, product) {
     }
   }
 
-  Permission.insertMany(permissions);
+  await Permission.insertMany(permissions);
   console.log(
     `${permissions.length} permissions were added to company, ${brand.name}.`
   );

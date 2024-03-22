@@ -71,7 +71,7 @@ async function createRole(brand, permissions) {
     }
   }
 
-  Role.insertMany(roles);
+  await Role.insertMany(roles);
   console.log(`${roles.length} roles were added to company, ${brand.name}.`);
   return roles[0]._id;
 }
