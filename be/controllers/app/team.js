@@ -129,6 +129,16 @@ async function deleteTeam(req, res) {
       res.send(`You cannot delete the default 'Unassigned' team.`);
     } else {
       if (foundTeam && foundTeam.brandId === req.bid) {
+        const unassignedTeam = Team.find({
+          brandId: req.bid,
+          name: 'Unassigned',
+        });
+        const impactedUsers = User.updateMany(
+          { brandId: req.bid, teamId: foundOrg._id },
+          {
+            $set: { teamId: unassignedTeam._id, teamName: unassignedTeam.name },
+          }
+        );
         await Team.findOneAndDelete({ _id: foundTeam._id });
 
         res.send(

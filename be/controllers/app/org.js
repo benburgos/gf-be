@@ -129,6 +129,14 @@ async function deleteOrg(req, res) {
       res.send(`You cannot delete the default 'Unassigned' team.`);
     } else {
       if (foundOrg && foundOrg.brandId === req.bid) {
+        const unassignedOrg = Org.find({
+          brandId: req.bid,
+          name: 'Unassigned',
+        });
+        const impactedUsers = User.updateMany(
+          { brandId: req.bid, orgId: foundOrg._id },
+          { $set: { orgId: unassignedOrg._id, orgName: unassignedOrg.name } }
+        );
         await Org.findOneAndDelete({ _id: foundOrg._id });
 
         res.send(`Org, ${foundOrg.name}, has been removed from the database.`);
