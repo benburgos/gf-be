@@ -23,7 +23,7 @@ async function createOrg(data) {
 
   await Org.insertMany(orgsToCreate)
   console.log(
-    `${products.length} products were added to company, ${data.name}.`
+    `${orgsToCreate.length} orgs were added to company, ${data.name}.`
   );
 
   return orgsToCreate[1]

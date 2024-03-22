@@ -23,7 +23,7 @@ async function createTeam(data) {
 
   await Team.insertMany(teamsToCreate)
   console.log(
-    `${products.length} products were added to company, ${data.name}.`
+    `${teamsToCreate.length} teams were added to company, ${data.name}.`
   );
 
   return teamsToCreate[1]
