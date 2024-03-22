@@ -21,6 +21,7 @@ async function newBrand(req, res) {
     res.send(`The company you're attempting to register already exists.`);
     return;
   } else if (!emailCheck && !brandCheck) {
+    req.body._id = uuidv4()
     const brand = await sys.createBrand(req.body);
     const org = await sys.createOrg(brand);
     const team = await sys.createTeam(brand);
@@ -29,7 +30,6 @@ async function newBrand(req, res) {
     const role = await sys.createRole(brand, permissions);
     req.body = {
       ...req.body,
-      _id: uuidv4(),
       brandId: brand._id,
       roleId: role,
       org: {
