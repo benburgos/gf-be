@@ -142,7 +142,7 @@ async function deleteTeam(req, res) {
         await Team.findOneAndDelete({ _id: foundTeam._id });
 
         res.send(
-          `Team, ${foundTeam.name}, has been removed from the database.`
+          `Team, ${foundTeam.name}, has been removed from the database. ${(impactedUsers).modifiedCount}have been reassigned to the ${unassignedTeam.name} org.`
         );
       } else if (foundTeam && foundTeam.brandId !== req.bid) {
         res.send(`You do not belong to the same organization as this user.`);
