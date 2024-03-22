@@ -6,6 +6,7 @@ const brandSchema = new mongoose.Schema(
     name: { type: String, required: true },
     desc: { type: String, required: false },
     imgUrl: { type: String, required: false },
+    adminId: { type: String, required: true },
     apiUser: { type: Boolean, default: false, required: true },
     dateUpdated: { type: Number, required: true },
     dateCreated: { type: Number, required: true },
