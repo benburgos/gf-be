@@ -11,13 +11,14 @@ app.use(express.json());
 // Routes
 app.use('/login', route.login);
 app.use('/brand', route.brand);
-app.use('/app/user', route.appUser)
-app.use('/app/team', route.appTeam)
-app.use('/app/qa/option', route.appQaOption)
-app.use('/app/qa/question', route.appQaQuestion)
-app.use('/app/qa/section', route.appQaSection)
-app.use('/app/qa/scorecard', route.appQaScorecard)
-app.use('/app/qa/evaluate', route.appQaEvaluation)
+app.use('/app/user', route.appUser);
+app.use('/app/team', route.appTeam);
+app.use('/app/org', route.appOrg);
+app.use('/app/qa/option', route.appQaOption);
+app.use('/app/qa/question', route.appQaQuestion);
+app.use('/app/qa/section', route.appQaSection);
+app.use('/app/qa/scorecard', route.appQaScorecard);
+app.use('/app/qa/evaluate', route.appQaEvaluation);
 
 /////// Future Additions ///////////////////////////////
 // app.use('/api/user', route.apiUser)
