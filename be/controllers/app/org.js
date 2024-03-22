@@ -129,17 +129,17 @@ async function deleteOrg(req, res) {
       res.send(`You cannot delete the default 'Unassigned' team.`);
     } else {
       if (foundOrg && foundOrg.brandId === req.bid) {
-        const unassignedOrg = await Org.find({
+        const unassignedOrg = await Org.findOne({
           brandId: req.bid,
           name: 'Unassigned',
         });
         const impactedUsers = await User.updateMany(
-          { brandId: req.bid, orgId: foundOrg._id },
-          { $set: { orgId: unassignedOrg._id, orgName: unassignedOrg.name } }
+          { brandId: req.bid, 'org.orgId': foundOrg._id },
+          { $set: { 'org.orgId': unassignedOrg._id, 'org.orgName': unassignedOrg.name } }
         );
         await Org.findOneAndDelete({ _id: foundOrg._id });
 
-        res.send(`Org, ${foundOrg.name}, has been removed from the database. ${(impactedUsers).modifiedCount}have been reassigned to the ${unassignedOrg.name} org.`);
+        res.send(`Org, ${foundOrg.name}, has been removed from the database. ${(impactedUsers).modifiedCount} have been reassigned to the ${unassignedOrg.name} org.`);
       } else if (foundOrg && foundOrg.brandId !== req.bid) {
         res.send(`You do not belong to the same organization as this user.`);
       } else {
