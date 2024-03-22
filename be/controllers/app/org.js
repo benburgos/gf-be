@@ -125,16 +125,18 @@ async function deleteOrg(req, res) {
   if (type === 'rw') {
     const foundOrg = await Org.findOne({ _id: req.params.id });
 
-    if (foundOrg && foundOrg.brandId === req.bid) {
-      await Org.findOneAndDelete({ _id: foundOrg._id });
-
-      res.send(
-        `Org, ${foundOrg.name}, has been removed from the database.`
-      );
-    } else if (foundOrg && foundOrg.brandId !== req.bid) {
-      res.send(`You do not belong to the same organization as this user.`);
+    if (foundOrg.name === 'Unassigned') {
+      res.send(`You cannot delete the default 'Unassigned' team.`);
     } else {
-      res.send(`Org does not exist.`);
+      if (foundOrg && foundOrg.brandId === req.bid) {
+        await Org.findOneAndDelete({ _id: foundOrg._id });
+
+        res.send(`Org, ${foundOrg.name}, has been removed from the database.`);
+      } else if (foundOrg && foundOrg.brandId !== req.bid) {
+        res.send(`You do not belong to the same organization as this user.`);
+      } else {
+        res.send(`Org does not exist.`);
+      }
     }
   } else {
     res.send(`You are not authorized to access this resource.`);

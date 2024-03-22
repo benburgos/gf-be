@@ -125,16 +125,20 @@ async function deleteTeam(req, res) {
   if (type === 'rw') {
     const foundTeam = await Team.findOne({ _id: req.params.id });
 
-    if (foundTeam && foundTeam.brandId === req.bid) {
-      await Team.findOneAndDelete({ _id: foundTeam._id });
-
-      res.send(
-        `Team, ${foundTeam.name}, has been removed from the database.`
-      );
-    } else if (foundTeam && foundTeam.brandId !== req.bid) {
-      res.send(`You do not belong to the same organization as this user.`);
+    if (foundTeam.name === 'Unassigned') {
+      res.send(`You cannot delete the default 'Unassigned' team.`);
     } else {
-      res.send(`Team does not exist.`);
+      if (foundTeam && foundTeam.brandId === req.bid) {
+        await Team.findOneAndDelete({ _id: foundTeam._id });
+
+        res.send(
+          `Team, ${foundTeam.name}, has been removed from the database.`
+        );
+      } else if (foundTeam && foundTeam.brandId !== req.bid) {
+        res.send(`You do not belong to the same organization as this user.`);
+      } else {
+        res.send(`Team does not exist.`);
+      }
     }
   } else {
     res.send(`You are not authorized to access this resource.`);
