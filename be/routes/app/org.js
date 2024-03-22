@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const orgController = require('../../controllers/app/team');
+const orgController = require('../../controllers/app/org');
 const { authToken } = require('../../middlewares/authToken');
 
 router.post('/create', authToken, orgController.createOrg);

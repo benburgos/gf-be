@@ -61,7 +61,7 @@ async function getOrg(req, res) {
   }
 }
 
-async function getOrgs(req, res) {
+async function getAllOrgs(req, res) {
   const data = {
     prod: 'admin',
     bid: req.bid,
