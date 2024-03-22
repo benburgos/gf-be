@@ -2,12 +2,12 @@ const User = require('../models/user');
 const Pwh = require('../models/pwh');
 const Brand = require('../models/sys/brand');
 const Role = require('../models/sys/role');
-const Qa = require('../models/app/qa/qaIndex')
+const Qa = require('../models/app/qa/qaIndex');
 const { v4: uuidv4 } = require('uuid');
 const { hashPassword } = require('../middlewares/genHash');
 const { checkBrand } = require('../services/checkBrand');
 const { checkEmail } = require('../services/checkEmail');
-const sys = require('../middlewares/sys/startupIndex')
+const sys = require('../middlewares/sys/startupIndex');
 
 // Create User
 async function newBrand(req, res) {
@@ -22,6 +22,8 @@ async function newBrand(req, res) {
     return;
   } else if (!emailCheck && !brandCheck) {
     const brand = await sys.createBrand(req.body);
+    const org = await sys.createOrg(brand);
+    const team = await sys.createTeam(brand);
     const product = await sys.createProduct(brand);
     const permissions = await sys.createPermissions(brand, product);
     const role = await sys.createRole(brand, permissions);
@@ -30,6 +32,12 @@ async function newBrand(req, res) {
       _id: uuidv4(),
       brandId: brand._id,
       roleId: role,
+      org: {
+        orgId: org._id,
+        orgName: org.name,
+        teamId: team._id,
+        teamName: team.name,
+      },
       dateUpdated: Date.now(),
       dateCreated: Date.now(),
     };
