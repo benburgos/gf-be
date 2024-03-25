@@ -13,7 +13,7 @@ async function createOption(data) {
       dateUpdated: Date.now(),
       dateCreated: Date.now(),
       data: template[i].data,
-      brandId: uuidv4(),
+      brandId: data._id,
       modality: 'all',
     };
 
