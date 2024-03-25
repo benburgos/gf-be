@@ -2,6 +2,7 @@ const User = require('../models/user');
 const Pwh = require('../models/pwh');
 const Brand = require('../models/sys/brand');
 const Role = require('../models/sys/role');
+const Product = require('../models/sys/product');
 const Qa = require('../models/app/qa/qaIndex');
 const { v4: uuidv4 } = require('uuid');
 const { hashPassword } = require('../middlewares/genHash');
@@ -9,7 +10,6 @@ const { checkBrand } = require('../services/checkBrand');
 const { checkEmail } = require('../services/checkEmail');
 const sys = require('../middlewares/sys/startupIndex');
 
-// Create User
 async function newBrand(req, res) {
   const brandCheck = await checkBrand(req.body.brandName);
   const emailCheck = await checkEmail(req.body.email);
@@ -21,7 +21,7 @@ async function newBrand(req, res) {
     res.send(`The company you're attempting to register already exists.`);
     return;
   } else if (!emailCheck && !brandCheck) {
-    req.body._id = uuidv4()
+    req.body._id = uuidv4();
     const brand = await sys.createBrand(req.body);
     const org = await sys.createOrg(brand);
     const team = await sys.createTeam(brand);
@@ -59,19 +59,19 @@ async function newBrand(req, res) {
   }
 }
 
-// Get Single User
 async function getBrand(req, res) {
-  const role = await Role.findOne({ _id: req.rid });
+  const brand = await Brand.findOne({ _id: req.params.id });
 
-  if (role.name === 'Company Admin') {
+  if (brand.adminId === req.id) {
     try {
-      const brand = await Brand.findOne({ _id: req.params.id });
       const user = await User.findOne({ _id: req.id });
-      // Shows user who accessed page, may think about creating event log.
+      const products = await Product.find({ brandId: req.bid });
+
       console.log(
         `User ${user.firstName} has viewed the company, ${brand.name}'s page.`
       );
-      res.send(brand);
+
+      res.json({ brand: brand, user: user, products: products });
     } catch (err) {
       res.send(err);
     }
@@ -79,6 +79,22 @@ async function getBrand(req, res) {
     res.send(
       `Only your company admin has access to this page, redirecting to your app.`
     );
+  }
+}
+
+async function editBrand(req, res) {
+  const brand = await Brand.findOne({ _id: req.params.id });
+
+  if (brand.adminId === req.id) {
+    req.body.dateUpdated = Date.now();
+    let savedBrand = await User.findOneAndUpdate(
+      { _id: brand._id },
+      req.body
+    );
+
+    res.send(`Brand, ${savedBrand.firstName} has been updated.`);
+  } else {
+    res.send(`You are not authorized to access this resource.`);
   }
 }
 
