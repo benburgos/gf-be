@@ -6,12 +6,12 @@
             {
                 "position": 0,
                 "name": "True",
-                "tooltip": "Interaction matches criteria."
+                "toolTip": "Interaction matches criteria."
             },
             {
                 "position": 1,
                 "name": "False",
-                "tooltip": "Interaction does not match criteria."
+                "toolTip": "Interaction does not match criteria."
             }
         ]
     },
@@ -22,12 +22,12 @@
             {
                 "position": 0,
                 "name": "Yes",
-                "tooltip": "Interaction matches criteria."
+                "toolTip": "Interaction matches criteria."
             },
             {
                 "position": 1,
                 "name": "No",
-                "tooltip": "Interaction does not match criteria."
+                "toolTip": "Interaction does not match criteria."
             }
         ]
     },
@@ -38,17 +38,17 @@
             {
                 "position": 0,
                 "name": "Agent fulfilled all criteria",
-                "tooltip": "Agent met all criteria as described."
+                "toolTip": "Agent met all criteria as described."
             },
             {
                 "position": 1,
                 "name": "Agent fulfilled some criteria",
-                "tooltip": "Agent met some of the criteria as described."
+                "toolTip": "Agent met some of the criteria as described."
             },
             {
                 "position": 2,
                 "name": "Agent fulfilled no criteria",
-                "tooltip": "Agent met none of the criteria as described."
+                "toolTip": "Agent met none of the criteria as described."
             }
         ]
     },
@@ -59,32 +59,32 @@
             {
                 "position": 0,
                 "name": "0",
-                "tooltip": "On a scale from 0 - 5, the Agent receives a 0."
+                "toolTip": "On a scale from 0 - 5, the Agent receives a 0."
             },
             {
                 "position": 1,
                 "name": "1",
-                "tooltip": "On a scale from 0 - 5, if the Agent met the criteria, is a 1."
+                "toolTip": "On a scale from 0 - 5, if the Agent met the criteria, is a 1."
             },
             {
                 "position": 2,
                 "name": "2",
-                "tooltip": "On a scale from 0 - 5, if the Agent met the criteria, is a 2."
+                "toolTip": "On a scale from 0 - 5, if the Agent met the criteria, is a 2."
             },
             {
                 "position": 3,
                 "name": "3",
-                "tooltip": "On a scale from 0 - 5, if the Agent met the criteria, is a 3."
+                "toolTip": "On a scale from 0 - 5, if the Agent met the criteria, is a 3."
             },
             {
                 "position": 4,
                 "name": "4",
-                "tooltip": "On a scale from 0 - 5, if the Agent met the criteria, is a 4."
+                "toolTip": "On a scale from 0 - 5, if the Agent met the criteria, is a 4."
             },
             {
                 "position": 5,
                 "name": "5",
-                "tooltip": "On a scale from 0 - 5, if the Agent met the criteria, is a 5."
+                "toolTip": "On a scale from 0 - 5, if the Agent met the criteria, is a 5."
             }
         ]
     }
