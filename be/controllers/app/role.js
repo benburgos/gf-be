@@ -75,7 +75,10 @@ async function getRole(req, res) {
       roleId: foundRole._id,
     });
     const foundProducts = await Product.find({ brandId: req.bid }, '_id desc');
-    const foundPermissions = await Permission.find({ brandId: req.bid }, '_id productId type');
+    const foundPermissions = await Permission.find(
+      { brandId: req.bid },
+      '_id productId type'
+    );
 
     foundRole.userCount = userCount;
 
@@ -108,30 +111,83 @@ async function getRole(req, res) {
 }
 
 async function getRoles(req, res) {
-    const data = {
-        prod: 'admin',
-        bid: req.bid,
-        ra: req.ra,
-      };
-      const type = await checkPermission(data);
-    
-      if (type === 'w' || 'rw') {
-        let roles = await Role.find({ brandId: req.bid }, '_id name isActive');
-    
-        for (let i = 0; i < roles.length; i++) {
-          let roleCount = await User.countDocuments({
-            brandId: req.bid,
-            roleId: roles[i]._id,
-          });
-          roles[i].userCount = roleCount;
-        }
-        res.send(roles);
-      } else {
-        res.send(`You are not authorized to access this resource.`);
-      }
+  const data = {
+    prod: 'admin',
+    bid: req.bid,
+    ra: req.ra,
+  };
+  const type = await checkPermission(data);
+
+  if (type === 'w' || 'rw') {
+    let roles = await Role.find({ brandId: req.bid }, '_id name isActive');
+
+    for (let i = 0; i < roles.length; i++) {
+      let roleCount = await User.countDocuments({
+        brandId: req.bid,
+        roleId: roles[i]._id,
+      });
+      roles[i].userCount = roleCount;
+    }
+    res.send(roles);
+  } else {
+    res.send(`You are not authorized to access this resource.`);
+  }
 }
 
-async function editRole(req, res) {}
+async function editRole(req, res) {
+  const data = {
+    prod: 'admin',
+    bid: req.bid,
+    ra: req.ra,
+  };
+  const type = await checkPermission(data);
+
+  if (type === 'rw') {
+    const foundRole = await Role.findOne({ _id: req.params.id });
+
+    if (foundRole && foundRole.brandId === req.bid) {
+      const products = await Product.find({ brandId: req.bid }, '_id desc');
+      const permissions = await Permission.find(
+        { brandId: req.bid },
+        '_id productId type'
+      );
+      const permissionsArr = []
+
+      for (let i = 0; i < req.body.products.length; i++) {
+        let currentProduct = products.find(
+          (obj) => obj.desc === req.body.products[i].product
+        );
+        let currentPermission = permissions.find(
+          (obj) =>
+            obj.productId === currentProduct._id &&
+            obj.type === req.body.products[i].permission
+        );
+
+        let newPermissionObj = {
+          productId: currentProduct._id,
+          pId: currentPermission._id,
+        };
+
+        permissionsArr.push(newPermissionObj);
+      }
+
+      req.body.permissions = permissionsArr;
+      req.body.dateUpdated = Date.now();
+      let savedRole = await Role.findOneAndUpdate(
+        { _id: foundRole._id },
+        req.body
+      );
+
+      res.send(`Role, ${savedRole.name}, has been updated.`);
+    } else if (foundRole && foundRole.brandId !== req.bid) {
+      res.send(`You do not belong to this organization.`);
+    } else {
+      res.send(`Role does not exist.`);
+    }
+  } else {
+    res.send(`You are not authorized to access this resource.`);
+  }
+}
 
 async function deleteRole(req, res) {}
 
