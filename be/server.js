@@ -1,8 +1,8 @@
 // Dependencies
 require('dotenv').config();
+require('./config/db');
 const express = require('express');
 const app = express();
-const db = require('./config/db');
 const route = require('./routes/routeIndex');
 
 // Middleware
