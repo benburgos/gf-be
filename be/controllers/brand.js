@@ -87,10 +87,7 @@ async function editBrand(req, res) {
 
   if (brand.adminId === req.id) {
     req.body.dateUpdated = Date.now();
-    let savedBrand = await User.findOneAndUpdate(
-      { _id: brand._id },
-      req.body
-    );
+    let savedBrand = await User.findOneAndUpdate({ _id: brand._id }, req.body);
 
     res.send(`Brand, ${savedBrand.firstName} has been updated.`);
   } else {
@@ -101,4 +98,5 @@ async function editBrand(req, res) {
 module.exports = {
   newBrand,
   getBrand,
+  editBrand,
 };
