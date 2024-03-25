@@ -189,7 +189,42 @@ async function editRole(req, res) {
   }
 }
 
-async function deleteRole(req, res) {}
+async function deleteRole(req, res) {
+    const data = {
+        prod: 'admin',
+        bid: req.bid,
+        ra: req.ra,
+      };
+      const type = await checkPermission(data);
+    
+      if (type === 'rw') {
+        const foundRole = await Role.findOne({ _id: req.params.id });
+    
+        if (foundRole.name === 'Unassigned') {
+          res.send(`You cannot delete the default 'Unassigned' role.`);
+        } else {
+          if (foundRole && foundRole.brandId === req.bid) {
+            const unassignedRole = await Role.findOne({
+              brandId: req.bid,
+              name: 'Unassigned',
+            });
+            const impactedUsers = await User.updateMany(
+              { brandId: req.bid, roleId: foundRole._id },
+              { $set: { roleId: unassignedRole._id } }
+            );
+            await Role.findOneAndDelete({ _id: foundRole._id });
+    
+            res.send(`Role, ${foundRole.name}, has been removed from the database. ${(impactedUsers).modifiedCount} have been reassigned to the ${unassignedRole.name} role.`);
+          } else if (foundRole && foundRole.brandId !== req.bid) {
+            res.send(`You do not belong to the same organization as this user.`);
+          } else {
+            res.send(`Role does not exist.`);
+          }
+        }
+      } else {
+        res.send(`You are not authorized to access this resource.`);
+      }
+}
 
 module.exports = {
   createRole,
