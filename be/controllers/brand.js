@@ -27,6 +27,7 @@ async function newBrand(req, res) {
     const product = await sys.createProduct(brand);
     const permissions = await sys.createPermissions(brand, product);
     const role = await sys.createRole(brand, permissions);
+    await qa.createOption(brand)
     req.body = {
       ...req.body,
       brandId: brand._id,
