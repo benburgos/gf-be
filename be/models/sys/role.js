@@ -12,6 +12,7 @@ const roleSchema = new mongoose.Schema(
         pId: { type: String, required: true },
       },
     ],
+    userCount: { type: Number, default: 0, required: false },
     isActive: { type: Boolean, required: true },
     dateUpdated: { type: Number, required: true },
     dateCreated: { type: Number, required: true },
