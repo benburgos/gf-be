@@ -2,12 +2,12 @@ const User = require('../models/user');
 const Pwh = require('../models/pwh');
 const Brand = require('../models/sys/brand');
 const Product = require('../models/sys/product');
-const Qa = require('../models/app/qa/qaIndex');
 const { v4: uuidv4 } = require('uuid');
 const { hashPassword } = require('../middlewares/genHash');
 const { checkBrand } = require('../services/checkBrand');
 const { checkEmail } = require('../services/checkEmail');
 const sys = require('../middlewares/sys/startupIndex');
+const qa = require('../middlewares/sys/qa/startQa')
 
 async function newBrand(req, res) {
   const brandCheck = await checkBrand(req.body.brandName);
