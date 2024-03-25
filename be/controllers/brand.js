@@ -1,7 +1,6 @@
 const User = require('../models/user');
 const Pwh = require('../models/pwh');
 const Brand = require('../models/sys/brand');
-const Role = require('../models/sys/role');
 const Product = require('../models/sys/product');
 const Qa = require('../models/app/qa/qaIndex');
 const { v4: uuidv4 } = require('uuid');
@@ -87,9 +86,9 @@ async function editBrand(req, res) {
 
   if (brand.adminId === req.id) {
     req.body.dateUpdated = Date.now();
-    let savedBrand = await User.findOneAndUpdate({ _id: brand._id }, req.body);
+    let savedBrand = await Brand.findOneAndUpdate({ _id: brand._id }, req.body);
 
-    res.send(`Brand, ${savedBrand.firstName} has been updated.`);
+    res.send(`Brand, ${savedBrand.name}, has been updated.`);
   } else {
     res.send(`You are not authorized to access this resource.`);
   }
