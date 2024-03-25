@@ -15,6 +15,7 @@ async function createRole(req, res) {
 
   if (type === 'rw') {
     req.body = {
+      ...req.body,
       _id: uuidv4(),
       name: req.body.name,
       brandId: req.bid,
@@ -27,15 +28,22 @@ async function createRole(req, res) {
     const products = await Product.find({ brandId: req.bid });
     const permissions = await Permission.find({ brandId: req.bid });
 
-    for (let i = 0; i < products.length; i++){
-        let permissionObj = {}
-        
-        let product = products.find((obj) => obj.desc === req.body.products[i].product)
-        let permission = permissions.find((obj) => obj.type === req.body.products[i].permission && obj.productId === product._id)
+    for (let i = 0; i < req.body.products.length; i++) {
+      let currentProduct = products.find(
+        (obj) => obj.desc === req.body.products[i].product
+      );
+      let currentPermission = permissions.find(
+        (obj) =>
+          obj.productId === currentProduct._id &&
+          obj.type === req.body.products[i].permission
+      );
 
-        permissionObj.productId = product._id
-        permissionObj.pId = permission._id
-        req.body.permissions.push(permissionObj)
+      let newPermissionObj = {
+        productId: currentProduct._id,
+        pId: currentPermission._id,
+      };
+
+      req.body.permissions.push(newPermissionObj)
     }
 
     try {
