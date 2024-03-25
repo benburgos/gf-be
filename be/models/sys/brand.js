@@ -8,6 +8,7 @@ const brandSchema = new mongoose.Schema(
     imgUrl: { type: String, required: false },
     adminId: { type: String, required: true },
     apiUser: { type: Boolean, default: false, required: true },
+    isActive: { type: Boolean, default: true, required: true },
     dateUpdated: { type: Number, required: true },
     dateCreated: { type: Number, required: true },
   },
