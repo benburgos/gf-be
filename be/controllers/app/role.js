@@ -25,8 +25,11 @@ async function createRole(req, res) {
       dateCreated: Date.now(),
     };
 
-    const products = await Product.find({ brandId: req.bid });
-    const permissions = await Permission.find({ brandId: req.bid });
+    const products = await Product.find({ brandId: req.bid }, '_id desc');
+    const permissions = await Permission.find(
+      { brandId: req.bid },
+      '_id productId type'
+    );
 
     for (let i = 0; i < req.body.products.length; i++) {
       let currentProduct = products.find(
@@ -43,7 +46,7 @@ async function createRole(req, res) {
         pId: currentPermission._id,
       };
 
-      req.body.permissions.push(newPermissionObj)
+      req.body.permissions.push(newPermissionObj);
     }
 
     try {
@@ -56,9 +59,58 @@ async function createRole(req, res) {
     res.send(`You are not authorized to access this resource.`);
   }
 }
-async function getRole(req, res) {}
+
+async function getRole(req, res) {
+  const data = {
+    prod: 'admin',
+    bid: req.bid,
+    ra: req.ra,
+  };
+  const type = await checkPermission(data);
+
+  if (type === 'w' || 'rw') {
+    const foundRole = await Role.findOne({ _id: req.params.id });
+    const userCount = await User.countDocuments({
+      brandId: req.bid,
+      roleId: foundRole._id,
+    });
+    const foundProducts = await Product.find({ brandId: req.bid });
+    const foundPermissions = await Permission.find({ brandId: req.bid });
+
+    foundRole.userCount = userCount;
+
+    for (let i = 0; i < foundRole.permissions.length; i++) {
+      let productName = foundProducts.find(
+        (obj) => obj._id === foundRole.permissions[i].productId
+      );
+      let permissionName = foundPermissions.find(
+        (obj) =>
+          obj.productId === productName._id &&
+          obj._id === foundRole.permissions[i].pId
+      );
+
+      foundRole.permissions[i] = {
+        productId: productName.desc,
+        pId: permissionName.type,
+      };
+    }
+
+    if (foundRole && foundRole.brandId === req.bid) {
+      res.json(foundRole);
+    } else if (foundRole && foundRole.brandId !== req.bid) {
+      res.send(`You do not belong to the same organization as this team.`);
+    } else {
+      res.send(`Team does not exist.`);
+    }
+  } else {
+    res.send(`You are not authorized to access this resource.`);
+  }
+}
+
 async function getRoles(req, res) {}
+
 async function editRole(req, res) {}
+
 async function deleteRole(req, res) {}
 
 module.exports = {
