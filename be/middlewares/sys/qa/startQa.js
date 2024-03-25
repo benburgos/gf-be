@@ -1,7 +1,7 @@
-const createOption = require('./createOption');
-const createQuestion = require('./createQuestion');
-const createSection = require('./createSection');
-const createScorecard = require('./createScorecard');
+const { createOption } = require('./createOption');
+const { createQuestion } = require('./createQuestion');
+const { createSection } = require('./createSection');
+const { createScorecard } = require('./createScorecard');
 
 module.exports = {
   createOption,
