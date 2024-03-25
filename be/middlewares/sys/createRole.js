@@ -2,7 +2,7 @@ const Role = require('../../models/sys/role');
 const { v4: uuidv4 } = require('uuid');
 
 async function createRole(brand, permissions) {
-  const seedRoles = ['Company Admin', 'Admin', 'Manager', 'Agent'];
+  const seedRoles = ['Company Admin', 'Admin', 'Manager', 'Agent', 'Unassigned'];
   let role = {
     brandId: brand._id,
     permissions: [],
@@ -63,6 +63,20 @@ async function createRole(brand, permissions) {
           _id: uuidv4(),
           name: seedRoles[i],
           permissions: agent,
+          dateUpdated: Date.now(),
+          dateCreated: Date.now(),
+        };
+        roles.push(role);
+        break;
+        case 'Unassigned':
+        const unassigned = permissions
+          .filter((obj) => obj.type === 'r')
+          .map(({ type, ...rest }) => rest);
+        role = {
+          ...role,
+          _id: uuidv4(),
+          name: seedRoles[i],
+          permissions: unassigned,
           dateUpdated: Date.now(),
           dateCreated: Date.now(),
         };
