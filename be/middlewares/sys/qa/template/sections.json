@@ -46,5 +46,29 @@
         "desc": "The 30 - 60 seconds of the call, reason for the call is summarized and next steps are clarified, if applicable.",
         "modality": "phone_outbound",
         "isActive": true
+    },
+    {
+        "name": "Email Introduction",
+        "desc": "Sets the tone of the email and establishes a connection with the recipient right from the start. Agent strikes a balance between being professional and friendly.",
+        "modality": "email",
+        "isActive": true
+    },
+    {
+        "name": "Email Process & Procedure",
+        "desc": "The Agent conveys the message and provides value to the customer. Agent remains concise, writes conversationally, and delivers relevant content.",
+        "modality": "email",
+        "isActive": true
+    },
+    {
+        "name": "Soft Skills",
+        "desc": "Crtieria used throughout the email displays thoughtful use of the company's tone guidelines.",
+        "modality": "email",
+        "isActive": true
+    },
+    {
+        "name": "Complimentary Close",
+        "desc": "The Agent delivers a sense of closure and leaves a positive impression on the customer. Where applicable, a clear and easy-to-understand call to action is delivered.",
+        "modality": "email",
+        "isActive": true
     }
 ]
