@@ -24,7 +24,31 @@ const scorecardSchema = new mongoose.Schema(
       ],
       required: true,
     },
-    criteria: { type: Array, required: true },
+    criteria: [
+      {
+        _id: false,
+        sectionId: { type: String, required: true },
+        sectionName: { type: String, required: true },
+        sectionValue: { type: Number, required: true },
+        questions: [
+          {
+            _id: false,
+            questionId: { type: String, required: true },
+            questionDesc: { type: String, required: true },
+            questionValue: { type: Number, required: true },
+            options: [
+              {
+                _id: false,
+                position: { type: Number, required: true },
+                label: { type: String, required: true },
+                toolTip: { type: String, required: true },
+                value: { type: Number, required: true },
+              }
+            ]
+          },
+        ],
+      },
+    ],
     maxScore: { type: Number, required: true },
     targetScore: { type: Number, required: true },
     isActive: { type: Boolean, default: false, required: true },
