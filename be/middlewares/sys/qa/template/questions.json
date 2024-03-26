@@ -218,5 +218,335 @@
             }
         ],
         "isActive": true
+    },
+    {
+        "name": "MRD (Monitoring and Recording Disclosure)",
+        "desc": "Agent delivered the monitoring and recording disclosure promptly.",
+        "modality": "phone_outbound",
+        "type": "fail_all",
+        "value": 10,
+        "options": [
+            {
+                "position": 0,
+                "name": "Yes",
+                "toolTip": "Interaction matches criteria.",
+                "value": 10
+            },
+            {
+                "position": 1,
+                "name": "No",
+                "toolTip": "Interaction does not match the criteria.",
+                "value": 0
+            }
+        ],
+        "isActive": true
+    },
+    {
+        "name": "Proper Greeting",
+        "desc": "Agent provided an appropriate salutation, their first name, the company, and clearly articulates the reason for the call.",
+        "modality": "phone_outbound",
+        "type": "standard",
+        "value": 5,
+        "options": [
+            {
+                "position": 0,
+                "name": "Yes",
+                "toolTip": "Interaction matches criteria.",
+                "value": 5
+            },
+            {
+                "position": 1,
+                "name": "No",
+                "toolTip": "Interaction does not match the criteria.",
+                "value": 0
+            }
+        ],
+        "isActive": true
+    },
+    {
+        "name": "Anticipates Customer Need",
+        "desc": "Agent reviewed all relevant information needed prior to the call and does not re-request information already provided. Agent clearly communicates when information or an item is needed by and how to submit the information. Agent covered the required content based on the type of call or script.",
+        "modality": "phone_outbound",
+        "type": "standard",
+        "value": 20,
+        "options": [
+            {
+                "position": 0,
+                "name": "Yes",
+                "toolTip": "Interaction matches criteria.",
+                "value": 20
+            },
+            {
+                "position": 1,
+                "name": "No",
+                "toolTip": "Interaction does not match the criteria.",
+                "value": 0
+            }
+        ],
+        "isActive": true
+    },
+    {
+        "name": "Effective Notes",
+        "desc": "Agent left detailed notes on the interaction; the content of the call and the solutions provided, as applicable.",
+        "modality": "phone_outbound",
+        "type": "standard",
+        "value": 15,
+        "options": [
+            {
+                "position": 0,
+                "name": "Yes",
+                "toolTip": "Interaction matches criteria.",
+                "value": 15
+            },
+            {
+                "position": 1,
+                "name": "No",
+                "toolTip": "Interaction does not match the criteria.",
+                "value": 0
+            }
+        ],
+        "isActive": true
+    },
+    {
+        "name": "Completed Interaction Details",
+        "desc": "Agent selected the most accurate and detailed contact reason for the content of the call.",
+        "modality": "phone_outbound",
+        "type": "standard",
+        "value": 5,
+        "options": [
+            {
+                "position": 0,
+                "name": "Yes",
+                "toolTip": "Interaction matches criteria.",
+                "value": 5
+            },
+            {
+                "position": 1,
+                "name": "No",
+                "toolTip": "Interaction does not match the criteria.",
+                "value": 0
+            }
+        ],
+        "isActive": true
+    },
+    {
+        "name": "Voice and Tone",
+        "desc": "Agent maintained a positive and professional demeanor throughout the call and refrained from utilizing expletives or rude remarks. Where applicable, the Agent provided an empathetic response at the first opportunity and utilized positive positioning at every opportunity.",
+        "modality": "phone_outbound",
+        "type": "standard",
+        "value": 10,
+        "options": [
+            {
+                "position": 0,
+                "name": "Yes",
+                "toolTip": "Interaction matches criteria.",
+                "value": 10
+            },
+            {
+                "position": 1,
+                "name": "No",
+                "toolTip": "Interaction does not match the criteria.",
+                "value": 0
+            }
+        ],
+        "isActive": true
+    },
+    {
+        "name": "Phone Etiquette",
+        "desc": "Agent asked permission to place the customer on hold, provided an estimate of how long the hold would last, and returned back to the call by thanking the customer for holding. Dead air on the call did not exceed 60 seconds at any given time.",
+        "modality": "phone_outbound",
+        "type": "standard",
+        "value": 5,
+        "options": [
+            {
+                "position": 0,
+                "name": "Yes",
+                "toolTip": "Interaction matches criteria.",
+                "value": 5
+            },
+            {
+                "position": 1,
+                "name": "No",
+                "toolTip": "Interaction does not match the criteria.",
+                "value": 0
+            }
+        ],
+        "isActive": true
+    },
+    {
+        "name": "Call to Action",
+        "desc": "Agent gave a detailed summary of what was discussed on the call and a direct call to action or expectation for follow-up.",
+        "modality": "phone_outbound",
+        "type": "standard",
+        "value": 20,
+        "options": [
+            {
+                "position": 0,
+                "name": "Yes",
+                "toolTip": "Interaction matches criteria.",
+                "value": 20
+            },
+            {
+                "position": 1,
+                "name": "No",
+                "toolTip": "Interaction does not match the criteria.",
+                "value": 0
+            }
+        ],
+        "isActive": true
+    },
+    {
+        "name": "Close of Call",
+        "desc": "Agent provided a closing salutation and thanked the customer for taking their call.",
+        "modality": "phone_outbound",
+        "type": "standard",
+        "value": 10,
+        "options": [
+            {
+                "position": 0,
+                "name": "Yes",
+                "toolTip": "Interaction matches criteria.",
+                "value": 10
+            },
+            {
+                "position": 1,
+                "name": "No",
+                "toolTip": "Interaction does not match the criteria.",
+                "value": 0
+            }
+        ],
+        "isActive": true
+    },
+    {
+        "name": "Greeting",
+        "desc": "Agent greets the customer with an appropriate salutation, creating a positive impression.",
+        "modality": "email",
+        "type": "standard",
+        "value": 10,
+        "options": [
+            {
+                "position": 0,
+                "name": "Yes",
+                "toolTip": "Interaction matches criteria.",
+                "value": 10
+            },
+            {
+                "position": 1,
+                "name": "No",
+                "toolTip": "Interaction does not match the criteria.",
+                "value": 0
+            }
+        ],
+        "isActive": true
+    },
+    {
+        "name": "Purpose for Email",
+        "desc": "Agent is concise and to the point as to the purpose of the email.",
+        "modality": "email",
+        "type": "standard",
+        "value": 15,
+        "options": [
+            {
+                "position": 0,
+                "name": "Yes",
+                "toolTip": "Interaction matches criteria.",
+                "value": 15
+            },
+            {
+                "position": 1,
+                "name": "No",
+                "toolTip": "Interaction does not match the criteria.",
+                "value": 0
+            }
+        ],
+        "isActive": true
+    },
+    {
+        "name": "Email Body",
+        "desc": "Agent provides customer with relevant information, facts or figures, that they will need to know.",
+        "modality": "email",
+        "type": "standard",
+        "value": 25,
+        "options": [
+            {
+                "position": 0,
+                "name": "Yes",
+                "toolTip": "Interaction matches criteria.",
+                "value": 25
+            },
+            {
+                "position": 1,
+                "name": "No",
+                "toolTip": "Interaction does not match the criteria.",
+                "value": 0
+            }
+        ],
+        "isActive": true
+    },
+    {
+        "name": "Voice and Tone",
+        "desc": "Agent uses friendly, yet professional, language throughout the email. Agent avoids the use of technical terms or jargon.",
+        "modality": "email",
+        "type": "fail_all",
+        "value": 20,
+        "options": [
+            {
+                "position": 0,
+                "name": "Yes",
+                "toolTip": "Interaction matches criteria.",
+                "value": 20
+            },
+            {
+                "position": 1,
+                "name": "No",
+                "toolTip": "Interaction does not match the criteria.",
+                "value": 0
+            }
+        ],
+        "isActive": true
+    },
+    {
+        "name": "Spelling and Grammar",
+        "desc": "Communication is free of spelling and grammatical errors.",
+        "modality": "email",
+        "type": "fail_section",
+        "value": 20,
+        "options": [
+            {
+                "position": 0,
+                "name": "Yes",
+                "toolTip": "Interaction matches criteria.",
+                "value": 20
+            },
+            {
+                "position": 1,
+                "name": "No",
+                "toolTip": "Interaction does not match the criteria.",
+                "value": 0
+            }
+        ],
+        "isActive": true
+    },
+    {
+        "name": "Complimentary Close",
+        "desc": "Agent clearly defines what the customer needs to do next, where applicable. Agent explains the reason for taking action. The Agent delivers an appropriate closing saluation and leaves a positive impression on the customer.",
+        "modality": "email",
+        "type": "standard",
+        "value": 10,
+        "options": [
+            {
+                "position": 0,
+                "name": "Yes",
+                "toolTip": "Interaction matches criteria.",
+                "value": 10
+            },
+            {
+                "position": 1,
+                "name": "No",
+                "toolTip": "Interaction does not match the criteria.",
+                "value": 0
+            }
+        ],
+        "isActive": true
     }
 ]
