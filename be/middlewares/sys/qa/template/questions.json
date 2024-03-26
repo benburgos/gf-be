@@ -9,13 +9,13 @@
             {
                 "position": 0,
                 "name": "Yes",
-                "toolTip": "Interaction matches criteria.",
+                "toolTip": "Criteria met, or is not applicable.",
                 "value": 5
             },
             {
                 "position": 1,
                 "name": "No",
-                "toolTip": "Interaction does not match the criteria.",
+                "toolTip": "Criteria was not met.",
                 "value": 0
             }
         ],
@@ -31,13 +31,13 @@
             {
                 "position": 0,
                 "name": "Yes",
-                "toolTip": "Interaction matches criteria.",
+                "toolTip": "Criteria met, or is not applicable.",
                 "value": 5
             },
             {
                 "position": 1,
                 "name": "No",
-                "toolTip": "Interaction does not match the criteria.",
+                "toolTip": "Criteria was not met.",
                 "value": 0
             }
         ],
@@ -53,13 +53,13 @@
             {
                 "position": 0,
                 "name": "Yes",
-                "toolTip": "Interaction matches criteria.",
+                "toolTip": "Criteria met, or is not applicable.",
                 "value": 5
             },
             {
                 "position": 1,
                 "name": "No",
-                "toolTip": "Interaction does not match the criteria.",
+                "toolTip": "Criteria was not met.",
                 "value": 0
             }
         ],
@@ -75,13 +75,13 @@
             {
                 "position": 0,
                 "name": "Yes",
-                "toolTip": "Interaction matches criteria.",
+                "toolTip": "Criteria met, or is not applicable.",
                 "value": 25
             },
             {
                 "position": 1,
                 "name": "No",
-                "toolTip": "Interaction does not match the criteria.",
+                "toolTip": "Criteria was not met.",
                 "value": 0
             }
         ],
@@ -97,13 +97,13 @@
             {
                 "position": 0,
                 "name": "Yes",
-                "toolTip": "Interaction matches criteria.",
+                "toolTip": "Criteria met, or is not applicable.",
                 "value": 15
             },
             {
                 "position": 1,
                 "name": "No",
-                "toolTip": "Interaction does not match the criteria.",
+                "toolTip": "Criteria was not met.",
                 "value": 0
             }
         ],
@@ -119,13 +119,13 @@
             {
                 "position": 0,
                 "name": "Yes",
-                "toolTip": "Interaction matches criteria.",
+                "toolTip": "Criteria met, or is not applicable.",
                 "value": 5
             },
             {
                 "position": 1,
                 "name": "No",
-                "toolTip": "Interaction does not match the criteria.",
+                "toolTip": "Criteria was not met.",
                 "value": 0
             }
         ],
@@ -141,13 +141,13 @@
             {
                 "position": 0,
                 "name": "Yes",
-                "toolTip": "Interaction matches criteria.",
+                "toolTip": "Criteria met, or is not applicable.",
                 "value": 15
             },
             {
                 "position": 1,
                 "name": "No",
-                "toolTip": "Interaction does not match the criteria.",
+                "toolTip": "Criteria was not met.",
                 "value": 0
             }
         ],
@@ -163,13 +163,13 @@
             {
                 "position": 0,
                 "name": "Yes",
-                "toolTip": "Interaction matches criteria.",
+                "toolTip": "Criteria met, or is not applicable.",
                 "value": 10
             },
             {
                 "position": 1,
                 "name": "No",
-                "toolTip": "Interaction does not match the criteria.",
+                "toolTip": "Criteria was not met.",
                 "value": 0
             }
         ],
@@ -185,13 +185,13 @@
             {
                 "position": 0,
                 "name": "Yes",
-                "toolTip": "Interaction matches criteria.",
+                "toolTip": "Criteria met, or is not applicable.",
                 "value": 10
             },
             {
                 "position": 1,
                 "name": "No",
-                "toolTip": "Interaction does not match the criteria.",
+                "toolTip": "Criteria was not met.",
                 "value": 0
             }
         ],
@@ -207,13 +207,13 @@
             {
                 "position": 0,
                 "name": "Yes",
-                "toolTip": "Interaction matches criteria.",
+                "toolTip": "Criteria met, or is not applicable.",
                 "value": 5
             },
             {
                 "position": 1,
                 "name": "No",
-                "toolTip": "Interaction does not match the criteria.",
+                "toolTip": "Criteria was not met.",
                 "value": 0
             }
         ],
@@ -229,13 +229,13 @@
             {
                 "position": 0,
                 "name": "Yes",
-                "toolTip": "Interaction matches criteria.",
+                "toolTip": "Criteria met, or is not applicable.",
                 "value": 10
             },
             {
                 "position": 1,
                 "name": "No",
-                "toolTip": "Interaction does not match the criteria.",
+                "toolTip": "Criteria was not met.",
                 "value": 0
             }
         ],
@@ -251,13 +251,13 @@
             {
                 "position": 0,
                 "name": "Yes",
-                "toolTip": "Interaction matches criteria.",
+                "toolTip": "Criteria met, or is not applicable.",
                 "value": 5
             },
             {
                 "position": 1,
                 "name": "No",
-                "toolTip": "Interaction does not match the criteria.",
+                "toolTip": "Criteria was not met.",
                 "value": 0
             }
         ],
@@ -273,13 +273,13 @@
             {
                 "position": 0,
                 "name": "Yes",
-                "toolTip": "Interaction matches criteria.",
+                "toolTip": "Criteria met, or is not applicable.",
                 "value": 20
             },
             {
                 "position": 1,
                 "name": "No",
-                "toolTip": "Interaction does not match the criteria.",
+                "toolTip": "Criteria was not met.",
                 "value": 0
             }
         ],
@@ -295,13 +295,13 @@
             {
                 "position": 0,
                 "name": "Yes",
-                "toolTip": "Interaction matches criteria.",
+                "toolTip": "Criteria met, or is not applicable.",
                 "value": 15
             },
             {
                 "position": 1,
                 "name": "No",
-                "toolTip": "Interaction does not match the criteria.",
+                "toolTip": "Criteria was not met.",
                 "value": 0
             }
         ],
@@ -317,13 +317,13 @@
             {
                 "position": 0,
                 "name": "Yes",
-                "toolTip": "Interaction matches criteria.",
+                "toolTip": "Criteria met, or is not applicable.",
                 "value": 5
             },
             {
                 "position": 1,
                 "name": "No",
-                "toolTip": "Interaction does not match the criteria.",
+                "toolTip": "Criteria was not met.",
                 "value": 0
             }
         ],
@@ -339,13 +339,13 @@
             {
                 "position": 0,
                 "name": "Yes",
-                "toolTip": "Interaction matches criteria.",
+                "toolTip": "Criteria met, or is not applicable.",
                 "value": 10
             },
             {
                 "position": 1,
                 "name": "No",
-                "toolTip": "Interaction does not match the criteria.",
+                "toolTip": "Criteria was not met.",
                 "value": 0
             }
         ],
@@ -361,13 +361,13 @@
             {
                 "position": 0,
                 "name": "Yes",
-                "toolTip": "Interaction matches criteria.",
+                "toolTip": "Criteria met, or is not applicable.",
                 "value": 5
             },
             {
                 "position": 1,
                 "name": "No",
-                "toolTip": "Interaction does not match the criteria.",
+                "toolTip": "Criteria was not met.",
                 "value": 0
             }
         ],
@@ -383,13 +383,13 @@
             {
                 "position": 0,
                 "name": "Yes",
-                "toolTip": "Interaction matches criteria.",
+                "toolTip": "Criteria met, or is not applicable.",
                 "value": 20
             },
             {
                 "position": 1,
                 "name": "No",
-                "toolTip": "Interaction does not match the criteria.",
+                "toolTip": "Criteria was not met.",
                 "value": 0
             }
         ],
@@ -405,13 +405,13 @@
             {
                 "position": 0,
                 "name": "Yes",
-                "toolTip": "Interaction matches criteria.",
+                "toolTip": "Criteria met, or is not applicable.",
                 "value": 10
             },
             {
                 "position": 1,
                 "name": "No",
-                "toolTip": "Interaction does not match the criteria.",
+                "toolTip": "Criteria was not met.",
                 "value": 0
             }
         ],
@@ -427,13 +427,13 @@
             {
                 "position": 0,
                 "name": "Yes",
-                "toolTip": "Interaction matches criteria.",
+                "toolTip": "Criteria met, or is not applicable.",
                 "value": 10
             },
             {
                 "position": 1,
                 "name": "No",
-                "toolTip": "Interaction does not match the criteria.",
+                "toolTip": "Criteria was not met.",
                 "value": 0
             }
         ],
@@ -449,13 +449,13 @@
             {
                 "position": 0,
                 "name": "Yes",
-                "toolTip": "Interaction matches criteria.",
+                "toolTip": "Criteria met, or is not applicable.",
                 "value": 15
             },
             {
                 "position": 1,
                 "name": "No",
-                "toolTip": "Interaction does not match the criteria.",
+                "toolTip": "Criteria was not met.",
                 "value": 0
             }
         ],
@@ -471,13 +471,13 @@
             {
                 "position": 0,
                 "name": "Yes",
-                "toolTip": "Interaction matches criteria.",
+                "toolTip": "Criteria met, or is not applicable.",
                 "value": 25
             },
             {
                 "position": 1,
                 "name": "No",
-                "toolTip": "Interaction does not match the criteria.",
+                "toolTip": "Criteria was not met.",
                 "value": 0
             }
         ],
@@ -493,13 +493,13 @@
             {
                 "position": 0,
                 "name": "Yes",
-                "toolTip": "Interaction matches criteria.",
+                "toolTip": "Criteria met, or is not applicable.",
                 "value": 20
             },
             {
                 "position": 1,
                 "name": "No",
-                "toolTip": "Interaction does not match the criteria.",
+                "toolTip": "Criteria was not met.",
                 "value": 0
             }
         ],
@@ -515,13 +515,13 @@
             {
                 "position": 0,
                 "name": "Yes",
-                "toolTip": "Interaction matches criteria.",
+                "toolTip": "Criteria met, or is not applicable.",
                 "value": 20
             },
             {
                 "position": 1,
                 "name": "No",
-                "toolTip": "Interaction does not match the criteria.",
+                "toolTip": "Criteria was not met.",
                 "value": 0
             }
         ],
@@ -537,13 +537,13 @@
             {
                 "position": 0,
                 "name": "Yes",
-                "toolTip": "Interaction matches criteria.",
+                "toolTip": "Criteria met, or is not applicable.",
                 "value": 10
             },
             {
                 "position": 1,
                 "name": "No",
-                "toolTip": "Interaction does not match the criteria.",
+                "toolTip": "Criteria was not met.",
                 "value": 0
             }
         ],
@@ -559,13 +559,13 @@
             {
                 "position": 0,
                 "name": "Yes",
-                "toolTip": "Interaction matches criteria.",
+                "toolTip": "Criteria met, or is not applicable.",
                 "value": 10
             },
             {
                 "position": 1,
                 "name": "No",
-                "toolTip": "Interaction does not match the criteria.",
+                "toolTip": "Criteria was not met.",
                 "value": 0
             }
         ],
@@ -581,13 +581,13 @@
             {
                 "position": 0,
                 "name": "Yes",
-                "toolTip": "Interaction matches criteria.",
+                "toolTip": "Criteria met, or is not applicable.",
                 "value": 25
             },
             {
                 "position": 1,
                 "name": "No",
-                "toolTip": "Interaction does not match the criteria.",
+                "toolTip": "Criteria was not met.",
                 "value": 0
             }
         ],
@@ -603,13 +603,13 @@
             {
                 "position": 0,
                 "name": "Yes",
-                "toolTip": "Interaction matches criteria.",
+                "toolTip": "Criteria met, or is not applicable.",
                 "value": 15
             },
             {
                 "position": 1,
                 "name": "No",
-                "toolTip": "Interaction does not match the criteria.",
+                "toolTip": "Criteria was not met.",
                 "value": 0
             }
         ],
@@ -625,13 +625,13 @@
             {
                 "position": 0,
                 "name": "Yes",
-                "toolTip": "Interaction matches criteria.",
+                "toolTip": "Criteria met, or is not applicable.",
                 "value": 20
             },
             {
                 "position": 1,
                 "name": "No",
-                "toolTip": "Interaction does not match the criteria.",
+                "toolTip": "Criteria was not met.",
                 "value": 0
             }
         ],
@@ -647,13 +647,13 @@
             {
                 "position": 0,
                 "name": "Yes",
-                "toolTip": "Interaction matches criteria.",
+                "toolTip": "Criteria met, or is not applicable.",
                 "value": 20
             },
             {
                 "position": 1,
                 "name": "No",
-                "toolTip": "Interaction does not match the criteria.",
+                "toolTip": "Criteria was not met.",
                 "value": 0
             }
         ],
@@ -669,13 +669,13 @@
             {
                 "position": 0,
                 "name": "Yes",
-                "toolTip": "Interaction matches criteria.",
+                "toolTip": "Criteria met, or is not applicable.",
                 "value": 10
             },
             {
                 "position": 1,
                 "name": "No",
-                "toolTip": "Interaction does not match the criteria.",
+                "toolTip": "Criteria was not met.",
                 "value": 0
             }
         ],
