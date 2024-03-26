@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Call Introduction",
+        "desc": "The first 5 - 30 seconds of the call, the customer is greeted and verified.",
+        "modality": "phone_inbound",
+        "isActive": true
+    },
+    {
+        "name": "Process & Procedure",
+        "desc": "The bulk of the call; depending on the customer's issue it will be resolved or a follow-up expectation is set.",
+        "modality": "phone_inbound",
+        "isActive": true
+    },
+    {
+        "name": "Soft Skills",
+        "desc": "Crtieria used throughout the call to establish a unified company voice.",
+        "modality": "phone_inbound",
+        "isActive": true
+    },
+    {
+        "name": "Close of Call",
+        "desc": "The 30 - 60 seconds of the call, issue/resolution is summarized and the customer leaves the call knowing what comes next.",
+        "modality": "phone_inbound",
+        "isActive": true
+    }
+]
