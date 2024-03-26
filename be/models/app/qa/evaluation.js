@@ -42,6 +42,7 @@ const evaluationSchema = new mongoose.Schema(
             questionName: { type: String, required: true },
             questionDesc: { type: String, required: true },
             questionValue: { type: Number, required: true },
+            questionSelection: { type: Number, required: false },
             options: [
               {
                 _id: false,
