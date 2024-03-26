@@ -1,0 +1,42 @@
+[
+    {
+        "name": "Inbound Customer Support",
+        "desc": "A scorecard for inbound customer support.",
+        "type": "native",
+        "modality": "phone_inbound",
+        "criteria": [],
+        "maxScore": 100,
+        "targetScore": 80,
+        "isActive": true
+      },
+      {
+        "name": "Outbound Customer Support",
+        "desc": "A scorecard for outbound customer support.",
+        "type": "native",
+        "modality": "phone_outbound",
+        "criteria": [],
+        "maxScore": 100,
+        "targetScore": 80,
+        "isActive": true
+      },
+      {
+        "name": "Inbound Chat Customer Support",
+        "desc": "A scorecard for inbound customer support.",
+        "type": "native",
+        "modality": "chat",
+        "criteria": [],
+        "maxScore": 100,
+        "targetScore": 80,
+        "isActive": true
+      },
+      {
+        "name": "Email",
+        "desc": "A scorecard for email interactions, incoming or outgoing.",
+        "type": "native",
+        "modality": "email",
+        "criteria": [],
+        "maxScore": 100,
+        "targetScore": 80,
+        "isActive": true
+      }
+]
