@@ -7,7 +7,7 @@
         "criteria": [
           {
             "sectionName": "Call Introduction",
-            "sectionValue": 0,
+            "sectionValue": 15,
             "questions": [
               {
                 "questionName": "Proper Greeting",
@@ -29,6 +29,204 @@
                   }
                 ]
               },
+              {
+                "questionName": "Ownership Statement",
+                "questionDesc": "Agent summarizes the customer's issue to demonstrate active listening skills and provides an ownership statement.",
+                "questionType": "standard",
+                "questionValue": 5,
+                "options": [
+                  {
+                      "position": 0,
+                      "name": "Yes",
+                      "toolTip": "Criteria met, or is not applicable.",
+                      "value": 5
+                  },
+                  {
+                      "position": 1,
+                      "name": "No",
+                      "toolTip": "Criteria was not met.",
+                      "value": 0
+                  }
+                ]
+              },
+              {
+                "questionName": "Verification",
+                "questionDesc": "Agent verified at least two pieces of the customer's information.",
+                "questionType": "fail_all",
+                "questionValue": 5,
+                "options": [
+                  {
+                      "position": 0,
+                      "name": "Yes",
+                      "toolTip": "Criteria met, or is not applicable.",
+                      "value": 5
+                  },
+                  {
+                      "position": 1,
+                      "name": "No",
+                      "toolTip": "Criteria was not met.",
+                      "value": 0
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "sectionName": "Process & Procedure",
+            "sectionValue": 45,
+            "questions": [
+              {
+                "questionName": "Effective Solutioning",
+                "questionDesc": "Agent provided a concise and correct solution for each question or issue brought forth by the customer. In addition, Agent offers additional detail or insight related to the topic in order to eliminate the need for follow-up on the same subject.",
+                "questionType": "standard",
+                "questionValue": 25,
+                "options": [
+                  {
+                      "position": 0,
+                      "name": "Yes",
+                      "toolTip": "Criteria met, or is not applicable.",
+                      "value": 25
+                  },
+                  {
+                      "position": 1,
+                      "name": "No",
+                      "toolTip": "Criteria was not met.",
+                      "value": 0
+                  }
+                ]
+              },
+              {
+                "questionName": "Effective Notes",
+                "questionDesc": "Agent left detailed notes on the interaction; the content of the call and the solution provided, as applicable.",
+                "questionType": "standard",
+                "questionValue": 15,
+                "options": [
+                  {
+                      "position": 0,
+                      "name": "Yes",
+                      "toolTip": "Criteria met, or is not applicable.",
+                      "value": 15
+                  },
+                  {
+                      "position": 1,
+                      "name": "No",
+                      "toolTip": "Criteria was not met.",
+                      "value": 0
+                  }
+                ]
+              },
+              {
+                "questionName": "Completed Interaction Details",
+                "questionDesc": "Agent selected the most accurate and detailed contact reason for the content of the call, either the initial reason for the call, or the solution provided for the call.",
+                "questionType": "standard",
+                "questionValue": 5,
+                "options": [
+                  {
+                      "position": 0,
+                      "name": "Yes",
+                      "toolTip": "Criteria met, or is not applicable.",
+                      "value": 5
+                  },
+                  {
+                      "position": 1,
+                      "name": "No",
+                      "toolTip": "Criteria was not met.",
+                      "value": 0
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "sectionName": "Soft Skills",
+            "sectionValue": 25,
+            "questions": [
+              {
+                "questionName": "Voice and Tone",
+                "questionDesc": "Agent maintained a positive and professional demeanor throughout the call and refrained from utilizing expletives or rude remarks. Where applicable, the Agent provided an empathetic response at the first opportunity and utilized positive positioning at every opportunity.",
+                "questionType": "fail_section",
+                "questionValue": 15,
+                "options": [
+                  {
+                      "position": 0,
+                      "name": "Yes",
+                      "toolTip": "Criteria met, or is not applicable.",
+                      "value": 15
+                  },
+                  {
+                      "position": 1,
+                      "name": "No",
+                      "toolTip": "Criteria was not met.",
+                      "value": 0
+                  }
+                ]
+              },
+              {
+                "questionName": "Phone Etiquette",
+                "questionDesc": "Agent asked permission to place the customer on hold, provided an estimate of how long the hold would last, and returned back to the call by thanking the customer for holding. Dead air on the call did not exceed 60 seconds at any given time.",
+                "questionType": "standard",
+                "questionValue": 10,
+                "options": [
+                  {
+                      "position": 0,
+                      "name": "Yes",
+                      "toolTip": "Criteria met, or is not applicable.",
+                      "value": 10
+                  },
+                  {
+                      "position": 1,
+                      "name": "No",
+                      "toolTip": "Criteria was not met.",
+                      "value": 0
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "sectionName": "Close of Call",
+            "sectionValue": 15,
+            "questions": [
+              {
+                "questionName": "Wrap Up",
+                "questionDesc": "Agent effectively summarized the content of the call and the solution provided. Agent provided an additional offer of assistance.",
+                "questionType": "standard",
+                "questionValue": 10,
+                "options": [
+                  {
+                      "position": 0,
+                      "name": "Yes",
+                      "toolTip": "Criteria met, or is not applicable.",
+                      "value": 10
+                  },
+                  {
+                      "position": 1,
+                      "name": "No",
+                      "toolTip": "Criteria was not met.",
+                      "value": 0
+                  }
+                ]
+              },
+              {
+                "questionName": "Close of Call",
+                "questionDesc": "Agent provided a closing salutation and thanked the customer for calling. If this was the first time the customer had called in, we provided at least two methods to contact us again in the future should the need arise.",
+                "questionType": "standard",
+                "questionValue": 5,
+                "options": [
+                  {
+                      "position": 0,
+                      "name": "Yes",
+                      "toolTip": "Criteria met, or is not applicable.",
+                      "value": 5
+                  },
+                  {
+                      "position": 1,
+                      "name": "No",
+                      "toolTip": "Criteria was not met.",
+                      "value": 0
+                  }
+                ]
+              }
             ]
           }
         ],
