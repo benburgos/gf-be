@@ -23,9 +23,9 @@ async function createQuestion(data) {
     newQuestionArr.push(newQuestion);
   }
 
-  let createdOptions = await Option.insertMany(newQuestionArr);
+  let createdQuestions = await Question.insertMany(newQuestionArr);
   console.log(
-    `${createdOptions.length} QA options were added to company, ${data.name}.`
+    `${createdQuestions.length} QA questions were added to company, ${data.name}.`
   );
 
   return newQuestionArr;
