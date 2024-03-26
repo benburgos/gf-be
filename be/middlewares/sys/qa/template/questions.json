@@ -548,5 +548,137 @@
             }
         ],
         "isActive": true
+    },
+    {
+        "name": "Proper Greeting",
+        "desc": "Agent provided an appropriate salutation, their first name, and an offer of assistance.",
+        "modality": "chat",
+        "type": "standard",
+        "value": 10,
+        "options": [
+            {
+                "position": 0,
+                "name": "Yes",
+                "toolTip": "Interaction matches criteria.",
+                "value": 10
+            },
+            {
+                "position": 1,
+                "name": "No",
+                "toolTip": "Interaction does not match the criteria.",
+                "value": 0
+            }
+        ],
+        "isActive": true
+    },
+    {
+        "name": "Effective Solutioning",
+        "desc": "Agent was able to anticipate the reason for the customer's communication, if applicable, or show they understand why the customer reached out by asking probing questions. Agent offers additional insight/detail related to the issue in order to eliminate the need for a follow-up. Agent covered the required content based on the content of the chat, providing a concise and correct solution for each question/issue brought forth.",
+        "modality": "chat",
+        "type": "fail_all",
+        "value": 25,
+        "options": [
+            {
+                "position": 0,
+                "name": "Yes",
+                "toolTip": "Interaction matches criteria.",
+                "value": 25
+            },
+            {
+                "position": 1,
+                "name": "No",
+                "toolTip": "Interaction does not match the criteria.",
+                "value": 0
+            }
+        ],
+        "isActive": true
+    },
+    {
+        "name": "Completed Interaction Details",
+        "desc": "Agent selected the most accurate and detailed contact reason for the content of the chat.",
+        "modality": "chat",
+        "type": "standard",
+        "value": 15,
+        "options": [
+            {
+                "position": 0,
+                "name": "Yes",
+                "toolTip": "Interaction matches criteria.",
+                "value": 15
+            },
+            {
+                "position": 1,
+                "name": "No",
+                "toolTip": "Interaction does not match the criteria.",
+                "value": 0
+            }
+        ],
+        "isActive": true
+    },
+    {
+        "name": "Voice and Tone",
+        "desc": "Agent uses friendly, yet professional, language throughout the email. Agent avoids the use of technical terms or jargon.",
+        "modality": "chat",
+        "type": "fail_all",
+        "value": 20,
+        "options": [
+            {
+                "position": 0,
+                "name": "Yes",
+                "toolTip": "Interaction matches criteria.",
+                "value": 20
+            },
+            {
+                "position": 1,
+                "name": "No",
+                "toolTip": "Interaction does not match the criteria.",
+                "value": 0
+            }
+        ],
+        "isActive": true
+    },
+    {
+        "name": "Spelling and Grammar",
+        "desc": "Communication is free of spelling and grammatical errors.",
+        "modality": "chat",
+        "type": "fail_section",
+        "value": 20,
+        "options": [
+            {
+                "position": 0,
+                "name": "Yes",
+                "toolTip": "Interaction matches criteria.",
+                "value": 20
+            },
+            {
+                "position": 1,
+                "name": "No",
+                "toolTip": "Interaction does not match the criteria.",
+                "value": 0
+            }
+        ],
+        "isActive": true
+    },
+    {
+        "name": "Complimentary Close",
+        "desc": "Agent offered additional assistance to the customer before ending the chat. Agent clearly indicates or recaps any next steps, expectation for follow-up, or oustanding action items. Agent provides a closing saluation, and thanks the customer for chatting in. If the chat has become inactive or there is no response from the customer, Agent advised they will be closing the chat.",
+        "modality": "chat",
+        "type": "standard",
+        "value": 10,
+        "options": [
+            {
+                "position": 0,
+                "name": "Yes",
+                "toolTip": "Interaction matches criteria.",
+                "value": 10
+            },
+            {
+                "position": 1,
+                "name": "No",
+                "toolTip": "Interaction does not match the criteria.",
+                "value": 0
+            }
+        ],
+        "isActive": true
     }
 ]
