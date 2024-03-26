@@ -259,7 +259,34 @@
         "desc": "A scorecard for email interactions, incoming or outgoing.",
         "type": "native",
         "modality": "email",
-        "criteria": [],
+        "criteria": [
+          {
+            "sectionName": "",
+            "sectionValue": 0,
+            "questions": [
+              {
+                "questionName": "",
+                "questionDesc": "",
+                "questionType": "standard",
+                "questionValue": 10,
+                "options": [
+                  {
+                      "position": 0,
+                      "name": "Yes",
+                      "toolTip": "Criteria met, or is not applicable.",
+                      "value": 10
+                  },
+                  {
+                      "position": 1,
+                      "name": "No",
+                      "toolTip": "Criteria was not met.",
+                      "value": 0
+                  }
+                ]
+              }
+            ]
+          }
+        ],
         "maxScore": 100,
         "targetScore": 80,
         "isActive": true
