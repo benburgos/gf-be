@@ -33,18 +33,24 @@ const evaluationSchema = new mongoose.Schema(
     data: [
       {
         _id: false,
-        sectionId: { type: String, required: true },
         sectionName: { type: String, required: true },
         sectionValue: { type: Number, required: true },
         sectionFeedback: { type: String, required: false },
         questions: [
           {
             _id: false,
-            questionId: { type: String, required: true },
+            questionName: { type: String, required: true },
             questionDesc: { type: String, required: true },
             questionValue: { type: Number, required: true },
-            optionType: { type: String, required: true },
-            optionScore: { type: Number, required: true },
+            options: [
+              {
+                _id: false,
+                position: { type: Number, required: true },
+                label: { type: String, required: true },
+                toolTip: { type: String, required: true },
+                value: { type: Number, required: true },
+              }
+            ],
             questionFeedback: { type: String, required: false }
           },
         ],
