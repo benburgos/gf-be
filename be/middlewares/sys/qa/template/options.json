@@ -6,12 +6,12 @@
             {
                 "position": 0,
                 "name": "True",
-                "toolTip": "Interaction matches criteria."
+                "toolTip": "Criteria met or is not applicable."
             },
             {
                 "position": 1,
                 "name": "False",
-                "toolTip": "Interaction does not match criteria."
+                "toolTip": "Criteria was not met."
             }
         ]
     },
@@ -22,12 +22,12 @@
             {
                 "position": 0,
                 "name": "Yes",
-                "toolTip": "Interaction matches criteria."
+                "toolTip": "Criteria met, or is not applicable."
             },
             {
                 "position": 1,
                 "name": "No",
-                "toolTip": "Interaction does not match criteria."
+                "toolTip": "Criteria was not met."
             }
         ]
     },
