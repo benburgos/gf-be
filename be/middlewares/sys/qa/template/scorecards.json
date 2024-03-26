@@ -4,7 +4,34 @@
         "desc": "A scorecard for inbound customer support.",
         "type": "native",
         "modality": "phone_inbound",
-        "criteria": [],
+        "criteria": [
+          {
+            "sectionName": "Call Introduction",
+            "sectionValue": 0,
+            "questions": [
+              {
+                "questionName": "Proper Greeting",
+                "questionDesc": "Agent provided an appropriate salutation, their first name, the company, and an offer of assistance.",
+                "questionType": "standard",
+                "questionValue": 5,
+                "options": [
+                  {
+                      "position": 0,
+                      "name": "Yes",
+                      "toolTip": "Criteria met, or is not applicable.",
+                      "value": 5
+                  },
+                  {
+                      "position": 1,
+                      "name": "No",
+                      "toolTip": "Criteria was not met.",
+                      "value": 0
+                  }
+                ]
+              },
+            ]
+          }
+        ],
         "maxScore": 100,
         "targetScore": 80,
         "isActive": true

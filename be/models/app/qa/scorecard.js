@@ -34,6 +34,7 @@ const scorecardSchema = new mongoose.Schema(
             _id: false,            
             questionName: { type: String, required: true },
             questionDesc: { type: String, required: true },
+            questionType: { type: String, required: true },
             questionValue: { type: Number, required: true },
             options: [
               {
