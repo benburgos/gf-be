@@ -2,7 +2,7 @@ const { Question } = require('../../../models/app/qa/qaIndex');
 const template = require('../../../middlewares/sys/qa/template/questions.json');
 const { v4: uuidv4 } = require('uuid');
 
-async function createQuestion(data) {
+async function createQuestion(brand, options) {
   let newQuestionArr = [];
 
   for (let i = 0; i < template.length; i++) {
