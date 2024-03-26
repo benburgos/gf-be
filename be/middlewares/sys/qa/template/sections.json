@@ -70,5 +70,29 @@
         "desc": "The Agent delivers a sense of closure and leaves a positive impression on the customer. Where applicable, a clear and easy-to-understand call to action is delivered.",
         "modality": "email",
         "isActive": true
+    },
+    {
+        "name": "Chat Introduction",
+        "desc": "Sets the tone of the chat and establishes a connection with the recipient right from the start. Agent strikes a balance between being professional and friendly.",
+        "modality": "chat",
+        "isActive": true
+    },
+    {
+        "name": "Chat Process & Procedure",
+        "desc": "The body of the chat; Agent remains concise, writes conversationally, and delivers relevant content.",
+        "modality": "chat",
+        "isActive": true
+    },
+    {
+        "name": "Soft Skills",
+        "desc": "Crtieria used throughout the chat displays thoughtful use of the company's tone guidelines.",
+        "modality": "chat",
+        "isActive": true
+    },
+    {
+        "name": "Close of Chat",
+        "desc": "The Agent effectively summarizes the issue/resolution and, where applicable, customer is given expectations for follow-up or time frame for resolution.",
+        "modality": "chat",
+        "isActive": true
     }
 ]
