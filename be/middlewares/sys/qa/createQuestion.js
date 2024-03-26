@@ -27,8 +27,6 @@ async function createQuestion(data) {
   console.log(
     `${createdQuestions.length} QA questions were added to company, ${data.name}.`
   );
-
-  return newQuestionArr;
 }
 
 module.exports = {

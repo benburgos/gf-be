@@ -24,8 +24,6 @@ async function createSection(data) {
   console.log(
     `${createdSections.length} QA sections were added to company, ${data.name}.`
   );
-
-  return newSectionArr;
 }
 
 module.exports = {

@@ -24,8 +24,6 @@ async function createOption(data) {
   console.log(
     `${createdOptions.length} QA options were added to company, ${data.name}.`
   );
-
-  return newOptionArr;
 }
 
 module.exports = {
