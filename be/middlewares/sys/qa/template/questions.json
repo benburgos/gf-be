@@ -1,0 +1,222 @@
+[
+    {
+        "name": "Proper Greeting",
+        "desc": "Agent provided an appropriate salutation, their first name, the company, and an offer of assistance.",
+        "modality": "phone_inbound",
+        "type": "standard",
+        "value": 5,
+        "options": [
+            {
+                "position": 0,
+                "name": "Yes",
+                "toolTip": "Interaction matches criteria.",
+                "value": 5
+            },
+            {
+                "position": 1,
+                "name": "No",
+                "toolTip": "Interaction does not match the criteria.",
+                "value": 0
+            }
+        ],
+        "isActive": true
+    },
+    {
+        "name": "Ownership Statement",
+        "desc": "Agent summarizes the customer's issue to demonstrate active listening skills and provides an ownership statement.",
+        "modality": "phone_inbound",
+        "type": "standard",
+        "value": 5,
+        "options": [
+            {
+                "position": 0,
+                "name": "Yes",
+                "toolTip": "Interaction matches criteria.",
+                "value": 5
+            },
+            {
+                "position": 1,
+                "name": "No",
+                "toolTip": "Interaction does not match the criteria.",
+                "value": 0
+            }
+        ],
+        "isActive": true
+    },
+    {
+        "name": "Verification",
+        "desc": "Agent verified at least two pieces of the customer's information.",
+        "modality": "phone_inbound",
+        "type": "fail_all",
+        "value": 5,
+        "options": [
+            {
+                "position": 0,
+                "name": "Yes",
+                "toolTip": "Interaction matches criteria.",
+                "value": 5
+            },
+            {
+                "position": 1,
+                "name": "No",
+                "toolTip": "Interaction does not match the criteria.",
+                "value": 0
+            }
+        ],
+        "isActive": true
+    },
+    {
+        "name": "Effective Solutioning",
+        "desc": "Agent provided a concise and correct solution for each question or issue brought forth by the customer. In addition, Agent offers additional detail or insight related to the topic in order to eliminate the need for follow-up on the same subject.",
+        "modality": "phone_inbound",
+        "type": "standard",
+        "value": 25,
+        "options": [
+            {
+                "position": 0,
+                "name": "Yes",
+                "toolTip": "Interaction matches criteria.",
+                "value": 25
+            },
+            {
+                "position": 1,
+                "name": "No",
+                "toolTip": "Interaction does not match the criteria.",
+                "value": 0
+            }
+        ],
+        "isActive": true
+    },
+    {
+        "name": "Effective Notes",
+        "desc": "Agent left detailed notes on the interaction; the content of the call and the solution provided, as applicable.",
+        "modality": "phone_inbound",
+        "type": "standard",
+        "value": 15,
+        "options": [
+            {
+                "position": 0,
+                "name": "Yes",
+                "toolTip": "Interaction matches criteria.",
+                "value": 15
+            },
+            {
+                "position": 1,
+                "name": "No",
+                "toolTip": "Interaction does not match the criteria.",
+                "value": 0
+            }
+        ],
+        "isActive": true
+    },
+    {
+        "name": "Completed Interaction Details",
+        "desc": "Agent selected the most accurate and detailed contact reason for the content of the call, either the initial reason for the call, or the solution provided for the call.",
+        "modality": "phone_inbound",
+        "type": "standard",
+        "value": 5,
+        "options": [
+            {
+                "position": 0,
+                "name": "Yes",
+                "toolTip": "Interaction matches criteria.",
+                "value": 5
+            },
+            {
+                "position": 1,
+                "name": "No",
+                "toolTip": "Interaction does not match the criteria.",
+                "value": 0
+            }
+        ],
+        "isActive": true
+    },
+    {
+        "name": "Voice and Tone",
+        "desc": "Agent maintained a positive and professional demeanor throughout the call and refrained from utilizing expletives or rude remarks. Where applicable, the Agent provided an empathetic response at the first opportunity and utilized positive positioning at every opportunity.",
+        "modality": "phone_inbound",
+        "type": "fail_section",
+        "value": 15,
+        "options": [
+            {
+                "position": 0,
+                "name": "Yes",
+                "toolTip": "Interaction matches criteria.",
+                "value": 15
+            },
+            {
+                "position": 1,
+                "name": "No",
+                "toolTip": "Interaction does not match the criteria.",
+                "value": 0
+            }
+        ],
+        "isActive": true
+    },
+    {
+        "name": "Phone Etiquette",
+        "desc": "Agent asked permission to place the customer on hold, provided an estimate of how long the hold would last, and returned back to the call by thanking the customer for holding. Dead air on the call did not exceed 60 seconds at any given time.",
+        "modality": "phone_inbound",
+        "type": "standard",
+        "value": 10,
+        "options": [
+            {
+                "position": 0,
+                "name": "Yes",
+                "toolTip": "Interaction matches criteria.",
+                "value": 10
+            },
+            {
+                "position": 1,
+                "name": "No",
+                "toolTip": "Interaction does not match the criteria.",
+                "value": 0
+            }
+        ],
+        "isActive": true
+    },
+    {
+        "name": "Wrap Up",
+        "desc": "Agent effectively summarized the content of the call and the solution provided. Agent provided an additional offer of assistance.",
+        "modality": "phone_inbound",
+        "type": "standard",
+        "value": 10,
+        "options": [
+            {
+                "position": 0,
+                "name": "Yes",
+                "toolTip": "Interaction matches criteria.",
+                "value": 10
+            },
+            {
+                "position": 1,
+                "name": "No",
+                "toolTip": "Interaction does not match the criteria.",
+                "value": 0
+            }
+        ],
+        "isActive": true
+    },
+    {
+        "name": "Close of Call",
+        "desc": "Agent provided a closing salutation and thanked the customer for calling. If this was the first time the customer had called in, we provided at least two methods to contact us again in the future should the need arise.",
+        "modality": "phone_inbound",
+        "type": "standard",
+        "value": 5,
+        "options": [
+            {
+                "position": 0,
+                "name": "Yes",
+                "toolTip": "Interaction matches criteria.",
+                "value": 5
+            },
+            {
+                "position": 1,
+                "name": "No",
+                "toolTip": "Interaction does not match the criteria.",
+                "value": 0
+            }
+        ],
+        "isActive": true
+    }
+]
