@@ -10,7 +10,7 @@ async function createScorecard(data) {
   for (let i = 0; i < template.length; i++) {
     let newScorecard = {
       _id: uuidv4(),
-      brandId: data._id,
+      brandId: data,
       teamId: team._id,
       name: template[i].name,
       desc: template[i].desc,

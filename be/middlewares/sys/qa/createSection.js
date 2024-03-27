@@ -8,7 +8,7 @@ async function createSection(data) {
   for (let i = 0; i < template.length; i++) {
     let newSection = {
       _id: uuidv4(),
-      brandId: data._id,
+      brandId: data,
       name: template[i].name,
       desc: template[i].desc,
       modality: template[i].modality,
