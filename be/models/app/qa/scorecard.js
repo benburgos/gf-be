@@ -27,11 +27,13 @@ const scorecardSchema = new mongoose.Schema(
     criteria: [
       {
         _id: false,
+        position: { type: Number, required: true },
         sectionName: { type: String, required: true },
         sectionValue: { type: Number, required: true },
         questions: [
           {
-            _id: false,            
+            _id: false,
+            position: { type: Number, required: true },            
             questionName: { type: String, required: true },
             questionDesc: { type: String, required: true },
             questionType: { type: String, required: true },
