@@ -5,7 +5,7 @@ const { v4: uuidv4 } = require('uuid');
 
 async function createScorecard(data) {
   let newScorecardArr = [];
-  let team = await Team.findOne({brandId: data._id, name: "Unassigned"})
+  let team = await Team.findOne({brandId: data, name: "Unassigned"})
 
   for (let i = 0; i < template.length; i++) {
     let newScorecard = {
