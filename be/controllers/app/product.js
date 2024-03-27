@@ -7,7 +7,7 @@ async function getAllProducts(req, res) {
 
   if (brandCheck.adminId === req.id) {
     let products = await Product.find(
-      { brandId: req.bid },
+      { brandId: req.bid, desc: { $nin: 'admin' } },
       '_id desc isActive'
     );
     res.send(products);
