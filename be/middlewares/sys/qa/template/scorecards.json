@@ -1,7 +1,7 @@
 [
     {
-        "name": "Inbound Customer Support",
-        "desc": "A scorecard for inbound customer support.",
+        "name": "Inbound Phone Scorecard",
+        "desc": "A scorecard for inbound phone support.",
         "type": "native",
         "modality": "phone_inbound",
         "criteria": [
@@ -235,33 +235,321 @@
         "isActive": true
       },
       {
-        "name": "Outbound Customer Support",
-        "desc": "A scorecard for outbound customer support.",
+        "name": "Outbound Phone Scorecard",
+        "desc": "A scorecard for outbound phone support.",
         "type": "native",
         "modality": "phone_outbound",
-        "criteria": [],
+        "criteria": [
+          {
+            "sectionName": "Call Introduction",
+            "sectionValue": 0,
+            "questions": [
+              {
+                "questionName": "",
+                "questionDesc": "",
+                "questionType": "standard",
+                "questionValue": 10,
+                "options": [
+                  {
+                      "position": 0,
+                      "name": "Yes",
+                      "toolTip": "Criteria met, or is not applicable.",
+                      "value": 10
+                  },
+                  {
+                      "position": 1,
+                      "name": "No",
+                      "toolTip": "Criteria was not met.",
+                      "value": 0
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "sectionName": "Process & Procedure",
+            "sectionValue": 0,
+            "questions": [
+              {
+                "questionName": "",
+                "questionDesc": "",
+                "questionType": "standard",
+                "questionValue": 10,
+                "options": [
+                  {
+                      "position": 0,
+                      "name": "Yes",
+                      "toolTip": "Criteria met, or is not applicable.",
+                      "value": 10
+                  },
+                  {
+                      "position": 1,
+                      "name": "No",
+                      "toolTip": "Criteria was not met.",
+                      "value": 0
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "sectionName": "Soft Skills",
+            "sectionValue": 0,
+            "questions": [
+              {
+                "questionName": "",
+                "questionDesc": "",
+                "questionType": "standard",
+                "questionValue": 10,
+                "options": [
+                  {
+                      "position": 0,
+                      "name": "Yes",
+                      "toolTip": "Criteria met, or is not applicable.",
+                      "value": 10
+                  },
+                  {
+                      "position": 1,
+                      "name": "No",
+                      "toolTip": "Criteria was not met.",
+                      "value": 0
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "sectionName": "Close of Call",
+            "sectionValue": 0,
+            "questions": [
+              {
+                "questionName": "",
+                "questionDesc": "",
+                "questionType": "standard",
+                "questionValue": 10,
+                "options": [
+                  {
+                      "position": 0,
+                      "name": "Yes",
+                      "toolTip": "Criteria met, or is not applicable.",
+                      "value": 10
+                  },
+                  {
+                      "position": 1,
+                      "name": "No",
+                      "toolTip": "Criteria was not met.",
+                      "value": 0
+                  }
+                ]
+              }
+            ]
+          }
+        ],
         "maxScore": 100,
         "targetScore": 80,
         "isActive": true
       },
       {
-        "name": "Inbound Chat Customer Support",
-        "desc": "A scorecard for inbound customer support.",
+        "name": "Inbound Chat Scorecard",
+        "desc": "A scorecard for inbound chat support.",
         "type": "native",
         "modality": "chat",
-        "criteria": [],
+        "criteria": [
+          {
+            "sectionName": "Chat Introduction",
+            "sectionValue": 0,
+            "questions": [
+              {
+                "questionName": "",
+                "questionDesc": "",
+                "questionType": "standard",
+                "questionValue": 10,
+                "options": [
+                  {
+                      "position": 0,
+                      "name": "Yes",
+                      "toolTip": "Criteria met, or is not applicable.",
+                      "value": 10
+                  },
+                  {
+                      "position": 1,
+                      "name": "No",
+                      "toolTip": "Criteria was not met.",
+                      "value": 0
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "sectionName": "Chat Process & Procedure",
+            "sectionValue": 0,
+            "questions": [
+              {
+                "questionName": "",
+                "questionDesc": "",
+                "questionType": "standard",
+                "questionValue": 10,
+                "options": [
+                  {
+                      "position": 0,
+                      "name": "Yes",
+                      "toolTip": "Criteria met, or is not applicable.",
+                      "value": 10
+                  },
+                  {
+                      "position": 1,
+                      "name": "No",
+                      "toolTip": "Criteria was not met.",
+                      "value": 0
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "sectionName": "Soft Skills",
+            "sectionValue": 0,
+            "questions": [
+              {
+                "questionName": "",
+                "questionDesc": "",
+                "questionType": "standard",
+                "questionValue": 10,
+                "options": [
+                  {
+                      "position": 0,
+                      "name": "Yes",
+                      "toolTip": "Criteria met, or is not applicable.",
+                      "value": 10
+                  },
+                  {
+                      "position": 1,
+                      "name": "No",
+                      "toolTip": "Criteria was not met.",
+                      "value": 0
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "sectionName": "Close of Chat",
+            "sectionValue": 0,
+            "questions": [
+              {
+                "questionName": "",
+                "questionDesc": "",
+                "questionType": "standard",
+                "questionValue": 10,
+                "options": [
+                  {
+                      "position": 0,
+                      "name": "Yes",
+                      "toolTip": "Criteria met, or is not applicable.",
+                      "value": 10
+                  },
+                  {
+                      "position": 1,
+                      "name": "No",
+                      "toolTip": "Criteria was not met.",
+                      "value": 0
+                  }
+                ]
+              }
+            ]
+          }
+        ],
         "maxScore": 100,
         "targetScore": 80,
         "isActive": true
       },
       {
-        "name": "Email",
+        "name": "Email Scorecard",
         "desc": "A scorecard for email interactions, incoming or outgoing.",
         "type": "native",
         "modality": "email",
         "criteria": [
           {
-            "sectionName": "",
+            "sectionName": "Email Introduction",
+            "sectionValue": 0,
+            "questions": [
+              {
+                "questionName": "",
+                "questionDesc": "",
+                "questionType": "standard",
+                "questionValue": 10,
+                "options": [
+                  {
+                      "position": 0,
+                      "name": "Yes",
+                      "toolTip": "Criteria met, or is not applicable.",
+                      "value": 10
+                  },
+                  {
+                      "position": 1,
+                      "name": "No",
+                      "toolTip": "Criteria was not met.",
+                      "value": 0
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "sectionName": "Email Process & Procedure",
+            "sectionValue": 0,
+            "questions": [
+              {
+                "questionName": "",
+                "questionDesc": "",
+                "questionType": "standard",
+                "questionValue": 10,
+                "options": [
+                  {
+                      "position": 0,
+                      "name": "Yes",
+                      "toolTip": "Criteria met, or is not applicable.",
+                      "value": 10
+                  },
+                  {
+                      "position": 1,
+                      "name": "No",
+                      "toolTip": "Criteria was not met.",
+                      "value": 0
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "sectionName": "Soft Skills",
+            "sectionValue": 0,
+            "questions": [
+              {
+                "questionName": "",
+                "questionDesc": "",
+                "questionType": "standard",
+                "questionValue": 10,
+                "options": [
+                  {
+                      "position": 0,
+                      "name": "Yes",
+                      "toolTip": "Criteria met, or is not applicable.",
+                      "value": 10
+                  },
+                  {
+                      "position": 1,
+                      "name": "No",
+                      "toolTip": "Criteria was not met.",
+                      "value": 0
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "sectionName": "Complimentary Close",
             "sectionValue": 0,
             "questions": [
               {
