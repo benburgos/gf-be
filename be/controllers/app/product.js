@@ -1,5 +1,7 @@
 const Brand = require('../../models/sys/brand');
 const Product = require('../../models/sys/product');
+const { checkQa } = require('../../middlewares/sys/qa/checkQa');
+const { startQa } = require('../../middlewares/sys/qa/startQa');
 const { checkPermission } = require('../../middlewares/checkPermission');
 
 async function getAllProducts(req, res) {
@@ -20,15 +22,35 @@ async function editProduct(req, res) {
   const brandCheck = await Brand.findOne({ _id: req.bid }, 'adminId');
 
   if (brandCheck.adminId === req.id) {
-    if (req.query.update){
-      let updatedProduct = await Product.findOneAndUpdate({_id: req.params.id}, {isActive: req.query.update})
-      res.send(`${updatedProduct.desc.toUpperCase()} has been activated.`)
-    } else {
-      let updatedProduct = await Product.findOneAndUpdate({_id: req.params.id}, {isActive: req.query.update})
-      res.send(`${updatedProduct.desc.toUpperCase()} has been deactivated.`)
-    }
+    if (req.query.update) {
+      let qaCheck = await checkQa(req.bid);
 
-    
+      if (!qaCheck) {
+        await startQa(req.bid);
+        let updatedProduct = await Product.findOneAndUpdate(
+          { _id: req.params.id },
+          { isActive: req.query.update }
+        );
+        res.send(
+          `${updatedProduct.desc.toUpperCase()} has been activated and QA templates have been added.`
+        );
+      } else {
+        let updatedProduct = await Product.findOneAndUpdate(
+          { _id: req.params.id },
+          { isActive: req.query.update }
+        );
+
+        res.send(
+          `${updatedProduct.desc.toUpperCase()} has been activated, no templates were added because QA items were found in the database for your company.`
+        );
+      }
+    } else {
+      let updatedProduct = await Product.findOneAndUpdate(
+        { _id: req.params.id },
+        { isActive: req.query.update }
+      );
+      res.send(`${updatedProduct.desc.toUpperCase()} has been deactivated.`);
+    }
   } else {
     res.send(`You are not authorized to access this resource.`);
   }
