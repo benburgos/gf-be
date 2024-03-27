@@ -242,12 +242,12 @@
         "criteria": [
           {
             "sectionName": "Call Introduction",
-            "sectionValue": 0,
+            "sectionValue": 15,
             "questions": [
               {
-                "questionName": "",
-                "questionDesc": "",
-                "questionType": "standard",
+                "questionName": "MRD (Monitoring and Recording Disclosure)",
+                "questionDesc": "Agent delivered the monitoring and recording disclosure promptly.",
+                "questionType": "fail_all",
                 "questionValue": 10,
                 "options": [
                   {
@@ -255,6 +255,26 @@
                       "name": "Yes",
                       "toolTip": "Criteria met, or is not applicable.",
                       "value": 10
+                  },
+                  {
+                      "position": 1,
+                      "name": "No",
+                      "toolTip": "Criteria was not met.",
+                      "value": 0
+                  }
+                ]
+              },
+              {
+                "questionName": "Proper Greeting",
+                "questionDesc": "Agent provided an appropriate salutation, their first name, the company, and clearly articulates the reason for the call.",
+                "questionType": "standard",
+                "questionValue": 5,
+                "options": [
+                  {
+                      "position": 0,
+                      "name": "Yes",
+                      "toolTip": "Criteria met, or is not applicable.",
+                      "value": 5
                   },
                   {
                       "position": 1,
@@ -268,19 +288,59 @@
           },
           {
             "sectionName": "Process & Procedure",
-            "sectionValue": 0,
+            "sectionValue": 40,
             "questions": [
               {
-                "questionName": "",
-                "questionDesc": "",
+                "questionName": "Anticipates Customer Need",
+                "questionDesc": "Agent reviewed all relevant information needed prior to the call and does not re-request information already provided. Agent clearly communicates when information or an item is needed by and how to submit the information. Agent covered the required content based on the type of call or script.",
                 "questionType": "standard",
-                "questionValue": 10,
+                "questionValue": 20,
                 "options": [
                   {
                       "position": 0,
                       "name": "Yes",
                       "toolTip": "Criteria met, or is not applicable.",
-                      "value": 10
+                      "value": 20
+                  },
+                  {
+                      "position": 1,
+                      "name": "No",
+                      "toolTip": "Criteria was not met.",
+                      "value": 0
+                  }
+                ]
+              },
+              {
+                "questionName": "Effective Notes",
+                "questionDesc": "Agent left detailed notes on the interaction; the content of the call and the solutions provided, as applicable.",
+                "questionType": "standard",
+                "questionValue": 15,
+                "options": [
+                  {
+                      "position": 0,
+                      "name": "Yes",
+                      "toolTip": "Criteria met, or is not applicable.",
+                      "value": 15
+                  },
+                  {
+                      "position": 1,
+                      "name": "No",
+                      "toolTip": "Criteria was not met.",
+                      "value": 0
+                  }
+                ]
+              },
+              {
+                "questionName": "Completed Interaction Details",
+                "questionDesc": "Agent selected the most accurate and detailed contact reason for the content of the call.",
+                "questionType": "standard",
+                "questionValue": 5,
+                "options": [
+                  {
+                      "position": 0,
+                      "name": "Yes",
+                      "toolTip": "Criteria met, or is not applicable.",
+                      "value": 5
                   },
                   {
                       "position": 1,
@@ -294,11 +354,11 @@
           },
           {
             "sectionName": "Soft Skills",
-            "sectionValue": 0,
+            "sectionValue": 15,
             "questions": [
               {
-                "questionName": "",
-                "questionDesc": "",
+                "questionName": "Voice and Tone",
+                "questionDesc": "Agent maintained a positive and professional demeanor throughout the call and refrained from utilizing expletives or rude remarks. Where applicable, the Agent provided an empathetic response at the first opportunity and utilized positive positioning at every opportunity.",
                 "questionType": "standard",
                 "questionValue": 10,
                 "options": [
@@ -315,16 +375,56 @@
                       "value": 0
                   }
                 ]
+              },
+              {
+                "questionName": "Phone Etiquette",
+                "questionDesc": "Agent asked permission to place the customer on hold, provided an estimate of how long the hold would last, and returned back to the call by thanking the customer for holding. Dead air on the call did not exceed 60 seconds at any given time.",
+                "questionType": "standard",
+                "questionValue": 5,
+                "options": [
+                  {
+                      "position": 0,
+                      "name": "Yes",
+                      "toolTip": "Criteria met, or is not applicable.",
+                      "value": 5
+                  },
+                  {
+                      "position": 1,
+                      "name": "No",
+                      "toolTip": "Criteria was not met.",
+                      "value": 0
+                  }
+                ]
               }
             ]
           },
           {
             "sectionName": "Close of Call",
-            "sectionValue": 0,
+            "sectionValue": 30,
             "questions": [
               {
-                "questionName": "",
-                "questionDesc": "",
+                "questionName": "Call to Action",
+                "questionDesc": "Agent gave a detailed summary of what was discussed on the call and a direct call to action or expectation for follow-up.",
+                "questionType": "standard",
+                "questionValue": 20,
+                "options": [
+                  {
+                      "position": 0,
+                      "name": "Yes",
+                      "toolTip": "Criteria met, or is not applicable.",
+                      "value": 20
+                  },
+                  {
+                      "position": 1,
+                      "name": "No",
+                      "toolTip": "Criteria was not met.",
+                      "value": 0
+                  }
+                ]
+              },
+              {
+                "questionName": "Close of Call",
+                "questionDesc": "Agent provided a closing salutation and thanked the customer for taking their call.",
                 "questionType": "standard",
                 "questionValue": 10,
                 "options": [
