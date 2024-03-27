@@ -20,15 +20,15 @@ async function editProduct(req, res) {
   const brandCheck = await Brand.findOne({ _id: req.bid }, 'adminId');
 
   if (brandCheck.adminId === req.id) {
-    let product = await Product.findOneAndUpdate(
-      { _id: req.params.id, brandId: req.bid },
-      { isActive: req.query.update }
-    );
-    res.send(
-      `${product.desc} product has been ${
-        req.query.update === 'true' ? 'activated' : 'deactivated'
-      }.`
-    );
+    if (req.query.update){
+      let updatedProduct = await Product.findOneAndUpdate({_id: req.params.id}, {isActive: req.query.update})
+      res.send(`${updatedProduct.desc.toUpperCase()} has been activated.`)
+    } else {
+      let updatedProduct = await Product.findOneAndUpdate({_id: req.params.id}, {isActive: req.query.update})
+      res.send(`${updatedProduct.desc.toUpperCase()} has been deactivated.`)
+    }
+
+    
   } else {
     res.send(`You are not authorized to access this resource.`);
   }
