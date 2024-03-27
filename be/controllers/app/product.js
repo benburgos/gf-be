@@ -28,7 +28,7 @@ async function editProduct(req, res) {
         await startQa(req.bid);
         let updatedProduct = await Product.findOneAndUpdate(
           { _id: req.params.id },
-          { isActive: req.query.update }
+          { isActive: req.query.update, dateUpdated: Date.now() }
         );
         res.send(
           `${updatedProduct.desc.toUpperCase()} has been activated and QA templates have been added.`
@@ -36,7 +36,7 @@ async function editProduct(req, res) {
       } else {
         let updatedProduct = await Product.findOneAndUpdate(
           { _id: req.params.id },
-          { isActive: req.query.update }
+          { isActive: req.query.update, dateUpdated: Date.now() }
         );
 
         res.send(
@@ -46,7 +46,7 @@ async function editProduct(req, res) {
     } else {
       let updatedProduct = await Product.findOneAndUpdate(
         { _id: req.params.id },
-        { isActive: req.query.update }
+        { isActive: req.query.update, dateUpdated: Date.now() }
       );
       res.send(`${updatedProduct.desc.toUpperCase()} has been deactivated.`);
     }
