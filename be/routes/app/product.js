@@ -3,7 +3,6 @@ const router = express.Router();
 const productController = require('../../controllers/app/product');
 const { authToken } = require('../../middlewares/authToken');
 
-router.get('/:id', authToken, productController.getProduct);
 router.get('/', authToken, productController.getAllProducts);
 router.put('/edit/:id', authToken, productController.editProduct);
 
