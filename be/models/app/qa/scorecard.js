@@ -40,7 +40,7 @@ const scorecardSchema = new mongoose.Schema(
               {
                 _id: false,
                 position: { type: Number, required: true },
-                label: { type: String, required: true },
+                name: { type: String, required: true },
                 toolTip: { type: String, required: true },
                 value: { type: Number, required: true },
               }
