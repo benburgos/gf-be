@@ -27,7 +27,7 @@ const questionSchema = new mongoose.Schema(
     options: [
       {
         position: { type: Number, required: true },
-        label: { type: String, required: true },
+        name: { type: String, required: true },
         toolTip: { type: String, required: true },
         value: { type: Number, required: true },
         _id: false,
