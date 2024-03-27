@@ -1,12 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const orgController = require('../../controllers/app/org');
+const productController = require('../../controllers/app/product');
 const { authToken } = require('../../middlewares/authToken');
 
-router.post('/create', authToken, orgController.createOrg);
-router.get('/:id', authToken, orgController.getOrg);
-router.get('/', authToken, orgController.getAllOrgs);
-router.put('/edit/:id', authToken, orgController.editOrg);
-router.delete('/delete/:id', authToken, orgController.deleteOrg);
+router.get('/:id', authToken, productController.getProduct);
+router.get('/', authToken, productController.getAllProducts);
+router.put('/edit/:id', authToken, productController.editProduct);
 
 module.exports = router;
