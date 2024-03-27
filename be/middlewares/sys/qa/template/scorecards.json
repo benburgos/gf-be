@@ -612,11 +612,11 @@
         "criteria": [
           {
             "sectionName": "Email Introduction",
-            "sectionValue": 0,
+            "sectionValue": 10,
             "questions": [
               {
-                "questionName": "",
-                "questionDesc": "",
+                "questionName": "Greeting",
+                "questionDesc": "Agent greets the customer with an appropriate salutation, creating a positive impression.",
                 "questionType": "standard",
                 "questionValue": 10,
                 "options": [
@@ -638,19 +638,39 @@
           },
           {
             "sectionName": "Email Process & Procedure",
-            "sectionValue": 0,
+            "sectionValue": 40,
             "questions": [
               {
-                "questionName": "",
-                "questionDesc": "",
+                "questionName": "Purpose for Email",
+                "questionDesc": "Agent is concise and to the point as to the purpose of the email.",
                 "questionType": "standard",
-                "questionValue": 10,
+                "questionValue": 15,
                 "options": [
                   {
                       "position": 0,
                       "name": "Yes",
                       "toolTip": "Criteria met, or is not applicable.",
-                      "value": 10
+                      "value": 15
+                  },
+                  {
+                      "position": 1,
+                      "name": "No",
+                      "toolTip": "Criteria was not met.",
+                      "value": 0
+                  }
+                ]
+              },
+              {
+                "questionName": "Email Body",
+                "questionDesc": "Agent provides customer with relevant information, facts or figures, that they will need to know.",
+                "questionType": "standard",
+                "questionValue": 25,
+                "options": [
+                  {
+                      "position": 0,
+                      "name": "Yes",
+                      "toolTip": "Criteria met, or is not applicable.",
+                      "value": 25
                   },
                   {
                       "position": 1,
@@ -664,19 +684,39 @@
           },
           {
             "sectionName": "Soft Skills",
-            "sectionValue": 0,
+            "sectionValue": 40,
             "questions": [
               {
-                "questionName": "",
-                "questionDesc": "",
-                "questionType": "standard",
-                "questionValue": 10,
+                "questionName": "Voice and Tone",
+                "questionDesc": "Agent uses friendly, yet professional, language throughout the email. Agent avoids the use of technical terms or jargon.",
+                "questionType": "fail_all",
+                "questionValue": 20,
                 "options": [
                   {
                       "position": 0,
                       "name": "Yes",
                       "toolTip": "Criteria met, or is not applicable.",
-                      "value": 10
+                      "value": 20
+                  },
+                  {
+                      "position": 1,
+                      "name": "No",
+                      "toolTip": "Criteria was not met.",
+                      "value": 0
+                  }
+                ]
+              },
+              {
+                "questionName": "Spelling and Grammar",
+                "questionDesc": "Communication is free of spelling and grammatical errors.",
+                "questionType": "fail_section",
+                "questionValue": 20,
+                "options": [
+                  {
+                      "position": 0,
+                      "name": "Yes",
+                      "toolTip": "Criteria met, or is not applicable.",
+                      "value": 20
                   },
                   {
                       "position": 1,
@@ -690,11 +730,11 @@
           },
           {
             "sectionName": "Complimentary Close",
-            "sectionValue": 0,
+            "sectionValue": 10,
             "questions": [
               {
-                "questionName": "",
-                "questionDesc": "",
+                "questionName": "Complimentary Close",
+                "questionDesc": "Agent clearly defines what the customer needs to do next, where applicable. Agent explains the reason for taking action. The Agent delivers an appropriate closing saluation and leaves a positive impression on the customer.",
                 "questionType": "standard",
                 "questionValue": 10,
                 "options": [
