@@ -1,5 +1,5 @@
 const { Scorecard } = require('../../../models/app/qa/qaIndex');
-const { Team } = require('../../../models/team')
+const Team = require('../../../models/team')
 const template = require('../../../middlewares/sys/qa/template/scorecards.json');
 const { v4: uuidv4 } = require('uuid');
 
