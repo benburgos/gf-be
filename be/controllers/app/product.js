@@ -2,7 +2,6 @@ const Brand = require('../../models/sys/brand');
 const Product = require('../../models/sys/product');
 const { checkQa } = require('../../middlewares/sys/qa/checkQa');
 const { startQa } = require('../../middlewares/sys/qa/startQa');
-const { checkPermission } = require('../../middlewares/checkPermission');
 
 async function getAllProducts(req, res) {
   const brandCheck = await Brand.findOne({ _id: req.bid }, '-_id adminId');
