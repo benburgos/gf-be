@@ -11,6 +11,7 @@ app.use(express.json());
 // Routes
 app.use('/login', route.login);
 app.use('/brand', route.brand);
+app.use('/app/login', route.appLogin)
 app.use('/app/user', route.appUser);
 app.use('/app/product', route.appProduct);
 app.use('/app/role', route.appRole);
