@@ -42,6 +42,7 @@ async function getOption(req, res) {
 
   if (type === 'rw' || 'w') {
     const foundOption = await Option.findOne({ _id: req.params.id });
+    foundOption.data = await foundOption.data.sort((a, b) => a.position - b.position)
 
     if (foundOption && foundOption.brandId === req.bid) {
       res.json(foundOption);
