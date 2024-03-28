@@ -47,11 +47,12 @@ async function getQuestion(req, res) {
   const type = await checkPermission(data);
 
   if (type === 'rw' || 'w') {
-    const findQuestion = await Question.findOne({ _id: req.params.id });
+    const foundQuestion = await Question.findOne({ _id: req.params.id });
+    foundQuestion.options = await foundQuestion.options.sort((a, b) => a.position - b.position)
 
-    if (findQuestion && findQuestion.brandId === req.bid) {
-      res.json(findQuestion);
-    } else if (findQuestion && findQuestion.brandId !== req.bid) {
+    if (foundQuestion && foundQuestion.brandId === req.bid) {
+      res.json(foundQuestion);
+    } else if (foundQuestion && foundQuestion.brandId !== req.bid) {
       res.send(`You do not belong to the same organization as this option.`);
     } else {
       res.send(`Question ID does not exist.`);
