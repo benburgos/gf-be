@@ -44,7 +44,15 @@ async function getScorecard(req, res) {
 
   if (type === 'rw' || 'w') {
     const foundScorecard = await Scorecard.findOne({ _id: req.params.id });
+    foundScorecard.criteria = await foundScorecard.criteria.sort((a, b) => a.position - b.position)
 
+    for (let i = 0; i < foundScorecard.criteria.length; i++){
+      for (let i = 0; i < foundScorecard.criteria[i].questions.length; i++){
+        foundScorecard.criteria[i].questions[i].options.sort((a, b) => a.position - b.position)
+      }
+      foundScorecard.criteria[i].questions.sort((a, b) => a.position - b.position)
+    }
+    
     if (foundScorecard && foundScorecard.brandId === req.bid) {
       res.json(foundScorecard);
     } else if (foundScorecard && foundScorecard.brandId !== req.bid) {
