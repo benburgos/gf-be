@@ -10,7 +10,7 @@ app.use(express.json());
 
 // Routes
 app.get('/', (req, res) => {
-  res.send('Welcome to Groupeforce.');
+  res.json({ message: 'Welcome to Groupeforce'});
 });
 app.use('/login', route.login);
 app.use('/brand', route.brand);
