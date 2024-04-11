@@ -2,15 +2,17 @@
 require('dotenv').config();
 require('./config/db');
 const express = require('express');
+const cors = require('cors');
 const app = express();
 const route = require('./routes/routeIndex');
 
 // Middleware
 app.use(express.json());
+app.use(cors());
 
 // Routes
 app.get('/', (req, res) => {
-  res.json({ message: 'Welcome to Groupeforce'});
+  res.json({ message: 'Welcome to Groupeforce' });
 });
 app.use('/login', route.login);
 app.use('/brand', route.brand);
