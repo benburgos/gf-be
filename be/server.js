@@ -6,15 +6,26 @@ const cors = require('cors');
 const app = express();
 const route = require('./routes/routeIndex');
 
+let allowedOrigins = [`${process.env.DEV_APP}`]
+
 // Middleware
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: function(origin, callback){
+    if(!origin) return callback(null, true);
+    if(allowedOrigins.indexOf(origin) === -1){
+      var msg = 'The CORS policy for this site does not ' +
+                'allow access from the specified Origin.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);}
+}));
 
 // Routes
 app.get('/', (req, res) => {
   res.json({ message: 'Welcome to Groupeforce' });
 });
-app.use('/login', cors(), route.login);
+app.use('/login', route.login);
 app.use('/brand', route.brand);
 app.use('/app/login', route.appLogin);
 app.use('/app/user', route.appUser);
