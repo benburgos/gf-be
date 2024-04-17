@@ -21,6 +21,7 @@ app.use(cors(
 app.get('/', (req, res) => {
   res.json({ message: 'Welcome to Groupeforce' });
 });
+app.options("/login", cors())
 app.use('/login', route.login);
 app.use('/brand', route.brand);
 app.use('/app/login', route.appLogin);
