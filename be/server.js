@@ -8,20 +8,12 @@ const route = require('./routes/routeIndex');
 
 // Middleware
 app.use(express.json());
-app.use(cors(
-  {
-    "origin": "*",
-    "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
-    "preflightContinue": false,
-    "optionsSuccessStatus": 204
-  }
-))
+app.use(cors())
 
 // Routes
 app.get('/', (req, res) => {
   res.json({ message: 'Welcome to Groupeforce' });
 });
-app.options("/login", cors())
 app.use('/login', route.login);
 app.use('/brand', route.brand);
 app.use('/app/login', route.appLogin);
