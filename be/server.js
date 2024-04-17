@@ -6,11 +6,13 @@ const cors = require('cors');
 const app = express();
 const route = require('./routes/routeIndex');
 
-let allowedOrigins = [`${process.env.DEV_APP}`];
+let allowedOrigins = {
+  origin: [`${process.env.DEV_APP}`]
+}
 
 // Middleware
 app.use(express.json());
-app.use(cors());
+app.use(cors(allowedOrigins));
 
 // Routes
 app.get('/', (req, res) => {
