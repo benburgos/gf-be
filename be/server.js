@@ -8,10 +8,7 @@ const route = require('./routes/routeIndex');
 
 // Middleware
 app.use(express.json());
-const corsOption = {
-  origin: process.env.DEV_APP
-}
-app.use(cors(corsOption))
+app.use(cors())
 
 // Routes
 app.get('/', (req, res) => {
