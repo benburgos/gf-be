@@ -9,9 +9,7 @@ const route = require('./routes/routeIndex');
 // Middleware
 app.use(express.json());
 const corsOption = {
-  origin: [process.env.DEV_APP],
-  credentials: true,
-  methods: ["GET", "POST", "PUT", "DELETE"],
+  origin: process.env.DEV_APP
 }
 app.use(cors(corsOption))
 
