@@ -5,7 +5,6 @@ const { genToken } = require('../services/genToken');
 async function loginUser(req, res) {
   try {
     const match = await checkHash(req.body.email, req.body.password);
-    console.log(match)
     const isAdmin = await Brand.findOne({adminId: match.id})
     if (isAdmin && match) {
       res.json(genToken(match, match.key));
