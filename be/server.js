@@ -7,8 +7,12 @@ const app = express();
 const route = require('./routes/routeIndex');
 
 // Middleware
+const corsOptions = {
+  credentials: true,
+  origin: ['http://localhost:5173']
+};
 app.use(express.json());
-app.use(cors())
+app.use(cors(corsOptions))
 
 // Routes
 app.get('/', (req, res) => {
