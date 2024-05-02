@@ -8,21 +8,19 @@ async function loginUser(req, res) {
   if (!user) {
     res.json('Email does not exist.');
   } else if (user) {
-    try {
       const match = await checkHash(user, req.body.password);
       if (match) {
         const isAdmin = await Brand.findOne({ adminId: match.id });
-        if (isAdmin) {
+        if (isAdmin !== null) {
           res.json(genToken(match, match.key));
         } else {
           res.json('Use the app login page to access the app.');
         }
+      } else {
+        res.json('Password is incorrect.');
       }
-    } catch (err) {
-      throw err;
     }
   }
-}
 
 module.exports = {
   loginUser,
