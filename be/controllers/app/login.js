@@ -7,13 +7,11 @@ async function loginUser(req, res) {
   if (!user) {
     res.json('Email does not exist.');
   } else if (user) {
-    try {
-      const match = await checkHash(user, req.body.password);
-      if (match) {
-        res.json(genToken(match, match.key));
-      }
-    } catch (err) {
-      throw err;
+    const match = await checkHash(user, req.body.password);
+    if (match) {
+      res.json(genToken(match, match.key));
+    } else {
+      res.json('Password is incorrect.');
     }
   }
 }
