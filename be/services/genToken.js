@@ -8,7 +8,7 @@ function genToken(data) {
       expiresIn: '1h',
     }
   );
-  return { token, data };
+  return { token };
 }
 
 module.exports = {
