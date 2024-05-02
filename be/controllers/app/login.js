@@ -1,6 +1,6 @@
-const User = require('../models/user');
-const { checkHash } = require('../middlewares/checkHash');
-const { genToken } = require('../services/genToken');
+const User = require('../../models/user');
+const { checkHash } = require('../../middlewares/checkHash');
+const { genToken } = require('../../services/genToken');
 
 async function loginUser(req, res) {
   const user = await User.findOne({ email: req.body.email });
