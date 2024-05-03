@@ -65,10 +65,6 @@ async function getBrand(req, res) {
       const user = await User.findOne({ _id: req.id });
       const products = await Product.find({ brandId: req.bid });
 
-      console.log(
-        `User ${user.firstName} has viewed the company, ${brand.name}'s page.`
-      );
-
       res.json({ brand: brand, user: user, products: products });
     } catch (err) {
       res.send(err);
