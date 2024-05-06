@@ -1,7 +1,7 @@
 const User = require('../../models/user');
 const { checkHash } = require('../../middlewares/checkHash');
 const { genToken } = require('../../services/genToken');
-const { genRefreshToken } = require('../../services/genRefreshToken'); // Import function to generate refresh token
+const { genRefreshToken } = require('../../services/genRefreshToken');
 
 async function loginUser(req, res) {
   try {
