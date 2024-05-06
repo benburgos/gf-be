@@ -9,10 +9,17 @@ async function verifyRefreshToken(refreshToken) {
     // Check if the refresh token exists in the database
     const existingToken = await RefreshToken.findOne({ token: refreshToken });
     if (!existingToken) {
-      return null; // Token doesn't exist in the database
+      return null;
     }
 
-    // Optionally, you can check if the token has expired or perform additional validation
+    // Check if the refresh token has expired
+    const expirationTime = decoded.exp * 1000; // Convert seconds to milliseconds
+    const currentTime = Date.now();
+    const tokenLifetime = expirationTime - currentTime;
+    const maxLifetime = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+    if (tokenLifetime > maxLifetime) {
+      return null; // Token validity exceeds 24 hours
+    }
 
     // Return the decoded token
     return decoded;
