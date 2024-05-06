@@ -17,10 +17,10 @@ async function loginUser(req, res) {
     }
 
     // Generate access token
-    const accessToken = genToken({ id: user._id, email: user.email }); // Adjust payload as needed
+    const accessToken = res.json(genToken(match, match.key));
 
     // Generate refresh token
-    const refreshToken = genRefreshToken(user._id); // Assuming genRefreshToken function generates a refresh token for the user
+    const refreshToken = res.json(genRefreshToken(user._id))
 
     // Send tokens to the client
     res.json({ accessToken, refreshToken });

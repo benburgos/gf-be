@@ -1,5 +1,5 @@
-const { verifyRefreshToken } = require('../middlewares/verifyRefreshToken'); // Implement this function to verify refresh token
-const { genToken } = require('../services/genToken'); // Import your existing function to generate access token
+const { verifyRefreshToken } = require('../middlewares/verifyRefreshToken');
+const { genToken } = require('../services/genToken');
 
 // Controller function for refreshing tokens
 async function refreshToken(req, res) {
@@ -29,7 +29,6 @@ async function refreshToken(req, res) {
   }
 }
 
-// Export the controller function
 module.exports = {
   refreshToken,
 };
