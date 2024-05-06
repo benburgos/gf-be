@@ -17,13 +17,13 @@ async function loginUser(req, res) {
     }
 
     // Generate access token
-    const accessToken = res.json(genToken(match, match.key));
+    const accessToken = genToken(match, match.key);
 
     // Generate refresh token
-    const refreshToken = res.json(genRefreshToken(user._id))
-
+    const refreshToken = await genRefreshToken(user._id);
+    
     // Send tokens to the client
-    res.json({ accessToken, refreshToken });
+    return res.json({ accessToken, refreshToken });
   } catch (error) {
     console.error('Error logging in user:', error);
     res.status(500).json({ error: 'Internal server error' });

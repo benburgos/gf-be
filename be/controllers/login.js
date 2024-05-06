@@ -14,13 +14,13 @@ async function loginUser(req, res) {
       const isAdmin = await Brand.findOne({ adminId: match.id });
       if (isAdmin !== null) {
         // Generate access token
-        const accessToken = res.json(genToken(match, match.key));
+        const accessToken = genToken(match, match.key);
 
         // Generate refresh token
-        const refreshToken = res.json(genRefreshToken(user._id));
+        const refreshToken = await genRefreshToken(user._id);
 
         // Send tokens to the client
-        res.json({ accessToken, refreshToken });
+        return res.json({ accessToken, refreshToken });
       } else {
         res.json('Use the app login page to access the app.');
       }
