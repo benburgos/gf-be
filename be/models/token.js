@@ -12,4 +12,4 @@ const refreshTokenSchema = new mongoose.Schema(
 
 const RefreshToken = mongoose.model('RefreshToken', refreshTokenSchema);
 
-module.exports = Team;
+module.exports = RefreshToken;

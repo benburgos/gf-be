@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const RefreshToken = require('../models/token');
 
 async function verifyRefreshToken(refreshToken) {
   try {
