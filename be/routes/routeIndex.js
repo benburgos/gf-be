@@ -1,5 +1,6 @@
 const login = require('./login');
 const brand = require('./brand');
+const appToken = require('./token');
 const appLogin = require('./app/login')
 const appUser = require('./app/user');
 const appProduct = require('./app/product');
@@ -15,6 +16,7 @@ const appQaEvaluation = require('./app/qa/evaluation');
 module.exports = {
   login,
   brand,
+  appToken,
   appLogin,
   appUser,
   appProduct,

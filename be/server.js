@@ -16,6 +16,7 @@ app.get('/', (req, res) => {
 });
 app.use('/login', route.login);
 app.use('/brand', route.brand);
+app.use('/token', route.appToken);
 app.use('/app/login', route.appLogin);
 app.use('/app/user', route.appUser);
 app.use('/app/product', route.appProduct);
