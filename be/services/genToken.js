@@ -5,7 +5,7 @@ function genToken(data) {
     { id: data.id, bid: data.bid, rid: data.rid, ra: data.ra },
     process.env.SECRET,
     {
-      expiresIn: '1h',
+      expiresIn: '30m',
     }
   );
   return { token, id: data.id };
