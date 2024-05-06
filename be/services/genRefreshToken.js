@@ -8,17 +8,29 @@ async function genRefreshToken(userId) {
       userId: userId,
     };
 
-    // Sign the refresh token
-    const refreshToken = jwt.sign(payload, process.env.REFRESH_TOKEN_SECRET);
-
-    // Save the refresh token to the database
-    const newRefreshToken = new RefreshToken({
-      token: refreshToken,
-      userId: userId,
-      dateUpdated: Date.now(),
-      dateCreated: Date.now(),
+    // Sign the refresh token with expiration time of 24 hours
+    const refreshToken = jwt.sign(payload, process.env.REFRESH_TOKEN_SECRET, {
+      expiresIn: '24h',
     });
-    await newRefreshToken.save();
+
+    // Check if a refresh token entry already exists for the user ID
+    let existingToken = await RefreshToken.findOne({ _id: userId });
+
+    if (existingToken) {
+      // Update existing entry with new token and dateUpdated timestamp
+      existingToken.token = refreshToken;
+      existingToken.dateUpdated = Date.now();
+      await existingToken.save();
+    } else {
+      // Create new entry
+      existingToken = new RefreshToken({
+        token: refreshToken,
+        _id: userId,
+        dateUpdated: Date.now(),
+        dateCreated: Date.now(),
+      });
+      await existingToken.save();
+    }
 
     return refreshToken;
   } catch (error) {
@@ -27,7 +39,4 @@ async function genRefreshToken(userId) {
   }
 }
 
-
-module.exports = {
-  genRefreshToken,
-};
+module.exports = { genRefreshToken };
