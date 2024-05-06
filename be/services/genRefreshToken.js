@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const RefreshToken = require('../models/token'); // Assuming you have a model for refresh tokens
+const RefreshToken = require('../models/token');
 
 async function genRefreshToken(userId) {
   try {
@@ -15,6 +15,8 @@ async function genRefreshToken(userId) {
     const newRefreshToken = new RefreshToken({
       token: refreshToken,
       userId: userId,
+      dateUpdated: Date.now(),
+      dateCreated: Date.now(),
     });
     await newRefreshToken.save();
 
