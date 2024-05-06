@@ -26,3 +26,8 @@ async function genRefreshToken(userId) {
     throw new Error('Unable to generate refresh token');
   }
 }
+
+
+module.exports = {
+  genRefreshToken,
+};
