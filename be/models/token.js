@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const refreshTokenSchema = new mongoose.Schema(
   {
-    userId: { type: String, required: true },
+    _id: { type: String, required: true },
     token: { type: String, required: true },
     dateUpdated: { type: Number, required: true },
     dateCreated: { type: Number, required: true },
