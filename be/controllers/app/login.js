@@ -7,13 +7,13 @@ async function loginUser(req, res) {
   try {
     const user = await User.findOne({ email: req.body.email });
     if (!user) {
-      return res.status(401).json({ error: 'Email does not exist.' });
+      return res.status(401).json({ Error: 'Email does not exist.' });
     }
 
     // Check if the password matches
     const match = await checkHash(user, req.body.password);
     if (!match) {
-      return res.status(401).json({ error: 'Password is incorrect.' });
+      return res.status(401).json({ Error: 'Password is incorrect.' });
     }
 
     // Generate access token
@@ -26,7 +26,7 @@ async function loginUser(req, res) {
     return res.json({ accessToken, refreshToken });
   } catch (error) {
     console.error('Error logging in user:', error);
-    res.status(500).json({ error: 'Internal server error' });
+    res.status(500).json({ Error: 'Internal server error' });
   }
 }
 
