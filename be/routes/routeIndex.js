@@ -1,7 +1,7 @@
 const login = require('./login');
 const brand = require('./brand');
 const appToken = require('./token');
-const appLogin = require('./app/login')
+const appLogin = require('./app/login');
 const appUser = require('./app/user');
 const appProduct = require('./app/product');
 const appRole = require('./app/role');
@@ -13,7 +13,7 @@ const appQaSection = require('./app/qa/section');
 const appQaScorecard = require('./app/qa/scorecard');
 const appQaEvaluation = require('./app/qa/evaluation');
 
-const apiUser = require('./api/user');
+const apiUserProfile = require('./api/profile');
 
 module.exports = {
   login,
@@ -30,5 +30,5 @@ module.exports = {
   appQaSection,
   appQaScorecard,
   appQaEvaluation,
-  apiUser,
+  apiUserProfile,
 };
