@@ -3,7 +3,7 @@ const Role = require('../../models/sys/role');
 
 async function getUserProfile(req, res) {
   try {
-    // Assuming userId is passed in the request parameters
+    // Grabs userId from the request parameters
     const userId = req.params.id;
 
     // Retrieve user from the database
