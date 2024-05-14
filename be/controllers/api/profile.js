@@ -20,6 +20,13 @@ async function getUserProfile(req, res) {
     // Retrieve role name from Role collection
     let { name: roleName } = await Role.findById(userData.roleId, 'name -_id');
 
+    // Remove roleId and managerId from user data
+    userData = {
+      ...userData._doc,
+      roleId: null,
+      managerId: null,
+    };
+
     // If user exists, return user data
     return res.json({ user: userData, role: roleName });
   } catch (error) {
