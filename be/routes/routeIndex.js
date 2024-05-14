@@ -13,6 +13,8 @@ const appQaSection = require('./app/qa/section');
 const appQaScorecard = require('./app/qa/scorecard');
 const appQaEvaluation = require('./app/qa/evaluation');
 
+const apiUser = require('./api/user');
+
 module.exports = {
   login,
   brand,
@@ -28,4 +30,5 @@ module.exports = {
   appQaSection,
   appQaScorecard,
   appQaEvaluation,
+  apiUser,
 };

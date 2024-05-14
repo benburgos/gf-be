@@ -30,7 +30,7 @@ app.use('/app/qa/scorecard', route.appQaScorecard);
 app.use('/app/qa/evaluate', route.appQaEvaluation);
 
 /////// Future Additions ///////////////////////////////
-// app.use('/api/user', route.apiUser)
+app.use('/api/user', route.apiUser)
 // app.use('/api/qa', route.apiQa)
 // app.use('/app/performance', route.appPerformance)
 // app.use('/api/performance', route.apiPerformance)
