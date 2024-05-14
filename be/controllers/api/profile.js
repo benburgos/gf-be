@@ -36,7 +36,6 @@ async function getUserProfile(req, res) {
     let data = {
       user: {
         ...userData._doc,
-        managerId: null,
       },
       manager: {
         ...managerData._doc,
