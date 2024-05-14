@@ -20,6 +20,20 @@ async function getUserProfile(req, res) {
     // Retrieve role name from Role collection
     let { name: roleName } = await Role.findById(userData.roleId, 'name -_id');
 
+    // Retrieve manager details, if available
+    if (userData.managerId.length > 0) {
+      let managerData = await User.findById(
+        userData.managerId,
+        'firstName lastName email phoneNumber location'
+      );
+    }
+
+    // Retrieve user's team members
+    let teamMembers = await User.find(
+      { managerId: userId },
+      '-_id -brandId -org.orgId -org.teamId'
+    );
+    
     // Remove roleId and managerId from user data
     userData = {
       ...userData._doc,
