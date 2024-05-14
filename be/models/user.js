@@ -9,6 +9,7 @@ const userSchema = new mongoose.Schema(
     email: { type: String, required: false },
     phoneNumber: { type: String, required: false },
     roleId: { type: String, required: true },
+    managerId: { type: String, required: false },
     org: {
       orgId: { type: String, required: true },
       orgName: { type: String, required: true },
