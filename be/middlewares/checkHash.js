@@ -6,7 +6,7 @@ async function checkHash(user, password) {
   const pw = await Pwh.findOne({ userId: user._id });
   const isMatch = await bcrypt.compare(password, pw.pwh);
   if (!!isMatch) {
-    const role = await Role.findOne({ _id: user.roleId });
+    const role = await Role.findOne({ _id: user.role.roleId });
     return {
       id: user._id,
       bid: user.brandId,
