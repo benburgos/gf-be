@@ -12,7 +12,7 @@ async function refreshToken(req, res) {
     // Verify the refresh token
     const decoded = await verifyRefreshToken(refreshToken);
     const user = await User.findOne({ _id: decoded.userId });
-    const role = await Role.findOne({ _id: user.roleId });
+    const role = await Role.findOne({ _id: user.role.roleId });
 
     if (!decoded) {
       return res.status(401).json({ error: 'Invalid refresh token' });
