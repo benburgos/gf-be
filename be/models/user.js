@@ -17,6 +17,7 @@ const userSchema = new mongoose.Schema(
       teamName: { type: String, required: true },
     },
     isActive: { type: Boolean, default: true, required: true },
+    joinDate: { type: Number, required: false },
     dateUpdated: { type: Number, required: true },
     dateCreated: { type: Number, required: true },
   },

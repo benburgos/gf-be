@@ -12,11 +12,12 @@ async function getUser(req, res) {
     const userId = req.params.id;
 
     // Retrieve user from the database
-    const userData = await User.findById(
+    let userData = await User.findById(
       userId,
       '-_id -brandId -org.orgId -org.teamId'
     );
-    const roleData = await Role.findById(userData.roleId, 'name -_id');
+    let roleName = await Role.findById(userData.roleId, 'name -_id');
+    userData.roleId = roleName.name;
 
     // Check if user exists
     if (!userData || userData.isActive === false) {
@@ -24,7 +25,7 @@ async function getUser(req, res) {
     }
 
     // If user exists, return user data
-    return res.json({user: userData, role: roleData});
+    return res.json(userData);
   } catch (error) {
     console.error('Error fetching user:', error);
     return res.status(500).json({ error: 'Internal server error' });
