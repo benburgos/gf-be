@@ -7,5 +7,6 @@ router.post('/create', authToken, adminRoleController.adminCreateRole);
 router.get('/:id', authToken, adminRoleController.adminGetRole);
 router.get('/', authToken, adminRoleController.adminGetRoles);
 router.put('/:id/edit', authToken, adminRoleController.adminEditRole);
+router.delete('/:id/delete', authToken, adminRoleController.adminDeleteRole);
 
 module.exports = router;

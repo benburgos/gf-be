@@ -103,9 +103,29 @@ async function adminEditRole(req, res) {
   } catch (error) {}
 }
 
+async function adminDeleteRole(req, res) {
+  try {
+    // Access data from authToken middleware
+    const { bid: currentBrandId, ra: permissionLevels } = req;
+
+    // Check permission level
+    const permissionType = checkPermission({
+      prod: 'admin',
+      bid: currentBrandId,
+      ra: permissionLevels,
+    });
+    if (permissionType !== 'rw') {
+      return res
+        .status(403)
+        .json({ Error: 'You are not authorized to access this resource.' });
+    }
+  } catch (error) {}
+}
+
 module.exports = {
   adminCreateRole,
   adminGetRole,
   adminGetRoles,
   adminEditRole,
+  adminDeleteRole,
 };
