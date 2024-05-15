@@ -1,26 +1,25 @@
 const Brand = require('../../models/sys/brand');
 const { v4: uuidv4 } = require('uuid');
 
-// Create Brand
 async function createBrand(data) {
-  data = {
-    _id: uuidv4(),
-    name: data.brandName,
-    desc: data.brandDesc,
-    imgUrl: data.imgUrl,
-    adminId: data._id,
-    dateUpdated: Date.now(),
-    dateCreated: Date.now(),
-  };
   try {
-    const brand = await Brand.create(data);
-    console.log(`New company, ${brand.name}, was successfully added.`);
-    return brand;
-  } catch (err) {
-    console.log(err);
-  }
+    // Create brand document
+    const brand = await Brand.create({
+      _id: uuidv4(),
+      name: data.brandName,
+      desc: data.brandDesc,
+      imgUrl: data.imgUrl,
+      adminId: data._id,
+      dateUpdated: Date.now(),
+      dateCreated: Date.now(),
+    });
 
-  return { _id: data._id, name: data.name };
+    // Returns brand id for use in next middleware
+    return brand._id;
+  } catch (error) {
+    console.error('Error creating brand:', error);
+    throw new Error('Failed to create brand');
+  }
 }
 
 module.exports = {
