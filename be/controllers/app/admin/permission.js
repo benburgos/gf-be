@@ -4,7 +4,7 @@ const { checkPermission } = require('../../../middlewares/checkPermission');
 async function adminGetPermission(req, res) {
   try {
     // Access data from authToken middleware
-    const { bid: currentBrandId } = req;
+    const { bid: currentBrandId, ra: permissionLevels } = req;
 
     // Check permission level
     const permissionType = checkPermission({
@@ -37,7 +37,7 @@ async function adminGetPermission(req, res) {
 async function adminGetPermissions(req, res) {
   try {
     // Access data from authToken middleware
-    const { bid: currentBrandId } = req;
+    const { bid: currentBrandId, ra: permissionLevels } = req;
 
     // Check permission level
     const permissionType = checkPermission({
