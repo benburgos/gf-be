@@ -25,8 +25,6 @@ async function createOrg(data) {
 
     // Insert orgs into database
     await Org.insertMany(orgsToCreate);
-
-    console.log(`${orgsToCreate.length} orgs were added to company.`);
     
     // Find the org for 'System Admin' and return the _id and name
     const systemAdminOrg = orgsToCreate.find(org => org.name === 'System Admin');
