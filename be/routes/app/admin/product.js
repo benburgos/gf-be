@@ -5,6 +5,5 @@ const { authToken } = require('../../../middlewares/authToken');
 
 router.get('/:id', authToken, adminProductController.adminGetProduct);
 router.get('/', authToken, adminProductController.adminGetProducts);
-router.put('/:id/edit', authToken, adminProductController.adminEditProduct);
 
 module.exports = router;
