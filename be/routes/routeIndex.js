@@ -8,6 +8,7 @@ const appAdminRole = require('./app/admin/role');
 const appAdminOrg = require('./app/admin/org');
 const appAdminTeam = require('./app/admin/team');
 const appAdminProduct = require('./app/admin/product');
+const appAdminPermission = require('./app/admin/permission');
 
 module.exports = {
   login,
@@ -20,4 +21,5 @@ module.exports = {
   appAdminOrg,
   appAdminTeam,
   appAdminProduct,
+  appAdminPermission,
 };
