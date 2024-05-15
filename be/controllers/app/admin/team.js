@@ -196,8 +196,8 @@ async function adminDeleteTeam(req, res) {
 
     // Get list of users with the team being deleted and matching currentBrandId
     const usersToUpdate = await User.find({
-      'org.teamId': teamId,
       brandId: currentBrandId,
+      'org.teamId': teamId,
     });
 
     // Update users with Unassigned team ID and name
