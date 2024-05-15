@@ -7,5 +7,6 @@ router.post('/create', authToken, adminTeamController.adminCreateTeam);
 router.get('/:id', authToken, adminTeamController.adminGetTeam);
 router.get('/', authToken, adminTeamController.adminGetTeams);
 router.put('/:id/edit', authToken, adminTeamController.adminEditTeam);
+router.delete('/:id/delete', authToken, adminTeamController.adminDeleteTeam);
 
 module.exports = router;
