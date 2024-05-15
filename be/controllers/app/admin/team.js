@@ -199,7 +199,24 @@ async function adminDeleteTeam(req, res) {
       'org.teamId': teamId,
       brandId: currentBrandId,
     });
-  } catch (error) {}
+
+    // Update users with Unassigned team ID and name
+    await Promise.all(
+      usersToUpdate.map(async (user) => {
+        user.org.teamId = unassignedTeam._id;
+        user.org.teamName = unassignedTeam.name;
+        await user.save();
+      })
+    );
+
+    // Delete the team
+    await Team.findByIdAndDelete(teamId);
+
+    return res.json({ Message: 'Team deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting team:', error);
+    return res.status(500).json({ Error: 'Internal server error' });
+  }
 }
 
 module.exports = {
