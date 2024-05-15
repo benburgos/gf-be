@@ -70,6 +70,15 @@ async function adminGetTeam(req, res) {
       return res.status(404).json({ Error: 'Team not found' });
     }
 
+    // Count the number of users with the specified role ID and current brand ID
+    const userCount = await User.countDocuments({
+      'brandId': currentBrandId,
+      'org.teamId': teamId,
+    });
+
+    // Assign the user count to the role object
+    team.userCount = userCount;
+
     return res.json(team);
   } catch (error) {
     console.error('Error getting team:', error);
@@ -96,6 +105,21 @@ async function adminGetTeams(req, res) {
 
     // Retrieve all teams from the database
     const teams = await Team.find({ brandId: currentBrandId });
+
+    // Iterate through each role to get the user count
+    for (let i = 0; i < teams.length; i++) {
+      const teamId = teams[i]._id;
+
+      // Count the number of users with the specified role ID and current brand ID
+      const userCount = await User.countDocuments({
+        'brandId': currentBrandId,
+        'org.teamId': teamId,
+      });
+
+      // Assign the user count to the userCount property of the current role
+      teams[i].userCount = userCount;
+    }
+
     return res.json(teams);
   } catch (error) {
     console.error('Error getting teams:', error);

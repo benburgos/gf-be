@@ -69,6 +69,15 @@ async function adminGetOrg(req, res) {
       return res.status(404).json({ Error: 'Organization not found' });
     }
 
+    // Count the number of users with the specified role ID and current brand ID
+    const userCount = await User.countDocuments({
+      'brandId': currentBrandId,
+      'org.orgId': orgId,
+    });
+
+    // Assign the user count to the role object
+    org.userCount = userCount;
+
     return res.json(org);
   } catch (error) {
     console.error('Error fetching organization:', error);
@@ -95,6 +104,21 @@ async function adminGetOrgs(req, res) {
 
     // Retrieve all orgs from the database
     const orgs = await Org.find({ brandId: currentBrandId });
+
+    // Iterate through each role to get the user count
+    for (let i = 0; i < orgs.length; i++) {
+      const orgId = orgs[i]._id;
+
+      // Count the number of users with the specified role ID and current brand ID
+      const userCount = await User.countDocuments({
+        'brandId': currentBrandId,
+        'org.orgId': orgId,
+      });
+
+      // Assign the user count to the userCount property of the current role
+      orgs[i].userCount = userCount;
+    }
+
     return res.json(orgs);
   } catch (error) {
     console.error('Error fetching organizations:', error);

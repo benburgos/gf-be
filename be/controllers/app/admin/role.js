@@ -73,6 +73,15 @@ async function adminGetRole(req, res) {
       return res.status(404).json({ Error: 'Role not found' });
     }
 
+    // Count the number of users with the specified role ID and current brand ID
+    const userCount = await User.countDocuments({
+      'brandId': currentBrandId,
+      'role._id': roleId,
+    });
+
+    // Assign the user count to the role object
+    role.userCount = userCount;
+
     return res.json(role);
   } catch (error) {
     console.error('Error fetching role:', error);
@@ -99,6 +108,21 @@ async function adminGetRoles(req, res) {
 
     // Retrieve all roles from the database
     const roles = await Role.find({ brandId: currentBrandId });
+
+    // Iterate through each role to get the user count
+    for (let i = 0; i < roles.length; i++) {
+      const roleId = roles[i]._id;
+
+      // Count the number of users with the specified role ID and current brand ID
+      const userCount = await User.countDocuments({
+        'brandId': currentBrandId,
+        'role._id': roleId,
+      });
+
+      // Assign the user count to the userCount property of the current role
+      roles[i].userCount = userCount;
+    }
+
     return res.json(roles);
   } catch (error) {
     console.error('Error fetching roles:', error);
