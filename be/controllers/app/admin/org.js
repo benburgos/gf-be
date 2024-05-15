@@ -15,7 +15,7 @@ async function adminCreateOrg(req, res) {
         if (permissionType !== 'rw') {
           return res
             .status(403)
-            .json({ error: 'You are not authorized to access this resource.' });
+            .json({ Error: 'You are not authorized to access this resource.' });
         }
         
     } catch (error) {
@@ -36,7 +36,7 @@ async function adminGetOrg(req, res) {
         if (permissionType !== 'rw') {
           return res
             .status(403)
-            .json({ error: 'You are not authorized to access this resource.' });
+            .json({ Error: 'You are not authorized to access this resource.' });
         }
         
     } catch (error) {
@@ -57,7 +57,7 @@ async function adminGetOrgs(req, res) {
         if (permissionType !== 'rw') {
           return res
             .status(403)
-            .json({ error: 'You are not authorized to access this resource.' });
+            .json({ Error: 'You are not authorized to access this resource.' });
         }
         
     } catch (error) {
@@ -78,7 +78,7 @@ async function adminEditOrg(req, res) {
         if (permissionType !== 'rw') {
           return res
             .status(403)
-            .json({ error: 'You are not authorized to access this resource.' });
+            .json({ Error: 'You are not authorized to access this resource.' });
         }
         
     } catch (error) {

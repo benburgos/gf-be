@@ -15,7 +15,7 @@ async function adminCreateRole(req, res) {
         if (permissionType !== 'rw') {
           return res
             .status(403)
-            .json({ error: 'You are not authorized to access this resource.' });
+            .json({ Error: 'You are not authorized to access this resource.' });
         }
         
     } catch (error) {
@@ -36,7 +36,7 @@ async function adminGetRole(req, res) {
         if (permissionType !== 'rw') {
           return res
             .status(403)
-            .json({ error: 'You are not authorized to access this resource.' });
+            .json({ Error: 'You are not authorized to access this resource.' });
         }
         
     } catch (error) {
@@ -57,7 +57,7 @@ async function adminGetRoles(req, res) {
         if (permissionType !== 'rw') {
           return res
             .status(403)
-            .json({ error: 'You are not authorized to access this resource.' });
+            .json({ Error: 'You are not authorized to access this resource.' });
         }
         
     } catch (error) {
@@ -78,7 +78,7 @@ async function adminEditRole(req, res) {
         if (permissionType !== 'rw') {
           return res
             .status(403)
-            .json({ error: 'You are not authorized to access this resource.' });
+            .json({ Error: 'You are not authorized to access this resource.' });
         }
         
     } catch (error) {
