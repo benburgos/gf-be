@@ -92,7 +92,14 @@ async function adminGetOrgs(req, res) {
         .status(403)
         .json({ Error: 'You are not authorized to access this resource.' });
     }
-  } catch (error) {}
+
+    // Retrieve all orgs from the database
+    const orgs = await Org.find({ brandId: currentBrandId });
+    return res.json(orgs);
+  } catch (error) {
+    console.error('Error fetching organizations:', error);
+    return res.status(500).json({ Error: 'Internal server error' });
+  }
 }
 
 async function adminEditOrg(req, res) {
