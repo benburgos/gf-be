@@ -1,4 +1,5 @@
 const Team = require('../../../models/team');
+const User = require('../../../models/user');
 const { v4: uuidv4 } = require('uuid');
 const { checkPermission } = require('../../../middlewares/checkPermission');
 
@@ -193,8 +194,11 @@ async function adminDeleteTeam(req, res) {
       name: 'Unassigned',
     });
 
-        // Get list of users with the team being deleted and matching currentBrandId
-
+    // Get list of users with the team being deleted and matching currentBrandId
+    const usersToUpdate = await User.find({
+      'org.teamId': teamId,
+      brandId: currentBrandId,
+    });
   } catch (error) {}
 }
 

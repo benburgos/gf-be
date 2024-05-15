@@ -194,7 +194,7 @@ async function adminDeleteOrg(req, res) {
     );
 
     // Get list of users with the org being deleted and matching currentBrandId
-    const usersToUpdate = await Org.find({
+    const usersToUpdate = await User.find({
       'org.orgId': orgId,
       brandId: currentBrandId,
     });
