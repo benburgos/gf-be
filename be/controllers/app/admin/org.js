@@ -175,7 +175,7 @@ async function adminDeleteOrg(req, res) {
     const orgId = req.params.id;
 
     // Find org by ID and brandId
-    const org = await Org.findOne({ _id: orgId, brandId: currentBrandId });
+    const org = await Org.findById(orgId);
     if (!org) {
       return res.status(404).json({ Error: 'Organization not found' });
     }
@@ -195,8 +195,8 @@ async function adminDeleteOrg(req, res) {
 
     // Get list of users with the org being deleted and matching currentBrandId
     const usersToUpdate = await User.find({
-      'org.orgId': orgId,
       brandId: currentBrandId,
+      'org.orgId': orgId,
     });
 
     // Update users with 'Unassigned' org ID and name
