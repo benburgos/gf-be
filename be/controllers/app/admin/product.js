@@ -1,3 +1,4 @@
+const Product = require('../../../models/sys/product');
 const { checkPermission } = require('../../../middlewares/checkPermission');
 
 async function adminGetProuct(req, res) {

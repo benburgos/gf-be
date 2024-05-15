@@ -1,3 +1,4 @@
+const Org = require('../../../models/org');
 const { v4: uuidv4 } = require('uuid');
 const { checkPermission } = require('../../../middlewares/checkPermission');
 
