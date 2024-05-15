@@ -24,6 +24,7 @@ app.use('/app/admin/role', route.appAdminRole);
 app.use('/app/admin/org', route.appAdminOrg);
 app.use('/app/admin/team', route.appAdminTeam);
 app.use('/app/admin/product', route.appAdminProduct);
+app.use('/app/admin/permission', route.appAdminPermission);
 
 // Listener
 app.listen(process.env.PORT, () =>
