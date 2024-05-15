@@ -19,7 +19,7 @@ async function adminCreateUser(req, res) {
     if (permissionType !== 'rw') {
       return res
         .status(403)
-        .json({ error: 'You are not authorized to access this resource.' });
+        .json({ Error: 'You are not authorized to access this resource.' });
     }
 
     // Extract user data from request body
@@ -29,7 +29,7 @@ async function adminCreateUser(req, res) {
     const emailExists = await checkEmail(email);
     if (emailExists) {
       return res.status(400).json({
-        error: "The email you're attempting to register already exists.",
+        Error: "The email you're attempting to register already exists.",
       });
     }
 
@@ -62,10 +62,10 @@ async function adminCreateUser(req, res) {
     // Respond with success message
     return res
       .status(201)
-      .json({ message: 'User created successfully', user: newUser });
+      .json({ Message: 'User created successfully', User: newUser });
   } catch (error) {
     console.error('Error creating user:', error);
-    return res.status(500).json({ error: 'Internal server error' });
+    return res.status(500).json({ Error: 'Internal server error' });
   }
 }
 
@@ -83,7 +83,7 @@ async function adminGetUser(req, res) {
     if (permissionType !== 'rw') {
       return res
         .status(403)
-        .json({ error: 'You are not authorized to access this resource.' });
+        .json({ Error: 'You are not authorized to access this resource.' });
     }
 
     // Assign user ID from request parameters
@@ -92,13 +92,13 @@ async function adminGetUser(req, res) {
     // Retrieve user from the database by _id
     const user = await User.findById(userId);
     if (!user) {
-      return res.status(404).json({ error: 'User not found' });
+      return res.status(404).json({ Error: 'User not found' });
     }
 
     return res.json(user);
   } catch (error) {
     console.error('Error fetching user:', error);
-    return res.status(500).json({ error: 'Internal server error' });
+    return res.status(500).json({ Error: 'Internal server error' });
   }
 }
 
@@ -116,7 +116,7 @@ async function adminGetUsers(req, res) {
     if (permissionType !== 'rw') {
       return res
         .status(403)
-        .json({ error: 'You are not authorized to access this resource.' });
+        .json({ Error: 'You are not authorized to access this resource.' });
     }
 
     // Retrieve all users from the database
@@ -124,7 +124,7 @@ async function adminGetUsers(req, res) {
     return res.json(users);
   } catch (error) {
     console.error('Error fetching users:', error);
-    return res.status(500).json({ error: 'Internal server error' });
+    return res.status(500).json({ Error: 'Internal server error' });
   }
 }
 
@@ -142,7 +142,7 @@ async function adminEditUser(req, res) {
     if (permissionType !== 'rw') {
       return res
         .status(403)
-        .json({ error: 'You are not authorized to access this resource.' });
+        .json({ Error: 'You are not authorized to access this resource.' });
     }
 
     // Assign user ID from request parameters
@@ -153,7 +153,7 @@ async function adminEditUser(req, res) {
     // Retrieve user from the database by _id
     const user = await User.findById(userId);
     if (!user) {
-      return res.status(404).json({ error: 'User not found' });
+      return res.status(404).json({ Error: 'User not found' });
     }
 
     // Check for differences between existing data and updated data
@@ -166,17 +166,17 @@ async function adminEditUser(req, res) {
 
     if (Object.keys(newData).length === 0) {
       // No changes detected
-      return res.status(200).json({ message: 'No changes to save.' });
+      return res.status(200).json({ Message: 'No changes to save.' });
     }
 
     // Update user data
     newData.dateUpdated = Date.now();
     await User.findByIdAndUpdate(userId, newData);
 
-    return res.json({ message: 'User updated successfully', user: newData });
+    return res.json({ Message: 'User updated successfully', User: newData });
   } catch (error) {
     console.error('Error updating user:', error);
-    return res.status(500).json({ error: 'Internal server error' });
+    return res.status(500).json({ Error: 'Internal server error' });
   }
 }
 
