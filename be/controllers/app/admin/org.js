@@ -71,7 +71,7 @@ async function adminGetOrg(req, res) {
 
     // Count the number of users with the specified role ID and current brand ID
     const userCount = await User.countDocuments({
-      'brandId': currentBrandId,
+      brandId: currentBrandId,
       'org.orgId': orgId,
     });
 
@@ -111,7 +111,7 @@ async function adminGetOrgs(req, res) {
 
       // Count the number of users with the specified role ID and current brand ID
       const userCount = await User.countDocuments({
-        'brandId': currentBrandId,
+        brandId: currentBrandId,
         'org.orgId': orgId,
       });
 
@@ -171,7 +171,10 @@ async function adminEditOrg(req, res) {
     newData.dateUpdated = Date.now();
     await Org.findByIdAndUpdate(orgId, newData);
 
-    return res.json({ Message: 'Organization updated successfully', Org: newData });
+    return res.json({
+      Message: 'Organization updated successfully',
+      Org: newData,
+    });
   } catch (error) {
     console.error('Error updating organization:', error);
     return res.status(500).json({ Error: 'Internal server error' });
@@ -208,7 +211,9 @@ async function adminDeleteOrg(req, res) {
     if (org.name === 'Unassigned') {
       return res
         .status(400)
-        .json({ Error: "You cannot delete the default 'Unassigned' organization." });
+        .json({
+          Error: "You cannot delete the default 'Unassigned' organization.",
+        });
     }
 
     // Get the ID and name of the 'Unassigned' org
@@ -235,7 +240,9 @@ async function adminDeleteOrg(req, res) {
     // Delete the org
     await Org.findByIdAndDelete(orgId);
 
-    return res.status(200).json({ message: 'Organization deleted successfully' });
+    return res
+      .status(200)
+      .json({ message: 'Organization deleted successfully' });
   } catch (error) {
     console.error('Error deleting organization:', error);
     return res.status(500).json({ Error: 'Internal server error' });

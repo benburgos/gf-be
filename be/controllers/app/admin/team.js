@@ -72,7 +72,7 @@ async function adminGetTeam(req, res) {
 
     // Count the number of users with the specified role ID and current brand ID
     const userCount = await User.countDocuments({
-      'brandId': currentBrandId,
+      brandId: currentBrandId,
       'org.teamId': teamId,
     });
 
@@ -112,7 +112,7 @@ async function adminGetTeams(req, res) {
 
       // Count the number of users with the specified role ID and current brand ID
       const userCount = await User.countDocuments({
-        'brandId': currentBrandId,
+        brandId: currentBrandId,
         'org.teamId': teamId,
       });
 
