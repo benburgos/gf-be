@@ -4,6 +4,7 @@ const { createTeam } = require('./createTeam');
 const { createProduct } = require('./createProduct');
 const { createPermissions } = require('./createPermission');
 const { createRole } = require('./createRole');
+const { createUser } = require('./createUser');
 
 module.exports = {
   createBrand,
@@ -12,4 +13,5 @@ module.exports = {
   createProduct,
   createPermissions,
   createRole,
+  createUser,
 };
