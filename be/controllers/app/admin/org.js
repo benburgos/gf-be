@@ -176,6 +176,9 @@ async function adminDeleteOrg(req, res) {
 
     // Find org by ID and brandId
     const org = await Org.findOne({ _id: orgId, brandId: currentBrandId });
+    if (!org) {
+      return res.status(404).json({ Error: 'Organization not found' });
+    }
 
     // Check if the org being deleted is the 'Unassigned' org
     if (org.name === 'Unassigned') {

@@ -181,6 +181,9 @@ async function adminDeleteRole(req, res) {
 
     // Find role by ID and brandId
     const role = await Role.findOne({ _id: roleId, brandId: currentBrandId });
+    if (!role) {
+      return res.status(404).json({ Error: 'Role not found' });
+    }
 
     // Check if the role being deleted is the 'Unassigned' role
     if (role.name === 'Unassigned') {

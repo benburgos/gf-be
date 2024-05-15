@@ -170,6 +170,15 @@ async function adminDeleteTeam(req, res) {
         .status(403)
         .json({ Error: 'You are not authorized to access this resource.' });
     }
+
+    // Access teamId from request params
+    const teamId = req.params.id;
+
+    // Retrieve team from the database by _id
+    const team = await Team.findById(teamId);
+    if (!team) {
+      return res.status(404).json({ Error: 'Team not found' });
+    }
   } catch (error) {}
 }
 
