@@ -1,39 +1,51 @@
 const Permission = require('../../models/sys/permission');
 const { v4: uuidv4 } = require('uuid');
 
-async function createPermissions(brand, product) {
-  const permissionList = ['r', 'w', 'rw'];
-  const permissions = [];
-  const dataArr = [];
+async function createPermissions(brand, products) {
+  try {
+    // List of permission types
+    const permissionList = ['r', 'w', 'rw'];
+    const permissions = [];
+    const permissionData = [];
 
-  for (let i = 0; i < product.length; i++) {
-    for (let j = 0; j < permissionList.length; j++) {
-      const permission = {
-        _id: uuidv4(),
-        type: permissionList[j],
-        brandId: brand._id,
-        productId: product[i]._id,
-        dateUpdated: Date.now(),
-        dateCreated: Date.now(),
-      };
+    // Loop through each product
+    for (let i = 0; i < products.length; i++) {
+      // Loop through each permission type
+      for (let j = 0; j < permissionList.length; j++) {
+        // Create permission object
+        const permission = {
+          _id: uuidv4(),
+          type: permissionList[j],
+          brandId: brand,
+          productId: products[i]._id,
+          dateUpdated: Date.now(),
+          dateCreated: Date.now(),
+        };
 
-      const data = {
-        productId: permission.productId,
-        pId: permission._id,
-        type: permission.type,
-      };
+        // Push permission to permissions array
+        permissions.push(permission);
 
-      permissions.push(permission);
-      dataArr.push(data);
+        // Create permission data object
+        const data = {
+          productId: permission.productId,
+          pId: permission._id,
+          type: permission.type,
+        };
+
+        // Push permission data to permissionData array
+        permissionData.push(data);
+      }
     }
+
+    // Insert permissions into database
+    await Permission.insertMany(permissions);
+
+    // Return permission data array
+    return permissionData;
+  } catch (error) {
+    console.error('Error creating permissions:', error);
+    throw new Error('Failed to create permissions');
   }
-
-  await Permission.insertMany(permissions);
-  console.log(
-    `${permissions.length} permissions were added to company, ${brand.name}.`
-  );
-
-  return dataArr;
 }
 
 module.exports = {
