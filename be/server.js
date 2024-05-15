@@ -23,6 +23,7 @@ app.use('/app/admin/user', route.appAdminUser);
 app.use('/app/admin/role', route.appAdminRole);
 app.use('/app/admin/org', route.appAdminOrg);
 app.use('/app/admin/team', route.appAdminTeam);
+app.use('/app/admin/product', route.appAdminProduct);
 
 // Listener
 app.listen(process.env.PORT, () =>
