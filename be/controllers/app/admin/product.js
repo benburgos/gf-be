@@ -1,7 +1,7 @@
 const Product = require('../../../models/sys/product');
 const { checkPermission } = require('../../../middlewares/checkPermission');
 
-async function adminGetProuct(req, res) {
+async function adminGetProduct(req, res) {
   try {
     // Access data from authToken middleware
     const { bid: currentBrandId, ra: permissionLevels } = req;
@@ -34,7 +34,7 @@ async function adminGetProuct(req, res) {
   }
 }
 
-async function adminGetProucts(req, res) {
+async function adminGetProducts(req, res) {
   try {
     // Access data from authToken middleware
     const { bid: currentBrandId, ra: permissionLevels } = req;
@@ -61,6 +61,6 @@ async function adminGetProucts(req, res) {
 }
 
 module.exports = {
-  adminGetProuct,
-  adminGetProucts,
+  adminGetProduct,
+  adminGetProducts,
 };
