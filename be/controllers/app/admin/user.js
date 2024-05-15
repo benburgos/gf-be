@@ -1,5 +1,8 @@
-const User = require('../../models/user');
-const Pwh = require('../../models/pwh');
+const User = require('../../../models/user');
+const Pwh = require('../../../models/pwh');
+const Role = require('../../../models/sys/role');
+const Org = require('../../../models/org');
+const Team = require('../../../models/team');
 const { v4: uuidv4 } = require('uuid');
 const { hashPassword } = require('../../../middlewares/hashPassword');
 const { checkEmail } = require('../../../services/checkEmail');
@@ -95,7 +98,18 @@ async function adminGetUser(req, res) {
       return res.status(404).json({ Error: 'User not found' });
     }
 
-    return res.json(user);
+    // Retrieve roles from the database by brandId
+    const roles = await Role.find({ brandId: currentBrandId });
+    // Removes role named 'Company Admin' from the roles array
+    const filteredRoles = roles.filter((role) => role.name !== 'Company Admin');
+
+    // Retrieve orgs from the database by brandId
+    const orgs = await Org.find({ brandId: currentBrandId });
+
+    // Retrieve teams from the database by brandId
+    const teams = await Team.find({ brandId: currentBrandId });
+
+    return res.json({ User: user, Roles: filteredRoles, Orgs: orgs, Teams: teams });
   } catch (error) {
     console.error('Error fetching user:', error);
     return res.status(500).json({ Error: 'Internal server error' });
