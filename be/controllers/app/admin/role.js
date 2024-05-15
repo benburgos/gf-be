@@ -128,7 +128,7 @@ async function adminEditRole(req, res) {
     // Extract updated data from request body
     const updatedData = req.body;
 
-    // Retrieve user from the database by _id
+    // Retrieve role from the database by _id
     const role = await Role.findById(roleId);
     if (!role) {
       return res.status(404).json({ Error: 'Role not found' });
@@ -200,8 +200,8 @@ async function adminDeleteRole(req, res) {
 
     // Get list of users with the role being deleted and matching currentBrandId
     const usersToUpdate = await User.find({
-      'role._id': roleId,
       brandId: currentBrandId,
+      'role._id': roleId,
     });
 
     // Update users with 'Unassigned' role ID and name
