@@ -4,7 +4,7 @@ const Role = require('../../../models/sys/role');
 const Org = require('../../../models/org');
 const Team = require('../../../models/team');
 const { v4: uuidv4 } = require('uuid');
-const { hashPassword } = require('../../../middlewares/hashPassword');
+const { hashPassword } = require('../../../middlewares/genHash');
 const { checkEmail } = require('../../../services/checkEmail');
 const { checkPermission } = require('../../../middlewares/checkPermission');
 
