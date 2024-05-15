@@ -20,6 +20,9 @@ app.use('/token', route.appToken);
 app.use('/app/login', route.appLogin);
 app.use('/app/profile', route.appUserProfile);
 app.use('/app/admin/user', route.appAdminUser);
+app.use('/app/admin/role', route.appAdminRole);
+app.use('/app/admin/org', route.appAdminOrg);
+app.use('/app/admin/team', route.appAdminTeam);
 
 // Listener
 app.listen(process.env.PORT, () =>
