@@ -1,4 +1,5 @@
 const Role = require('../../../models/sys/role');
+const User = require('../../../models/user');
 const { v4: uuidv4 } = require('uuid');
 const { checkPermission } = require('../../../middlewares/checkPermission');
 
@@ -73,7 +74,10 @@ async function adminGetRole(req, res) {
     }
 
     return res.json(role);
-  } catch (error) {}
+  } catch (error) {
+    console.error('Error fetching role:', error);
+    return res.status(500).json({ Error: 'Internal server error' });
+  }
 }
 
 async function adminGetRoles(req, res) {
@@ -96,7 +100,10 @@ async function adminGetRoles(req, res) {
     // Retrieve all roles from the database
     const roles = await Role.find({ brandId: currentBrandId });
     return res.json(roles);
-  } catch (error) {}
+  } catch (error) {
+    console.error('Error fetching roles:', error);
+    return res.status(500).json({ Error: 'Internal server error' });
+  }
 }
 
 async function adminEditRole(req, res) {
@@ -145,7 +152,10 @@ async function adminEditRole(req, res) {
     await Role.findByIdAndUpdate(roleId, newData);
 
     return res.json({ Message: 'Role updated successfully', Role: newData });
-  } catch (error) {}
+  } catch (error) {
+    console.error('Error updating role:', error);
+    return res.status(500).json({ Error: 'Internal server error' });
+  }
 }
 
 async function adminDeleteRole(req, res) {
@@ -159,12 +169,55 @@ async function adminDeleteRole(req, res) {
       bid: currentBrandId,
       ra: permissionLevels,
     });
+
     if (permissionType !== 'rw') {
       return res
         .status(403)
         .json({ Error: 'You are not authorized to access this resource.' });
     }
-  } catch (error) {}
+
+    // Get role ID from request params
+    const roleId = req.params.id;
+
+    // Find role by ID and brandId
+    const role = await Role.findOne({ _id: roleId, brandId: currentBrandId });
+
+    // Check if the role being deleted is the 'Unassigned' role
+    if (role.name === 'Unassigned') {
+      return res
+        .status(400)
+        .json({ Error: "You cannot delete the default 'Unassigned' role." });
+    }
+
+    // Get the ID and name of the 'Unassigned' role
+    const unassignedRole = await Role.findOne(
+      { brandId: currentBrandId, name: 'Unassigned' },
+      '_id name'
+    );
+
+    // Get list of users with the role being deleted and matching currentBrandId
+    const usersToUpdate = await User.find({
+      'role._id': roleId,
+      brandId: currentBrandId,
+    });
+
+    // Update users with 'Unassigned' role ID and name
+    await Promise.all(
+      usersToUpdate.map(async (user) => {
+        user.role._id = unassignedRole._id;
+        user.role.name = unassignedRole.name;
+        await user.save();
+      })
+    );
+
+    // Delete the role
+    await Role.findByIdAndDelete(roleId);
+
+    return res.status(200).json({ message: 'Role deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting role:', error);
+    return res.status(500).json({ Error: 'Internal server error' });
+  }
 }
 
 module.exports = {
