@@ -18,7 +18,29 @@ async function adminCreateTeam(req, res) {
         .status(403)
         .json({ Error: 'You are not authorized to access this resource.' });
     }
-  } catch (error) {}
+
+    // Create a new team object
+    const newTeam = new Team({
+      // Generate a unique team_id
+      _id: uuidv4(),
+      brandId: currentBrandId,
+      ...req.body,
+      // Set date fields
+      dateUpdated: Date.now(),
+      dateCreated: Date.now(),
+    });
+
+    // Save the new team document to the database
+    await newTeam.save();
+
+    // Respond with success message
+    return res
+      .status(201)
+      .json({ Message: 'Team created successfully', Team: newTeam });
+  } catch (error) {
+    console.error('Error creating team:', error);
+    return res.status(500).json({ Error: 'Internal server error' });
+  }
 }
 
 async function adminGetTeam(req, res) {
@@ -37,7 +59,21 @@ async function adminGetTeam(req, res) {
         .status(403)
         .json({ Error: 'You are not authorized to access this resource.' });
     }
-  } catch (error) {}
+
+    // Access teamId from request params
+    const teamId = req.params.id;
+
+    // Retrieve team from the database by _id
+    const team = await Team.findOne({ _id: teamId, brandId: currentBrandId });
+    if (!team) {
+      return res.status(404).json({ Error: 'Team not found' });
+    }
+
+    return res.json(team);
+  } catch (error) {
+    console.error('Error getting team:', error);
+    return res.status(500).json({ Error: 'Internal server error' });
+  }
 }
 
 async function adminGetTeams(req, res) {
@@ -56,7 +92,14 @@ async function adminGetTeams(req, res) {
         .status(403)
         .json({ Error: 'You are not authorized to access this resource.' });
     }
-  } catch (error) {}
+
+    // Retrieve all teams from the database
+    const teams = await Team.find({ brandId: currentBrandId });
+    return res.json(teams);
+  } catch (error) {
+    console.error('Error getting teams:', error);
+    return res.status(500).json({ Error: 'Internal server error' });
+  }
 }
 
 async function adminEditTeam(req, res) {
@@ -102,4 +145,5 @@ module.exports = {
   adminGetTeam,
   adminGetTeams,
   adminEditTeam,
+  adminDeleteTeam,
 };
