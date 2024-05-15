@@ -170,7 +170,49 @@ async function adminDeleteOrg(req, res) {
         .status(403)
         .json({ Error: 'You are not authorized to access this resource.' });
     }
-  } catch (error) {}
+
+    // Get org ID from request params
+    const orgId = req.params.id;
+
+    // Find org by ID and brandId
+    const org = await Org.findOne({ _id: orgId, brandId: currentBrandId });
+
+    // Check if the org being deleted is the 'Unassigned' org
+    if (org.name === 'Unassigned') {
+      return res
+        .status(400)
+        .json({ Error: "You cannot delete the default 'Unassigned' organization." });
+    }
+
+    // Get the ID and name of the 'Unassigned' role
+    const unassignedOrg = await Org.findOne(
+      { brandId: currentBrandId, name: 'Unassigned' },
+      '_id name'
+    );
+
+    // Get list of users with the role being deleted and matching currentBrandId
+    const usersToUpdate = await Org.find({
+      'org.orgId': roleId,
+      brandId: currentBrandId,
+    });
+
+    // Update users with 'Unassigned' role ID and name
+    await Promise.all(
+      usersToUpdate.map(async (user) => {
+        user.org.orgId = unassignedOrg._id;
+        user.org.orgName = unassignedOrg.name;
+        await user.save();
+      })
+    );
+
+    // Delete the role
+    await Org.findByIdAndDelete(orgId);
+
+    return res.status(200).json({ message: 'Organization deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting organization:', error);
+    return res.status(500).json({ Error: 'Internal server error' });
+  }
 }
 
 module.exports = {
