@@ -1,5 +1,4 @@
 const User = require('../../models/user');
-const Role = require('../../models/sys/role');
 
 async function getUserProfile(req, res) {
   try {
