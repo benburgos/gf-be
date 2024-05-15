@@ -13,7 +13,7 @@ const appQaSection = require('./app/qa/section');
 const appQaScorecard = require('./app/qa/scorecard');
 const appQaEvaluation = require('./app/qa/evaluation');
 
-const apiUserProfile = require('./api/profile');
+const apiUserProfile = require('./app/profile');
 
 module.exports = {
   login,
