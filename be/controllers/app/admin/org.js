@@ -220,4 +220,5 @@ module.exports = {
   adminGetOrg,
   adminGetOrgs,
   adminEditOrg,
+  adminDeleteOrg,
 };
