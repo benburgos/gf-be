@@ -83,10 +83,12 @@ async function adminGetRole(req, res) {
     // Assign the user count to the role object
     role.userCount = userCount;
 
-    // Retrieve all permissions for the current brand
-    const permissions = await Permission.find({ brandId: currentBrandId });
-    if (!permissions) {
-      return res.status(404).json({ Error: 'Permissions not found' });
+    // Retrieve permissions from the database by brandId
+    let permissions = [];
+    try {
+      permissions = await Permission.find({ brandId: currentBrandId });
+    } catch (error) {
+      console.error('Error fetching permissions:', error);
     }
 
     return res.json({ Role: role, Permissions: permissions });
