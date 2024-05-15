@@ -19,7 +19,7 @@ async function createUser(userData, plainPassword) {
       dateCreated: Date.now(),
     });
 
-    return { user, pwh }; // Return both the created user and pwh documents
+    return user; // Return user document
   } catch (error) {
     console.error('Error creating user:', error);
     throw new Error('Failed to create user');
