@@ -1,4 +1,5 @@
 const Role = require('../../../models/sys/role');
+const Permission = require('../../../models/sys/permission');
 const User = require('../../../models/user');
 const { v4: uuidv4 } = require('uuid');
 const { checkPermission } = require('../../../middlewares/checkPermission');
@@ -82,7 +83,13 @@ async function adminGetRole(req, res) {
     // Assign the user count to the role object
     role.userCount = userCount;
 
-    return res.json(role);
+    // Retrieve all permissions for the current brand
+    const permissions = await Permission.find({ brandId: currentBrandId });
+    if (!permissions) {
+      return res.status(404).json({ Error: 'Permissions not found' });
+    }
+
+    return res.json({ Role: role, Permissions: permissions });
   } catch (error) {
     console.error('Error fetching role:', error);
     return res.status(500).json({ Error: 'Internal server error' });
