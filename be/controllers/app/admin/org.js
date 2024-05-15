@@ -187,19 +187,19 @@ async function adminDeleteOrg(req, res) {
         .json({ Error: "You cannot delete the default 'Unassigned' organization." });
     }
 
-    // Get the ID and name of the 'Unassigned' role
+    // Get the ID and name of the 'Unassigned' org
     const unassignedOrg = await Org.findOne(
       { brandId: currentBrandId, name: 'Unassigned' },
       '_id name'
     );
 
-    // Get list of users with the role being deleted and matching currentBrandId
+    // Get list of users with the org being deleted and matching currentBrandId
     const usersToUpdate = await Org.find({
-      'org.orgId': roleId,
+      'org.orgId': orgId,
       brandId: currentBrandId,
     });
 
-    // Update users with 'Unassigned' role ID and name
+    // Update users with 'Unassigned' org ID and name
     await Promise.all(
       usersToUpdate.map(async (user) => {
         user.org.orgId = unassignedOrg._id;
@@ -208,7 +208,7 @@ async function adminDeleteOrg(req, res) {
       })
     );
 
-    // Delete the role
+    // Delete the org
     await Org.findByIdAndDelete(orgId);
 
     return res.status(200).json({ message: 'Organization deleted successfully' });

@@ -179,6 +179,22 @@ async function adminDeleteTeam(req, res) {
     if (!team) {
       return res.status(404).json({ Error: 'Team not found' });
     }
+
+    // Check if the team being deleted is the Unassigned team
+    if (team.name === 'Unassigned') {
+      return res.status(403).json({
+        Error: 'The Unassigned team cannot be deleted.',
+      });
+    }
+
+    // Get the ID and name of the Unassigned team
+    const unassignedTeam = await Team.findOne({
+      brandId: currentBrandId,
+      name: 'Unassigned',
+    });
+
+        // Get list of users with the team being deleted and matching currentBrandId
+
   } catch (error) {}
 }
 
