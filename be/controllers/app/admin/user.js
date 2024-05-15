@@ -4,7 +4,6 @@ const { v4: uuidv4 } = require('uuid');
 const { hashPassword } = require('../../../middlewares/hashPassword');
 const { checkEmail } = require('../../../services/checkEmail');
 const { checkPermission } = require('../../../middlewares/checkPermission');
-const { brand } = require('../../../routes/routeIndex');
 
 async function adminCreateUser(req, res) {
   try {
