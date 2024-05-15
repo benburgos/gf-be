@@ -18,7 +18,29 @@ async function adminCreateOrg(req, res) {
         .status(403)
         .json({ Error: 'You are not authorized to access this resource.' });
     }
-  } catch (error) {}
+
+    // Create a new org object
+    const newOrg = new Org({
+      // Generate a unique org_id
+      _id: uuidv4(),
+      brandId: currentBrandId,
+      ...req.body,
+      // Set date fields
+      dateUpdated: Date.now(),
+      dateCreated: Date.now(),
+    });
+
+    // Save the new org document to the database
+    await newOrg.save();
+
+    // Respond with success message
+    return res
+      .status(201)
+      .json({ Message: 'Organization created successfully', Org: newOrg });
+  } catch (error) {
+    console.error('Error creating organization:', error);
+    return res.status(500).json({ Error: 'Internal server error' });
+  }
 }
 
 async function adminGetOrg(req, res) {
@@ -37,7 +59,21 @@ async function adminGetOrg(req, res) {
         .status(403)
         .json({ Error: 'You are not authorized to access this resource.' });
     }
-  } catch (error) {}
+
+    // Assign org ID from request parameters
+    const orgId = req.params.id;
+
+    // Retrieve org from the database by _id
+    const org = await Org.findById(orgId);
+    if (!org) {
+      return res.status(404).json({ Error: 'Organization not found' });
+    }
+
+    return res.json(org);
+  } catch (error) {
+    console.error('Error fetching organization:', error);
+    return res.status(500).json({ Error: 'Internal server error' });
+  }
 }
 
 async function adminGetOrgs(req, res) {
