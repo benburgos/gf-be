@@ -173,6 +173,100 @@ async function editBrand(req, res) {
   }
 }
 
+async function addProduct(req, res) {
+  try {
+    // Access data from authToken middleware
+    const { id: currentUserId, bid: currentBrandId } = req;
+
+    // Assign brand ID from request parameters
+    const brandId = req.params.id;
+
+    // Check if the brandId is valid
+    if (brandId !== currentBrandId) {
+      return res.status(404).json({ Error: 'Brand not found' });
+    }
+
+    // Retrieve brand from the database by _id
+    const brand = await Brand.findById(currentBrandId);
+    if (!brand) {
+      return res.status(404).json({ Error: 'Brand not found' });
+    }
+
+    // Check if the currentUserId is the admin of the brand
+    if (brand.adminId !== currentUserId) {
+      return res
+        .status(403)
+        .json({ Error: 'You are not authorized to access this resource.' });
+    }
+
+    // Retrieve product ID from request body
+    const productId = req.body.productId;
+
+    // Retrieve product from the database by _id
+    const product = await Product.findById(productId);
+    if (!product) {
+      return res.status(404).json({ Error: 'Product not found' });
+    }
+
+    // Update product status to active
+    await Product.findByIdAndUpdate(productId, { isActive: true });
+
+    return res.json({
+      Message: 'Product activated successfully',
+      Product: product,
+    });
+  } catch (error) {
+    
+  }
+}
+
+async function removeProduct(req, res) {
+  try {
+    // Access data from authToken middleware
+    const { id: currentUserId, bid: currentBrandId } = req;
+
+    // Assign brand ID from request parameters
+    const brandId = req.params.id;
+
+    // Check if the brandId is valid
+    if (brandId !== currentBrandId) {
+      return res.status(404).json({ Error: 'Brand not found' });
+    }
+    
+    // Retrieve brand from the database by _id
+    const brand = await Brand.findById(currentBrandId);
+    if (!brand) {
+      return res.status(404).json({ Error: 'Brand not found' });
+    }
+
+    // Check if the currentUserId is the admin of the brand
+    if (brand.adminId !== currentUserId) {
+      return res
+        .status(403)
+        .json({ Error: 'You are not authorized to access this resource.' });
+    }
+
+    // Retrieve product ID from request body
+    const productId = req.body.productId;
+
+    // Retrieve product from the database by _id
+    const product = await Product.findById(productId);
+    if (!product) {
+      return res.status(404).json({ Error: 'Product not found' });
+    }
+
+    // Update product status to inactive
+    await Product.findByIdAndUpdate(productId, { isActive: false });
+
+    return res.json({
+      Message: 'Product deactivated successfully',
+      Product: product,
+    });
+  } catch (error) {
+    
+  }
+}
+
 module.exports = {
   newBrand,
   getBrand,
