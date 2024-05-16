@@ -1,4 +1,3 @@
-const User = require('../models/user');
 const { v4: uuidv4 } = require('uuid');
 const { checkBrand } = require('../services/checkBrand');
 const { checkEmail } = require('../services/checkEmail');
