@@ -173,6 +173,65 @@ async function editBrand(req, res) {
   }
 }
 
+async function editUser(req, res) {
+  try {
+    // Access data from authToken middleware
+    const { id: currentUserId, bid: currentBrandId } = req;
+
+    // Assign brand ID from request parameters
+    const brandId = req.params.id;
+
+    // Check if the brandId is valid
+    if (brandId !== currentBrandId) {
+      return res.status(404).json({ Error: 'Brand not found' });
+    }
+
+    // Retrieve brand from the database by _id
+    const brand = await Brand.findById(currentBrandId);
+    if (!brand) {
+      return res.status(404).json({ Error: 'Brand not found' });
+    }
+
+    // Check if the currentUserId is the admin of the brand
+    if (brand.adminId !== currentUserId) {
+      return res
+        .status(403)
+        .json({ Error: 'You are not authorized to access this resource.' });
+    }
+
+    // Retrieve database user using currentUserId
+    const user = await User.findById(currentUserId);
+    if (!user) {
+      return res.status(404).json({ Error: 'User not found' });
+    }
+
+    // Extract updated user details from request body
+    const updatedData = req.body;
+
+        // Check for differences between existing data and updated data
+    const newData = {};
+    for (const key in updatedData) {
+      if (user[key] !== updatedData[key]) {
+        newData[key] = updatedData[key];
+      }
+    }
+
+    if (Object.keys(newData).length === 0) {
+      // No changes detected
+      return res.status(200).json({ Message: 'No changes to save.' });
+    }
+
+    // Update user data
+    newData.dateUpdated = Date.now();
+    await User.findByIdAndUpdate(currentUserId, newData);
+
+    return res.json({ Message: 'User updated successfully', User: newData });
+  } catch (error) {
+    console.error('Error updating user:', error);
+    return res.send('Failed to update user');
+  }
+}
+
 async function addProduct(req, res) {
   try {
     // Access data from authToken middleware
