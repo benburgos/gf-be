@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 const Brand = require('../models/sys/brand');
 const Product = require('../models/sys/product');
 const User = require('../models/user');
@@ -84,7 +84,7 @@ async function newBrand(req, res) {
     // Rollback transaction
     await session.abortTransaction();
     session.endSession();
-    
+
     console.error('Error creating brand:', error);
     return res.send('Failed to create brand');
   }
