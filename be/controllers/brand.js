@@ -1,35 +1,55 @@
 const User = require('../models/user');
-const Pwh = require('../models/pwh');
-const Brand = require('../models/sys/brand');
-const Product = require('../models/sys/product');
 const { v4: uuidv4 } = require('uuid');
-const { hashPassword } = require('../middlewares/genHash');
 const { checkBrand } = require('../services/checkBrand');
 const { checkEmail } = require('../services/checkEmail');
 const sys = require('../middlewares/sys/startupIndex');
 
 async function newBrand(req, res) {
-  const brandCheck = await checkBrand(req.body.brandName);
-  const emailCheck = await checkEmail(req.body.email);
+  try {
+    // Check if email or brand name already exists
+    const emailExists = await checkEmail(req.body.email);
+    const brandExists = await checkBrand(req.body.brandName);
 
-  if (emailCheck) {
-    res.send(`The email you're attempting to register already exists.`);
-    return;
-  } else if (brandCheck) {
-    res.send(`The company you're attempting to register already exists.`);
-    return;
-  } else if (!emailCheck && !brandCheck) {
-    req.body._id = uuidv4();
+    if (emailExists) {
+      return res.send(
+        `The email you're attempting to register already exists.`
+      );
+    } else if (brandExists) {
+      return res.send(
+        `The company you're attempting to register already exists.`
+      );
+    }
+
+    // Generate unique admin ID
+    const adminId = uuidv4();
+
+    // Create brand
     const brand = await sys.createBrand(req.body);
+
+    // Create org and team
     const org = await sys.createOrg(brand);
     const team = await sys.createTeam(brand);
+
+    // Create product and permissions
     const product = await sys.createProduct(brand);
     const permissions = await sys.createPermissions(brand, product);
+
+    // Create role
     const role = await sys.createRole(brand, permissions);
-    req.body = {
-      ...req.body,
-      brandId: brand._id,
-      roleId: role,
+
+    // Create admin user
+    const adminUser = {
+      _id: adminId,
+      brandId: brand,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email,
+      phoneNumber: req.body.phoneNumber,
+      location: req.body.location,
+      role: {
+        roleId: role._id,
+        roleName: role.name,
+      },
       org: {
         orgId: org._id,
         orgName: org.name,
@@ -39,55 +59,22 @@ async function newBrand(req, res) {
       dateUpdated: Date.now(),
       dateCreated: Date.now(),
     };
-    pw = await hashPassword(req.body.pw);
-    try {
-      const user = await User.create(req.body);
-      await Pwh.create({
-        ...req.body,
-        _id: uuidv4(),
-        userId: user._id,
-        pwh: pw,
-      });
-      res.send(
-        `New company, ${brand.name}, was created under new company admin, ${user.firstName}.`
-      );
-    } catch (err) {
-      res.send(err);
-    }
-  }
-}
 
-async function getBrand(req, res) {
-  const brand = await Brand.findOne({ _id: req.params.id });
+    // Create user and password hash
+    await sys.createUser(adminUser, req.body.password);
 
-  if (brand.adminId === req.id) {
-    try {
-      const user = await User.findOne({ _id: req.id });
-      const products = await Product.find({ brandId: req.bid });
-
-      res.json({ brand: brand, user: user, products: products });
-    } catch (err) {
-      res.send(err);
-    }
-  } else {
-    res.send(
-      `Only your company admin has access to this page, redirecting to your app.`
+    return res.send(
+      `New company, ${brand.name}, was created under new company admin, ${adminUser.firstName}.`
     );
+  } catch (error) {
+    console.error('Error creating brand:', error);
+    return res.send('Failed to create brand');
   }
 }
 
-async function editBrand(req, res) {
-  const brand = await Brand.findOne({ _id: req.params.id });
+async function getBrand(req, res) {}
 
-  if (brand.adminId === req.id) {
-    req.body.dateUpdated = Date.now();
-    let savedBrand = await Brand.findOneAndUpdate({ _id: brand._id }, req.body);
-
-    res.send(`Brand, ${savedBrand.name}, has been updated.`);
-  } else {
-    res.send(`You are not authorized to access this resource.`);
-  }
-}
+async function editBrand(req, res) {}
 
 module.exports = {
   newBrand,
