@@ -209,7 +209,7 @@ async function addProduct(req, res) {
     }
 
     // Update product status to active
-    await Product.findByIdAndUpdate(productId, { isActive: true });
+    await Product.findByIdAndUpdate(productId, { isActive: true, dateUpdated: Date.now() });
 
     return res.json({
       Message: 'Product activated successfully',
@@ -256,7 +256,7 @@ async function removeProduct(req, res) {
     }
 
     // Update product status to inactive
-    await Product.findByIdAndUpdate(productId, { isActive: false });
+    await Product.findByIdAndUpdate(productId, { isActive: false, dateUpdated: Date.now() });
 
     return res.json({
       Message: 'Product deactivated successfully',
