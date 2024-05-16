@@ -1,17 +1,17 @@
 const Brand = require('../../models/sys/brand');
 const { v4: uuidv4 } = require('uuid');
 
-async function createBrand(data, id, session) {
+async function createBrand(data, brandId, adminId, session) {
   try {
     // Create brand document
     const brand = await Brand.create(
       [
         {
-          _id: uuidv4(),
+          _id: brandId,
           name: data.brandName,
           desc: data.brandDesc,
           imgUrl: data.imgUrl,
-          adminId: id,
+          adminId: adminId,
           dateUpdated: Date.now(),
           dateCreated: Date.now(),
         },

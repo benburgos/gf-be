@@ -27,27 +27,28 @@ async function newBrand(req, res) {
       );
     }
 
-    // Generate unique admin ID
+    // Generate unique admin ID and brand ID
     const adminId = uuidv4();
+    const brandId = uuidv4();
 
     // Create brand
-    const brand = await sys.createBrand(req.body, adminId, session);
+    const brand = await sys.createBrand(req.body, brandId, adminId, session);
 
     // Create org and team
-    const org = await sys.createOrg(brand, session);
-    const team = await sys.createTeam(brand, session);
+    const org = await sys.createOrg(brandId, session);
+    const team = await sys.createTeam(brandId, session);
 
     // Create product and permissions
-    const product = await sys.createProduct(brand, session);
-    const permissions = await sys.createPermissions(brand, product, session);
+    const product = await sys.createProduct(brandId, session);
+    const permissions = await sys.createPermissions(brandId, product, session);
 
     // Create role
-    const role = await sys.createRole(brand, permissions, session);
+    const role = await sys.createRole(brandId, permissions, session);
 
     // Create admin user
     const adminUser = {
       _id: adminId,
-      brandId: brand,
+      brandId: brandId,
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       email: req.body.email,
