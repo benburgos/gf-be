@@ -1,3 +1,4 @@
+import mongoose from 'mongoose';
 const Brand = require('../models/sys/brand');
 const Product = require('../models/sys/product');
 const User = require('../models/user');
@@ -7,6 +8,10 @@ const { checkEmail } = require('../services/checkEmail');
 const sys = require('../middlewares/sys/startupIndex');
 
 async function newBrand(req, res) {
+  // Start mongoose session to handle transactions
+  const session = await mongoose.startSession();
+  session.startTransaction();
+
   try {
     // Check if email or brand name already exists
     const emailExists = await checkEmail(req.body.email);
@@ -65,6 +70,10 @@ async function newBrand(req, res) {
     // Create user and password hash
     await sys.createUser(adminUser, req.body.password);
 
+    // Commit transaction
+    await session.commitTransaction();
+    session.endSession();
+
     // Responsd with success message
     return res.status(201).json({
       Message: 'Brand created successfully',
@@ -72,6 +81,10 @@ async function newBrand(req, res) {
       User: adminUser,
     });
   } catch (error) {
+    // Rollback transaction
+    await session.abortTransaction();
+    session.endSession();
+    
     console.error('Error creating brand:', error);
     return res.send('Failed to create brand');
   }
