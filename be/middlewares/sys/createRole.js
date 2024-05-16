@@ -10,7 +10,7 @@ async function createRole(brand, permissions) {
 
     for (let i = 0; i < seedRoles.length; i++) {
       let role = {
-        brandId: brand._id,
+        brandId: brand,
         permissions: [],
         isActive: true,
         _id: uuidv4(),
