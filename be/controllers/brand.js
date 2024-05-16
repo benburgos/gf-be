@@ -31,18 +31,18 @@ async function newBrand(req, res) {
     const adminId = uuidv4();
 
     // Create brand
-    const brand = await sys.createBrand(req.body, adminId);
+    const brand = await sys.createBrand(req.body, adminId, session);
 
     // Create org and team
-    const org = await sys.createOrg(brand);
-    const team = await sys.createTeam(brand);
+    const org = await sys.createOrg(brand, session);
+    const team = await sys.createTeam(brand, session);
 
     // Create product and permissions
-    const product = await sys.createProduct(brand);
-    const permissions = await sys.createPermissions(brand, product);
+    const product = await sys.createProduct(brand, session);
+    const permissions = await sys.createPermissions(brand, product, session);
 
     // Create role
-    const role = await sys.createRole(brand, permissions);
+    const role = await sys.createRole(brand, permissions, session);
 
     // Create admin user
     const adminUser = {
@@ -68,7 +68,7 @@ async function newBrand(req, res) {
     };
 
     // Create user and password hash
-    await sys.createUser(adminUser, req.body.password);
+    await sys.createUser(adminUser, req.body.password, session);
 
     // Commit transaction
     await session.commitTransaction();
