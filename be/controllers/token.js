@@ -11,12 +11,14 @@ async function refreshToken(req, res) {
 
     // Verify the refresh token
     const decoded = await verifyRefreshToken(refreshToken);
+    if (!decoded) {
+      return res.status(401).json({ Error: 'Invalid refresh token' });
+    }
+
+    // Find the user and role
     const user = await User.findOne({ _id: decoded.userId });
     const role = await Role.findOne({ _id: user.role.roleId });
 
-    if (!decoded) {
-      return res.status(401).json({ error: 'Invalid refresh token' });
-    }
 
     // Generate new access token
     const newAccessToken = genToken({
