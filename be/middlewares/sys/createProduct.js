@@ -1,7 +1,7 @@
 const Product = require('../../models/sys/product');
 const { v4: uuidv4 } = require('uuid');
 
-async function createProduct(brandId) {
+async function createProduct(brandId, session) {
   try {
     // List of products
     const productList = ['qa', 'pm', 'eng', 'wfm', 'shop', 'admin'];
@@ -28,7 +28,7 @@ async function createProduct(brandId) {
     }
 
     // Insert products into database
-    await Product.insertMany(products);
+    await Product.insertMany(products, { session });
 
     // Return the array of created product objects
     return products;

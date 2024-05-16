@@ -1,7 +1,7 @@
 const Permission = require('../../models/sys/permission');
 const { v4: uuidv4 } = require('uuid');
 
-async function createPermissions(brand, products) {
+async function createPermissions(brand, products, session) {
   try {
     // List of permission types
     const permissionList = ['r', 'w', 'rw'];
@@ -38,7 +38,7 @@ async function createPermissions(brand, products) {
     }
 
     // Insert permissions into database
-    await Permission.insertMany(permissions);
+    await Permission.insertMany(permissions, { session });
 
     // Return permission data array
     return permissionData;

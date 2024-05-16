@@ -1,7 +1,7 @@
 const Team = require('../../models/team');
 const { v4: uuidv4 } = require('uuid');
 
-async function createTeam(data) {
+async function createTeam(data, session) {
   try {
     // Define teams to create
     const teamsToCreate = [
@@ -20,14 +20,14 @@ async function createTeam(data) {
         desc: 'Company administrator user team.',
         dateUpdated: Date.now(),
         dateCreated: Date.now(),
-      }
+      },
     ];
 
     // Insert teams into database
-    await Team.insertMany(teamsToCreate);
+    await Team.insertMany(teamsToCreate, { session });
 
     // Find and return the Admin team
-    const adminTeam = teamsToCreate.find(team => team.name === 'Admin');
+    const adminTeam = teamsToCreate.find((team) => team.name === 'Admin');
     return { teamId: adminTeam._id, teamName: adminTeam.name };
   } catch (error) {
     console.error('Error creating teams:', error);

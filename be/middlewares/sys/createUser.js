@@ -2,7 +2,7 @@ const User = require('../../models/user');
 const Pwh = require('../../models/pwh');
 const { hashPassword } = require('../../middlewares/genHash');
 
-async function createUser(userData, plainPassword) {
+async function createUser(userData, plainPassword, session) {
   try {
     // Hash the password
     const hashedPassword = await hashPassword(plainPassword);
@@ -11,13 +11,18 @@ async function createUser(userData, plainPassword) {
     const user = await User.create(userData);
 
     // Create Pwh document for storing hashed password
-    const pwh = await Pwh.create({
-      _id: user._id, // Use the user ID as the Pwh document ID
-      userId: user._id,
-      pwh: hashedPassword,
-      dateUpdated: Date.now(),
-      dateCreated: Date.now(),
-    });
+    const pwh = await Pwh.create(
+      [
+        {
+          _id: user._id, // Use the user ID as the Pwh document ID
+          userId: user._id,
+          pwh: hashedPassword,
+          dateUpdated: Date.now(),
+          dateCreated: Date.now(),
+        },
+      ],
+      { session }
+    );
 
     return user; // Return user document
   } catch (error) {
