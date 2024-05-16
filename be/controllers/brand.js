@@ -26,7 +26,7 @@ async function newBrand(req, res) {
     const adminId = uuidv4();
 
     // Create brand
-    const brand = await sys.createBrand(req.body);
+    const brand = await sys.createBrand(req.body, adminId);
 
     // Create org and team
     const org = await sys.createOrg(brand);
