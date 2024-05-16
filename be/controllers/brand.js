@@ -216,7 +216,8 @@ async function addProduct(req, res) {
       Product: product,
     });
   } catch (error) {
-    
+    console.error('Error activating product:', error);
+    return res.send('Failed to activate product');
   }
 }
 
@@ -263,7 +264,8 @@ async function removeProduct(req, res) {
       Product: product,
     });
   } catch (error) {
-    
+    console.error('Error deactivating product:', error);
+    return res.send('Failed to deactivate product');
   }
 }
 
@@ -271,4 +273,6 @@ module.exports = {
   newBrand,
   getBrand,
   editBrand,
+  addProduct,
+  removeProduct,
 };
