@@ -82,6 +82,14 @@ async function getBrand(req, res) {
     // Access data from authToken middleware
     const { id: currentUserId, bid: currentBrandId } = req;
 
+    // Assign brand ID from request parameters
+    const brandId = req.params.id;
+
+    // Check if the brandId is valid
+    if (brandId !== currentBrandId) {
+      return res.status(404).json({ Error: 'Brand not found' });
+    }
+
     // Retrieve brand from the database by _id
     const brand = await Brand.findById(currentBrandId);
     if (!brand) {
@@ -109,7 +117,61 @@ async function getBrand(req, res) {
   } catch (error) {}
 }
 
-async function editBrand(req, res) {}
+async function editBrand(req, res) {
+  try {
+    // Access data from authToken middleware
+    const { id: currentUserId, bid: currentBrandId } = req;
+
+    // Assign brand ID from request parameters
+    const brandId = req.params.id;
+
+    // Check if the brandId is valid
+    if (brandId !== currentBrandId) {
+      return res.status(404).json({ Error: 'Brand not found' });
+    }
+
+    // Retrieve brand from the database by _id
+    const brand = await Brand.findById(currentBrandId);
+    if (!brand) {
+      return res.status(404).json({ Error: 'Brand not found' });
+    }
+
+    // Check if the currentUserId is the admin of the brand
+    if (brand.adminId !== currentUserId) {
+      return res
+        .status(403)
+        .json({ Error: 'You are not authorized to access this resource.' });
+    }
+
+    // Extract updated brand details from request body
+    const updatedData = req.body;
+
+        // Check for differences between existing data and updated data
+    const newData = {};
+    for (const key in updatedData) {
+      if (brand[key] !== updatedData[key]) {
+        newData[key] = updatedData[key];
+      }
+    }
+
+    if (Object.keys(newData).length === 0) {
+      // No changes detected
+      return res.status(200).json({ Message: 'No changes to save.' });
+    }
+
+    // Update brand data
+    newData.dateUpdated = Date.now();
+    await Brand.findByIdAndUpdate(currentBrandId, newData);
+
+    return res.json({
+      Message: 'Brand updated successfully',
+      Brand: newData,
+    });
+  } catch (error) {
+    console.error('Error updating brand:', error);
+    return res.send('Failed to update brand');
+  }
+}
 
 module.exports = {
   newBrand,
