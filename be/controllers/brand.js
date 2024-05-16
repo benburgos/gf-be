@@ -2,6 +2,7 @@ const { v4: uuidv4 } = require('uuid');
 const { checkBrand } = require('../services/checkBrand');
 const { checkEmail } = require('../services/checkEmail');
 const sys = require('../middlewares/sys/startupIndex');
+const User = require('../models/user');
 
 async function newBrand(req, res) {
   try {
@@ -65,7 +66,7 @@ async function newBrand(req, res) {
     // Responsd with success message
     return res
       .status(201)
-      .json({ Message: 'Brand created successfully', Brand: brand });
+      .json({ Message: 'Brand created successfully', Brand: brand, User: adminUser});
   } catch (error) {
     console.error('Error creating brand:', error);
     return res.send('Failed to create brand');
