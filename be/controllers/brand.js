@@ -63,9 +63,10 @@ async function newBrand(req, res) {
     // Create user and password hash
     await sys.createUser(adminUser, req.body.password);
 
-    return res.send(
-      `New company, ${brand.name}, was created under new company admin, ${adminUser.firstName}.`
-    );
+    // Responsd with success message
+    return res
+      .status(201)
+      .json({ Message: 'Brand created successfully', Brand: brand });
   } catch (error) {
     console.error('Error creating brand:', error);
     return res.send('Failed to create brand');
