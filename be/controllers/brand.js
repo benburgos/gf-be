@@ -1,8 +1,10 @@
+const Brand = require('../models/sys/brand');
+const Product = require('../models/sys/product');
+const User = require('../models/user');
 const { v4: uuidv4 } = require('uuid');
 const { checkBrand } = require('../services/checkBrand');
 const { checkEmail } = require('../services/checkEmail');
 const sys = require('../middlewares/sys/startupIndex');
-const User = require('../models/user');
 
 async function newBrand(req, res) {
   try {
@@ -64,16 +66,48 @@ async function newBrand(req, res) {
     await sys.createUser(adminUser, req.body.password);
 
     // Responsd with success message
-    return res
-      .status(201)
-      .json({ Message: 'Brand created successfully', Brand: brand, User: adminUser});
+    return res.status(201).json({
+      Message: 'Brand created successfully',
+      Brand: brand,
+      User: adminUser,
+    });
   } catch (error) {
     console.error('Error creating brand:', error);
     return res.send('Failed to create brand');
   }
 }
 
-async function getBrand(req, res) {}
+async function getBrand(req, res) {
+  try {
+    // Access data from authToken middleware
+    const { id: currentUserId, bid: currentBrandId } = req;
+
+    // Retrieve brand from the database by _id
+    const brand = await Brand.findById(currentBrandId);
+    if (!brand) {
+      return res.status(404).json({ Error: 'Brand not found' });
+    }
+
+    // Check if the currentUserId is the admin of the brand
+    if (brand.adminId !== currentUserId) {
+      return res
+        .status(403)
+        .json({ Error: 'You are not authorized to access this resource.' });
+    }
+
+    // Retrieve all products from the database by brandId
+    const products = await Product.find({ brandId: currentBrandId });
+    if (!products) {
+      return res.status(404).json({ Error: 'No products found' });
+    }
+
+    // Retrieve user details from the database by currentUserId
+    const user = await User.findById(currentUserId);
+
+    // Return brand, products, and user details
+    return res.json({ Brand: brand, Products: products, User: user });
+  } catch (error) {}
+}
 
 async function editBrand(req, res) {}
 
