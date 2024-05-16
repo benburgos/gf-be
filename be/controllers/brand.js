@@ -114,7 +114,10 @@ async function getBrand(req, res) {
 
     // Return brand, products, and user details
     return res.json({ Brand: brand, Products: products, User: user });
-  } catch (error) {}
+  } catch (error) {
+    console.error('Error retrieving brand:', error);
+    return res.send('Failed to retrieve brand');
+  }
 }
 
 async function editBrand(req, res) {
@@ -146,7 +149,7 @@ async function editBrand(req, res) {
     // Extract updated brand details from request body
     const updatedData = req.body;
 
-        // Check for differences between existing data and updated data
+    // Check for differences between existing data and updated data
     const newData = {};
     for (const key in updatedData) {
       if (brand[key] !== updatedData[key]) {
@@ -208,7 +211,7 @@ async function editUser(req, res) {
     // Extract updated user details from request body
     const updatedData = req.body;
 
-        // Check for differences between existing data and updated data
+    // Check for differences between existing data and updated data
     const newData = {};
     for (const key in updatedData) {
       if (user[key] !== updatedData[key]) {
@@ -268,7 +271,10 @@ async function addProduct(req, res) {
     }
 
     // Update product status to active
-    await Product.findByIdAndUpdate(productId, { isActive: true, dateUpdated: Date.now() });
+    await Product.findByIdAndUpdate(productId, {
+      isActive: true,
+      dateUpdated: Date.now(),
+    });
 
     return res.json({
       Message: 'Product activated successfully',
@@ -292,7 +298,7 @@ async function removeProduct(req, res) {
     if (brandId !== currentBrandId) {
       return res.status(404).json({ Error: 'Brand not found' });
     }
-    
+
     // Retrieve brand from the database by _id
     const brand = await Brand.findById(currentBrandId);
     if (!brand) {
@@ -316,7 +322,10 @@ async function removeProduct(req, res) {
     }
 
     // Update product status to inactive
-    await Product.findByIdAndUpdate(productId, { isActive: false, dateUpdated: Date.now() });
+    await Product.findByIdAndUpdate(productId, {
+      isActive: false,
+      dateUpdated: Date.now(),
+    });
 
     return res.json({
       Message: 'Product deactivated successfully',
@@ -332,6 +341,7 @@ module.exports = {
   newBrand,
   getBrand,
   editBrand,
+  editUser,
   addProduct,
   removeProduct,
 };
