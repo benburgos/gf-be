@@ -28,7 +28,7 @@ async function createTeam(data) {
 
     // Find and return the Admin team
     const adminTeam = teamsToCreate.find(team => team.name === 'Admin');
-    return { _id: adminTeam._id, name: adminTeam.name };
+    return { teamId: adminTeam._id, teamName: adminTeam.name };
   } catch (error) {
     console.error('Error creating teams:', error);
     throw new Error('Failed to create teams');
