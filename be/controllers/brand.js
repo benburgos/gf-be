@@ -98,7 +98,7 @@ async function getBrand(req, res) {
 
     // Assign brand ID from request parameters
     const brandId = req.params.id;
-    
+
     // Check if the brandId is valid
     if (brandId !== currentBrandId) {
       return res.status(404).json({ Error: 'Brand not found' });
