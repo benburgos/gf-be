@@ -8,7 +8,7 @@ async function getUserProfile(req, res) {
     // Retrieve user from the database
     let userData = await User.findById(
       userId,
-      '-_id -brandId -role.roleId -org.orgId -org.teamId'
+      '-_id -role.roleId -org.orgId -org.teamId'
     );
 
     // Check if user exists
