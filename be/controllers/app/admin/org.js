@@ -8,7 +8,7 @@ async function adminCreateOrg(req, res) {
     const { bid: currentBrandId, ra: permissionLevels } = req;
 
     // Check permission level
-    const permissionType = checkPermission({
+    const permissionType = await checkPermission({
       prod: 'admin',
       bid: currentBrandId,
       ra: permissionLevels,
@@ -49,7 +49,7 @@ async function adminGetOrg(req, res) {
     const { bid: currentBrandId, ra: permissionLevels } = req;
 
     // Check permission level
-    const permissionType = checkPermission({
+    const permissionType = await checkPermission({
       prod: 'admin',
       bid: currentBrandId,
       ra: permissionLevels,
@@ -91,7 +91,7 @@ async function adminGetOrgs(req, res) {
     const { bid: currentBrandId, ra: permissionLevels } = req;
 
     // Check permission level
-    const permissionType = checkPermission({
+    const permissionType = await checkPermission({
       prod: 'admin',
       bid: currentBrandId,
       ra: permissionLevels,
@@ -132,7 +132,7 @@ async function adminEditOrg(req, res) {
     const { bid: currentBrandId, ra: permissionLevels } = req;
 
     // Check permission level
-    const permissionType = checkPermission({
+    const permissionType = await checkPermission({
       prod: 'admin',
       bid: currentBrandId,
       ra: permissionLevels,
@@ -187,7 +187,7 @@ async function adminDeleteOrg(req, res) {
     const { bid: currentBrandId, ra: permissionLevels } = req;
 
     // Check permission level
-    const permissionType = checkPermission({
+    const permissionType = await checkPermission({
       prod: 'admin',
       bid: currentBrandId,
       ra: permissionLevels,

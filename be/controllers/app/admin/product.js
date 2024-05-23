@@ -7,7 +7,7 @@ async function adminGetProduct(req, res) {
     const { bid: currentBrandId, ra: permissionLevels } = req;
 
     // Check permission level
-    const permissionType = checkPermission({
+    const permissionType = await checkPermission({
       prod: 'admin',
       bid: currentBrandId,
       ra: permissionLevels,
@@ -40,7 +40,7 @@ async function adminGetProducts(req, res) {
     const { bid: currentBrandId, ra: permissionLevels } = req;
 
     // Check permission level
-    const permissionType = checkPermission({
+    const permissionType = await checkPermission({
       prod: 'admin',
       bid: currentBrandId,
       ra: permissionLevels,

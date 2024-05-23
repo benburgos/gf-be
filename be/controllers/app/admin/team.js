@@ -9,7 +9,7 @@ async function adminCreateTeam(req, res) {
     const { bid: currentBrandId, ra: permissionLevels } = req;
 
     // Check permission level
-    const permissionType = checkPermission({
+    const permissionType = await checkPermission({
       prod: 'admin',
       bid: currentBrandId,
       ra: permissionLevels,
@@ -50,7 +50,7 @@ async function adminGetTeam(req, res) {
     const { bid: currentBrandId, ra: permissionLevels } = req;
 
     // Check permission level
-    const permissionType = checkPermission({
+    const permissionType = await checkPermission({
       prod: 'admin',
       bid: currentBrandId,
       ra: permissionLevels,
@@ -92,7 +92,7 @@ async function adminGetTeams(req, res) {
     const { bid: currentBrandId, ra: permissionLevels } = req;
 
     // Check permission level
-    const permissionType = checkPermission({
+    const permissionType = await checkPermission({
       prod: 'admin',
       bid: currentBrandId,
       ra: permissionLevels,
@@ -133,7 +133,7 @@ async function adminEditTeam(req, res) {
     const { bid: currentBrandId, ra: permissionLevels } = req;
 
     // Check permission level
-    const permissionType = checkPermission({
+    const permissionType = await checkPermission({
       prod: 'admin',
       bid: currentBrandId,
       ra: permissionLevels,
@@ -185,7 +185,7 @@ async function adminDeleteTeam(req, res) {
     const { bid: currentBrandId, ra: permissionLevels } = req;
 
     // Check permission level
-    const permissionType = checkPermission({
+    const permissionType = await checkPermission({
       prod: 'admin',
       bid: currentBrandId,
       ra: permissionLevels,

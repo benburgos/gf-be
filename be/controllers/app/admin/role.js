@@ -10,7 +10,7 @@ async function adminCreateRole(req, res) {
     const { bid: currentBrandId, ra: permissionLevels } = req;
 
     // Check permission level
-    const permissionType = checkPermission({
+    const permissionType = await checkPermission({
       prod: 'admin',
       bid: currentBrandId,
       ra: permissionLevels,
@@ -54,7 +54,7 @@ async function adminGetRole(req, res) {
     const { bid: currentBrandId, ra: permissionLevels } = req;
 
     // Check permission level
-    const permissionType = checkPermission({
+    const permissionType = await checkPermission({
       prod: 'admin',
       bid: currentBrandId,
       ra: permissionLevels,
@@ -104,7 +104,7 @@ async function adminGetRoles(req, res) {
     const { bid: currentBrandId, ra: permissionLevels } = req;
 
     // Check permission level
-    const permissionType = checkPermission({
+    const permissionType = await checkPermission({
       prod: 'admin',
       bid: currentBrandId,
       ra: permissionLevels,
@@ -145,7 +145,7 @@ async function adminEditRole(req, res) {
     const { bid: currentBrandId, ra: permissionLevels } = req;
 
     // Check permission level
-    const permissionType = checkPermission({
+    const permissionType = await checkPermission({
       prod: 'admin',
       bid: currentBrandId,
       ra: permissionLevels,
@@ -197,7 +197,7 @@ async function adminDeleteRole(req, res) {
     const { bid: currentBrandId, ra: permissionLevels } = req;
 
     // Check permission level
-    const permissionType = checkPermission({
+    const permissionType = await checkPermission({
       prod: 'admin',
       bid: currentBrandId,
       ra: permissionLevels,

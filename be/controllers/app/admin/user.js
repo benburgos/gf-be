@@ -14,7 +14,7 @@ async function adminCreateUser(req, res) {
     const { bid: currentBrandId, ra: permissionLevels } = req;
 
     // Check permission level
-    const permissionType = checkPermission({
+    const permissionType = await checkPermission({
       prod: 'admin',
       bid: currentBrandId,
       ra: permissionLevels,
@@ -78,7 +78,7 @@ async function adminGetUser(req, res) {
     const { bid: currentBrandId, ra: permissionLevels } = req;
 
     // Check permission level
-    const permissionType = checkPermission({
+    const permissionType = await checkPermission({
       prod: 'admin',
       bid: currentBrandId,
       ra: permissionLevels,
@@ -124,7 +124,7 @@ async function adminGetUser(req, res) {
 
     return res.json({
       User: user,
-      Roles: filteredRoles,
+      Roles: roles,
       Orgs: orgs,
       Teams: teams,
     });
@@ -140,11 +140,12 @@ async function adminGetUsers(req, res) {
     const { bid: currentBrandId, ra: permissionLevels } = req;
 
     // Check permission level
-    const permissionType = checkPermission({
+    const permissionType = await checkPermission({
       prod: 'admin',
       bid: currentBrandId,
       ra: permissionLevels,
     });
+
     if (permissionType !== 'rw') {
       return res
         .status(403)
@@ -166,7 +167,7 @@ async function adminEditUser(req, res) {
     const { bid: currentBrandId, ra: permissionLevels } = req;
 
     // Check permission level
-    const permissionType = checkPermission({
+    const permissionType = await checkPermission({
       prod: 'admin',
       bid: currentBrandId,
       ra: permissionLevels,
