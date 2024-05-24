@@ -80,6 +80,8 @@ async function adminCreateUser(req, res) {
     // Extract user data from request body
     const { password, email, ...userData } = req.body;
 
+    console.log(email)
+
     // Check if the email already exists
     const emailExists = await checkEmail(email);
     if (emailExists) {
@@ -93,6 +95,7 @@ async function adminCreateUser(req, res) {
       ...userData,
       // Generate a unique user ID
       _id: uuidv4(),
+      email: email,
       brandId: currentBrandId,
       // Set date fields
       dateUpdated: Date.now(),
