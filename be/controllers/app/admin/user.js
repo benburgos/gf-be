@@ -263,6 +263,7 @@ async function adminEditUser(req, res) {
 }
 
 module.exports = {
+  adminCreateUserOptions,
   adminCreateUser,
   adminGetUser,
   adminGetUsers,
