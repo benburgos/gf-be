@@ -45,9 +45,12 @@ async function adminCreateUserOptions(req, res) {
       }),
     ]);
 
+    // Filter out the 'Company Admin' role from the roles array
+    const filteredRoles = roles.filter((role) => role.name !== 'Company Admin');
+
     return res.json({
       Leaders: leaders,
-      Roles: roles,
+      Roles: filteredRoles,
       Orgs: orgs,
       Teams: teams,
     });
