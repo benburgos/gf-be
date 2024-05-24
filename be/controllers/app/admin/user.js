@@ -8,6 +8,55 @@ const { hashPassword } = require('../../../middlewares/genHash');
 const { checkEmail } = require('../../../services/checkEmail');
 const { checkPermission } = require('../../../middlewares/checkPermission');
 
+async function adminCreateUserOptions(req, res) {
+  try {
+    // Access data from authToken middleware
+    const { bid: currentBrandId, ra: permissionLevels } = req;
+
+    // Check permission level
+    const permissionType = await checkPermission({
+      prod: 'admin',
+      bid: currentBrandId,
+      ra: permissionLevels,
+    });
+    if (permissionType !== 'rw') {
+      return res
+        .status(403)
+        .json({ Error: 'You are not authorized to access this resource.' });
+    }
+
+    // Retrieve leaders, roles, orgs, and teams in parallel
+    const [leaders, roles, orgs, teams] = await Promise.all([
+      User.find({ brandId: currentBrandId, isLeader: true }).catch((error) => {
+        console.error('Error fetching leaders:', error);
+        return [];
+      }),
+      Role.find({ brandId: currentBrandId }).catch((error) => {
+        console.error('Error fetching roles:', error);
+        return [];
+      }),
+      Org.find({ brandId: currentBrandId }).catch((error) => {
+        console.error('Error fetching orgs:', error);
+        return [];
+      }),
+      Team.find({ brandId: currentBrandId }).catch((error) => {
+        console.error('Error fetching teams:', error);
+        return [];
+      }),
+    ]);
+
+    return res.json({
+      Leaders: leaders,
+      Roles: roles,
+      Orgs: orgs,
+      Teams: teams,
+    });
+  } catch (error) {
+    console.error('Error fetching options:', error);
+    return res.status(500).json({ Error: 'Internal server error' });
+  }
+}
+
 async function adminCreateUser(req, res) {
   try {
     // Access data from authToken middleware
