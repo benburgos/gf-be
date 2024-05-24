@@ -78,9 +78,7 @@ async function adminCreateUser(req, res) {
     }
 
     // Extract user data from request body
-    const { password, email, ...userData } = req.body;
-
-    console.log(email)
+    const { password, email, joinDate, ...userData } = req.body;
 
     // Check if the email already exists
     const emailExists = await checkEmail(email);
@@ -90,6 +88,9 @@ async function adminCreateUser(req, res) {
       });
     }
 
+    // Transform joinDate to Unix timestamp
+    const joinDateTimestamp = new Date(joinDate).getTime();
+
     // Create a new user document
     const newUser = new User({
       ...userData,
@@ -97,6 +98,7 @@ async function adminCreateUser(req, res) {
       _id: uuidv4(),
       email: email,
       brandId: currentBrandId,
+      joinDate: joinDateTimestamp, // Save transformed joinDate
       // Set date fields
       dateUpdated: Date.now(),
       dateCreated: Date.now(),
