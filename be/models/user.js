@@ -21,7 +21,7 @@ const userSchema = new mongoose.Schema(
       teamName: { type: String, required: true },
     },
     photoUrl: { type: String, required: false },
-    isLeader: { type: Boolean, required: true },
+    isLeader: { type: Boolean, default: false, required: true },
     isActive: { type: Boolean, default: true, required: true },
     joinDate: { type: Number, required: false },
     dateUpdated: { type: Number, required: true },
