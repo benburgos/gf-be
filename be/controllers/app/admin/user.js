@@ -155,28 +155,32 @@ async function adminGetUser(req, res) {
       return res.status(404).json({ Error: 'User not found' });
     }
 
-    // Retrieve roles from the database by brandId
-    let roles = [];
-    try {
-      roles = await Role.find({ brandId: currentBrandId });
-    } catch (error) {
-      console.error('Error fetching roles:', error);
-    }
+    // Retrieve roles, orgs, teams, and leaders in parallel
+    const [roles, orgs, teams, leaders] = await Promise.all([
+      Role.find({ brandId: currentBrandId }).catch((error) => {
+        console.error('Error fetching roles:', error);
+        return [];
+      }),
+      Org.find({ brandId: currentBrandId }).catch((error) => {
+        console.error('Error fetching orgs:', error);
+        return [];
+      }),
+      Team.find({ brandId: currentBrandId }).catch((error) => {
+        console.error('Error fetching teams:', error);
+        return [];
+      }),
+      User.find({ brandId: currentBrandId, isLeader: true }).catch((error) => {
+        console.error('Error fetching leaders:', error);
+        return [];
+      }),
+    ]);
 
-    // Retrieve orgs from the database by brandId
-    let orgs = [];
-    try {
-      orgs = await Org.find({ brandId: currentBrandId });
-    } catch (error) {
-      console.error('Error fetching orgs:', error);
-    }
-
-    // Retrieve teams from the database by brandId
-    let teams = [];
-    try {
-      teams = await Team.find({ brandId: currentBrandId });
-    } catch (error) {
-      console.error('Error fetching teams:', error);
+    // Filter out the current user if they are a leader
+    let filteredLeaders = leaders;
+    if (user.isLeader) {
+      filteredLeaders = leaders.filter(
+        (leader) => leader._id.toString() !== userId
+      );
     }
 
     return res.json({
@@ -184,6 +188,7 @@ async function adminGetUser(req, res) {
       Roles: roles,
       Orgs: orgs,
       Teams: teams,
+      Leaders: filteredLeaders,
     });
   } catch (error) {
     console.error('Error fetching user:', error);
