@@ -243,12 +243,22 @@ async function adminEditUser(req, res) {
     // Assign user ID from request parameters
     const userId = req.params.id;
     // Extract updated data from request body
-    const updatedData = req.body;
+    const { password, ...updatedData } = req.body;
 
     // Retrieve user from the database by _id
     const user = await User.findById(userId);
     if (!user) {
       return res.status(404).json({ Error: 'User not found' });
+    }
+
+    // If a new password is provided, hash it and update the existing entry in the Pwh model
+    if (password) {
+      const hashedPassword = await hashPassword(password);
+      const pwhData = {
+        pwh: hashedPassword,
+        dateUpdated: Date.now(),
+      };
+      await Pwh.findOneAndUpdate({ userId: userId }, pwhData);
     }
 
     // Check for differences between existing data and updated data
